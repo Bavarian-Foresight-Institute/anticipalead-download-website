@@ -15,7 +15,7 @@ module.exports = {
         'brand-gray-800': '#1F2937',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['"Clear Sans"', 'sans-serif'],
       },
       borderRadius: {
         'xl': '0.75rem',
