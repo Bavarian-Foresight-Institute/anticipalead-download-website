@@ -15,6 +15,7 @@ Below is the directory layout of the project:
 
 ```
 anticipalead-download-website/
+├── assets/
 ├── docs/
 │   ├── architecture.md
 │   ├── coding-standards.md
@@ -27,14 +28,6 @@ anticipalead-download-website/
 ├── package.json
 ├── README.md
 └── src/
-    ├── assets/
-    │   ├── brand/
-    │   └── materials/
-    ├── css/
-    └── js/
-        ├── components/
-        ├── core/
-        └── app.js
 ```
 
 ## Core Modules
