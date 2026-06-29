@@ -1,0 +1,73 @@
+{
+  "options": {
+    "language": [
+      "de",
+      "en",
+      "fr"
+    ],
+    "perspective": [
+      "corp",
+      "gen"
+    ],
+    "scenario": [
+      "s1",
+      "s2",
+      "s3",
+      "s4",
+      "s5",
+      "s6",
+      "s7",
+      "s8"
+    ],
+    "timeHorizon": [
+      "s",
+      "m",
+      "l",
+      "all"
+    ]
+  },
+  "fileMappings": {
+    "canvas": {
+      "dependencies": [
+        "language",
+        "perspective"
+      ],
+      "template": "canvas_{language}_{perspective}.pdf"
+    },
+    "nameTag": {
+      "dependencies": [
+        "language",
+        "perspective",
+        "scenario"
+      ],
+      "template": "nametag_{language}_{perspective}_{scenario}.pdf"
+    },
+    "playerCard": {
+      "dependencies": [
+        "language",
+        "perspective"
+      ],
+      "template": "playercard_{language}_{perspective}.pdf"
+    },
+    "audio": {
+      "dependencies": [
+        "language",
+        "scenario"
+      ],
+      "template": "audio_{language}_{scenario}.mp3"
+    },
+    "techCards": {
+      "dependencies": [
+        "language",
+        "timeHorizon"
+      ],
+      "template": "techcards_{language}_{timeHorizon}.pdf"
+    },
+    "quickstartGuide": {
+      "dependencies": [
+        "language"
+      ],
+      "template": "quickstart_{language}.pdf"
+    }
+  }
+}
