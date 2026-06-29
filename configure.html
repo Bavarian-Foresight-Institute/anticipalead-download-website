@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnticipaLead Configurator</title>
+    <!-- Tabler Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+    <!-- Tailwind Generated CSS -->
+    <link href="./src/css/style.css" rel="stylesheet">
+    
+    <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Hanken Grotesk', var(--font-sans), sans-serif; background: #f7f7f6; }
+
+    .nav { display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:60px;background:#fff;border-bottom:1px solid #e2e2e2; }
+    .nav-back { display:flex;align-items:center;gap:6px;font-size:13px;color:#666;cursor:pointer; }
+    .nav-back:hover { color:#111; }
+
+    .progress {
+      background:#fff; border-bottom:1px solid #e2e2e2;
+      padding:0 2rem;
+    }
+    .progress-inner {
+      max-width:680px; margin:0 auto; height:52px;
+      display:flex; align-items:center; gap:0;
+    }
+    .ps { display:flex;align-items:center;gap:8px; flex:1; }
+    .ps-dot {
+      width:24px; height:24px; border-radius:50%; flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+      font-size:11px; font-weight:700;
+    }
+    .ps-dot.done { background:#111; color:#fff; }
+    .ps-dot.active { background:#F20D0D; color:#fff; }
+    .ps-dot.todo { background:#fff; color:#aaa; border:1px solid #ddd; }
+    .ps-label { font-size:12px; color:#888; }
+    .ps-label.active { color:#111; font-weight:600; }
+    .pc { width:28px; height:1px; background:#ddd; flex-shrink:0; }
+    .pc.done { background:#111; }
+
+    .main { max-width:680px; margin:0 auto; padding:2.5rem 2rem 4rem; }
+    .step-header { margin-bottom:2rem; }
+    .step-eyebrow { font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:#F20D0D;margin-bottom:6px;display:flex;align-items:center;gap:8px; }
+    .step-eyebrow::before { content:'';display:block;width:16px;height:2px;background:#F20D0D; }
+    .step-title { font-size:24px;font-weight:700;color:#111;letter-spacing:-0.5px;margin-bottom:6px; }
+    .step-sub { font-size:14px;color:#666;line-height:1.7; }
+
+    /* Scenario grid */
+    .scenarios-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-bottom:1.75rem; }
+    .sc-card {
+      border:1.5px solid #e2e2e2; border-radius:8px; padding:1.1rem;
+      background:#fff; cursor:pointer; transition:border-color 0.12s;
+      display:flex;flex-direction:column;
+    }
+    .sc-card:hover { border-color:#aaa; }
+    .sc-card.selected { border-color:#F20D0D; background:#fff8f8; }
+    .sc-tag {
+      display:inline-block; font-size:10px; font-weight:700; letter-spacing:0.6px;
+      text-transform:uppercase; padding:2px 7px; border-radius:3px; margin-bottom:10px;
+    }
+    .sc-tag-ai { background:#111;color:#fff; }
+    .sc-tag-health { background:#1a5c8a;color:#fff; }
+    .sc-tag-mfg { background:#5a3e8a;color:#fff; }
+    .sc-tag-hr { background:#8a4e1a;color:#fff; }
+    .sc-letter {
+      font-size:28px; font-weight:700; color:#e2e2e2; line-height:1;
+      margin-bottom:6px; letter-spacing:-1px;
+    }
+    .sc-card.selected .sc-letter { color:#F20D0D; }
+    .sc-title { font-size:13px; font-weight:600; color:#111; margin-bottom:4px; line-height:1.3; }
+    .sc-desc { font-size:12px; color:#888; line-height:1.5; flex:1; }
+    .sc-check {
+      width:18px;height:18px;border-radius:50%;border:1.5px solid #ddd;
+      margin-top:10px; flex-shrink:0; align-self:flex-end;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .sc-card.selected .sc-check { background:#F20D0D;border-color:#F20D0D; }
+    .sc-card.selected .sc-check::after { content:'';display:block;width:5px;height:5px;border-radius:50%;background:#fff; }
+
+    /* Version & lang */
+    .opt-group { margin-bottom:1.75rem; }
+    .opt-group-label { font-size:11px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:#888;margin-bottom:10px; }
+    .opt-rows { display:flex;flex-direction:column;gap:8px; }
+    .opt-row {
+      display:flex;align-items:flex-start;gap:14px;padding:1rem 1.25rem;
+      border:1.5px solid #e2e2e2;border-radius:8px;background:#fff;cursor:pointer;
+      transition:border-color 0.12s;
+    }
+    .opt-row:hover { border-color:#aaa; }
+    .opt-row.selected { border-color:#F20D0D;background:#fff8f8; }
+    .radio {
+      width:18px;height:18px;border-radius:50%;border:1.5px solid #ccc;
+      flex-shrink:0;margin-top:2px;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .opt-row.selected .radio { border-color:#F20D0D; }
+    .opt-row.selected .radio::after { content:'';display:block;width:7px;height:7px;border-radius:50%;background:#F20D0D; }
+    .opt-title { font-size:14px;font-weight:600;color:#111;margin-bottom:3px; }
+    .opt-desc { font-size:13px;color:#666;line-height:1.5; }
+    .opt-badge {
+      font-size:10px;font-weight:600;letter-spacing:0.4px;text-transform:uppercase;
+      padding:2px 7px;border-radius:3px;flex-shrink:0;margin-top:2px;
+      background:#f0f0ee;color:#666;
+    }
+
+    .lang-row { display:flex;gap:8px; }
+    .lang-btn {
+      flex:1;padding:10px;border:1.5px solid #e2e2e2;border-radius:6px;
+      background:#fff;cursor:pointer;font-size:13px;font-weight:500;color:#666;
+      display:flex;align-items:center;justify-content:center;gap:6px;
+      transition:border-color 0.12s;
+    }
+    .lang-btn:hover { border-color:#aaa;color:#111; }
+    .lang-btn.selected { border-color:#F20D0D;color:#111;background:#fff8f8; }
+
+    /* Buttons */
+    .btn-black {
+      display:inline-flex;align-items:center;gap:8px;
+      background:#111;color:#fff;font-size:14px;font-weight:600;
+      border:none;border-radius:4px;padding:12px 28px;cursor:pointer;
+    }
+    .btn-black:hover { background:#F20D0D; }
+    .btn-ghost-sm {
+      display:inline-flex;align-items:center;gap:6px;
+      background:#fff;color:#666;font-size:14px;
+      border:1px solid #e2e2e2;border-radius:4px;padding:12px 18px;cursor:pointer;
+    }
+    .btn-ghost-sm:hover { border-color:#aaa;color:#111; }
+
+    .note {
+      display:flex;gap:8px;padding:0.875rem 1rem;background:#f7f7f6;
+      border-radius:6px;border:1px solid #e2e2e2;margin-top:1.25rem;
+    }
+    .note i { font-size:14px;color:#888;margin-top:1px;flex-shrink:0; }
+    .note-text { font-size:12px;color:#888;line-height:1.6; }
+
+    /* Summary & manifest */
+    .summary-card { border:1px solid #e2e2e2;border-radius:8px;overflow:hidden;margin-bottom:1.5rem;background:#fff; }
+    .s-header { padding:1rem 1.25rem;border-bottom:1px solid #e2e2e2;display:flex;align-items:center;justify-content:space-between; }
+    .s-title { font-size:14px;font-weight:600;color:#111; }
+    .s-edit { font-size:12px;color:#F20D0D;cursor:pointer;display:flex;align-items:center;gap:4px; }
+    .s-row { display:flex;align-items:center;padding:0.625rem 1.25rem;border-bottom:1px solid #f0f0ee; }
+    .s-row:last-child { border-bottom:none; }
+    .s-lbl { font-size:12px;color:#aaa;min-width:120px; }
+    .s-val { font-size:13px;font-weight:600;color:#111; }
+
+    .manifest { border:1px solid #e2e2e2;border-radius:8px;overflow:hidden;margin-bottom:1.5rem;background:#fff; }
+    .m-header { padding:0.875rem 1.25rem;border-bottom:1px solid #e2e2e2;display:flex;align-items:center;justify-content:space-between; }
+    .m-title { font-size:13px;font-weight:600;color:#111; }
+    .m-count { font-size:12px;color:#aaa; }
+    .m-row { display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1.25rem;border-bottom:1px solid #f7f7f6; }
+    .m-row:last-child { border-bottom:none; }
+    .m-left { display:flex;align-items:center;gap:10px; }
+    .m-icon { font-size:16px;color:#aaa; }
+    .m-name { font-size:13px;color:#111; }
+    .m-spec { font-size:11px;color:#aaa;margin-top:1px; }
+    .m-size { font-size:12px;color:#aaa; }
+
+    /* download step */
+    .dl-box { border:2px solid #111;border-radius:8px;padding:1.5rem;margin-bottom:1.5rem;background:#fff;text-align:center; }
+    .dl-box-name { font-size:16px;font-weight:700;color:#111;margin-bottom:6px; }
+    .dl-box-meta { font-size:13px;color:#888;margin-bottom:1.5rem; }
+
+    .step-panel { display:none; }
+    .step-panel.active { display:block; }
+    .sr-only { position:absolute;left:-9999px; }
+    </style>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div>
+<h2 class="sr-only">AnticipaLead download configurator</h2>
+
+<!-- NAV -->
+<nav class="nav">
+  <svg height="24" viewBox="0 0 300 55" xmlns="http://www.w3.org/2000/svg" aria-label="AnticipaLead">
+    <text x="0" y="40" font-family="'Hanken Grotesk',sans-serif" font-size="17" font-weight="600" fill="#111">Anticipa</text>
+    <text x="90" y="40" font-family="'Hanken Grotesk',sans-serif" font-size="28" font-weight="700" fill="#111" letter-spacing="-0.5">Lead</text>
+    <rect x="90" y="46" width="200" height="2.5" fill="#F20D0D"/>
+  </svg>
+  <div class="nav-back" onclick="window.location.href='index.html'">
+    <i class="ti ti-arrow-left" aria-hidden="true"></i> Back to overview
+  </div>
+</nav>
+
+<!-- PROGRESS -->
+<div class="progress">
+  <div class="progress-inner">
+    <div class="ps"><div class="ps-dot active" id="d1">1</div><span class="ps-label active" id="l1">Configure</span></div>
+    <div class="pc" id="c1"></div>
+    <div class="ps"><div class="ps-dot todo" id="d2">2</div><span class="ps-label" id="l2">Review</span></div>
+    <div class="pc" id="c2"></div>
+    <div class="ps"><div class="ps-dot todo" id="d3">3</div><span class="ps-label" id="l3">Download</span></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <!-- STEP 1 -->
+  <div class="step-panel active" id="p1">
+    <div class="step-header">
+      <div class="step-eyebrow">Step 1 of 3</div>
+      <h1 class="step-title">Configure your package</h1>
+      <p class="step-sub">Choose a scenario, game version, and language. The assistant bundles exactly the files you need.</p>
+    </div>
+
+    <div class="opt-group">
+      <div class="opt-group-label">Scenario - choose one</div>
+      <div class="scenarios-grid" role="radiogroup" aria-label="Choose scenario">
+
+        <div class="sc-card selected" onclick="pickSc(this)" role="radio" aria-checked="true" tabindex="0">
+          <span class="sc-tag sc-tag-hr">HR &amp; People</span>
+          <div class="sc-letter">A</div>
+          <div class="sc-title">AI in talent management</div>
+          <div class="sc-desc">AI-driven hiring and performance evaluation. Ethics, accountability, and bias.</div>
+          <div class="sc-check"></div>
+        </div>
+
+        <div class="sc-card" onclick="pickSc(this)" role="radio" aria-checked="false" tabindex="0">
+          <span class="sc-tag sc-tag-mfg">Manufacturing</span>
+          <div class="sc-letter">B</div>
+          <div class="sc-title">Predictive maintenance &amp; workforce</div>
+          <div class="sc-desc">AI in a factory setting. Job displacement, retraining, and leadership legitimacy.</div>
+          <div class="sc-check"></div>
+        </div>
+
+        <div class="sc-card" onclick="pickSc(this)" role="radio" aria-checked="false" tabindex="0">
+          <span class="sc-tag sc-tag-health">Healthcare</span>
+          <div class="sc-letter">C</div>
+          <div class="sc-title">Autonomous diagnostics</div>
+          <div class="sc-desc">AI-assisted clinical decisions. Patient trust, data governance, accountability.</div>
+          <div class="sc-check"></div>
+        </div>
+
+        <div class="sc-card" onclick="pickSc(this)" role="radio" aria-checked="false" tabindex="0">
+          <span class="sc-tag sc-tag-ai">AI &amp; Data</span>
+          <div class="sc-letter">D</div>
+          <div class="sc-title">Surveillance &amp; workplace monitoring</div>
+          <div class="sc-desc">Real-time employee monitoring. Privacy, consent, and managerial power.</div>
+          <div class="sc-check"></div>
+        </div>
+
+        <div class="sc-card" onclick="pickSc(this)" role="radio" aria-checked="false" tabindex="0">
+          <span class="sc-tag sc-tag-ai">AI &amp; Data</span>
+          <div class="sc-letter">E</div>
+          <div class="sc-title">Algorithmic customer scoring</div>
+          <div class="sc-desc">AI credit and risk scoring at scale. Fairness, transparency, and accountability.</div>
+          <div class="sc-check"></div>
+        </div>
+
+        <div class="sc-card" onclick="pickSc(this)" role="radio" aria-checked="false" tabindex="0">
+          <span class="sc-tag sc-tag-health">Public sector</span>
+          <div class="sc-letter">F</div>
+          <div class="sc-title">AI in public administration</div>
+          <div class="sc-desc">Automated welfare decisions. Democratic accountability, appeals, and transparency.</div>
+          <div class="sc-check"></div>
+        </div>
+
+        <div class="sc-card" onclick="pickSc(this)" role="radio" aria-checked="false" tabindex="0">
+          <span class="sc-tag sc-tag-mfg">Logistics</span>
+          <div class="sc-letter">G</div>
+          <div class="sc-title">AI in supply-chain optimisation</div>
+          <div class="sc-desc">Autonomous supplier selection and routing. Risk, resilience, and human oversight.</div>
+          <div class="sc-check"></div>
+        </div>
+
+        <div class="sc-card" onclick="pickSc(this)" role="radio" aria-checked="false" tabindex="0">
+          <span class="sc-tag sc-tag-hr">Leadership</span>
+          <div class="sc-letter">H</div>
+          <div class="sc-title">AI as strategic advisor</div>
+          <div class="sc-desc">AI-generated executive recommendations. Trust, delegation, and human judgment.</div>
+          <div class="sc-check"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="opt-group">
+      <div class="opt-group-label">Game version</div>
+      <div class="opt-rows" role="radiogroup" aria-label="Choose version">
+        <div class="opt-row selected" onclick="pickOpt(this,'ver')" role="radio" aria-checked="true" tabindex="0">
+          <div class="radio"></div>
+          <div style="flex:1;">
+            <div class="opt-title">Standard</div>
+            <div class="opt-desc">Players keep their role throughout. Ideal for first-time groups or fewer than 7 players.</div>
+          </div>
+          <span class="opt-badge">Recommended</span>
+        </div>
+        <div class="opt-row" onclick="pickOpt(this,'ver')" role="radio" aria-checked="false" tabindex="0">
+          <div class="radio"></div>
+          <div style="flex:1;">
+            <div class="opt-title">With changes of perspective</div>
+            <div class="opt-desc">Players switch roles between rounds. Requires exactly 7 players and double-sided printing.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt-group">
+      <div class="opt-group-label">Language</div>
+      <div class="lang-row" role="radiogroup" aria-label="Choose language">
+        <button class="lang-btn selected" onclick="pickLang(this)" role="radio" aria-checked="true" tabindex="0">🇩🇪 Deutsch</button>
+        <button class="lang-btn" onclick="pickLang(this)" role="radio" aria-checked="false" tabindex="0">🇬🇧 English</button>
+        <button class="lang-btn" onclick="pickLang(this)" role="radio" aria-checked="false" tabindex="0">🇫🇷 Français</button>
+      </div>
+    </div>
+
+    <button class="btn-black" onclick="go(2)">
+      Continue to review <i class="ti ti-arrow-right" aria-hidden="true"></i>
+    </button>
+
+    <div class="note">
+      <i class="ti ti-info-circle" aria-hidden="true"></i>
+      <span class="note-text">Different scenarios and versions use different role cards, name tags, and canvases - they are not interchangeable. If you plan multiple rounds, print several copies of Canvas Part 2.</span>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-panel" id="p2">
+    <div class="step-header">
+      <div class="step-eyebrow">Step 2 of 3</div>
+      <h1 class="step-title">Review your selection</h1>
+      <p class="step-sub">Check the configuration below before we assemble your package.</p>
+    </div>
+
+    <div class="summary-card">
+      <div class="s-header">
+        <span class="s-title">Package configuration</span>
+        <span class="s-edit" onclick="go(1)"><i class="ti ti-edit" style="font-size:12px;"></i> Edit</span>
+      </div>
+      <div class="s-row"><span class="s-lbl">Scenario</span><span class="s-val">A - AI in talent management</span></div>
+      <div class="s-row"><span class="s-lbl">Version</span><span class="s-val">Standard</span></div>
+      <div class="s-row"><span class="s-lbl">Language</span><span class="s-val">Deutsch</span></div>
+      <div class="s-row"><span class="s-lbl">Players</span><span class="s-val">5-7 per group</span></div>
+    </div>
+
+    <div class="manifest">
+      <div class="m-header">
+        <span class="m-title">Files in this package</span>
+        <span class="m-count">5 files · 12.4 MB</span>
+      </div>
+      <div class="m-row">
+        <div class="m-left"><i class="ti ti-file-type-pdf m-icon"></i><div><div class="m-name">Technology_Cards_A4_ScenarioA_DE.pdf</div><div class="m-spec">A4 · Print &amp; cut out · 2 pp</div></div></div>
+        <span class="m-size">1.2 MB</span>
+      </div>
+      <div class="m-row">
+        <div class="m-left"><i class="ti ti-file-type-pdf m-icon"></i><div><div class="m-name">Canvas_Part1_A3_DE.pdf</div><div class="m-spec">A3 · 1 copy per group</div></div></div>
+        <span class="m-size">2.8 MB</span>
+      </div>
+      <div class="m-row">
+        <div class="m-left"><i class="ti ti-file-type-pdf m-icon"></i><div><div class="m-name">Canvas_Part2_A3_DE.pdf</div><div class="m-spec">A3 · Print multiple for extra rounds</div></div></div>
+        <span class="m-size">2.9 MB</span>
+      </div>
+      <div class="m-row">
+        <div class="m-left"><i class="ti ti-file-type-pdf m-icon"></i><div><div class="m-name">RoleCards_NameTags_A4_Standard_DE.pdf</div><div class="m-spec">A4 · Single-sided · 2 pp</div></div></div>
+        <span class="m-size">1.8 MB</span>
+      </div>
+      <div class="m-row">
+        <div class="m-left"><i class="ti ti-music m-icon"></i><div><div class="m-name">Audioguide_ScenarioA_DE.mp3</div><div class="m-spec">MP3 · ~18 min · replaces moderator</div></div></div>
+        <span class="m-size">3.7 MB</span>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn-ghost-sm" onclick="go(1)"><i class="ti ti-arrow-left"></i> Back</button>
+      <button class="btn-black" onclick="go(3)" style="flex:1;justify-content:center;">
+        <i class="ti ti-download"></i> Confirm &amp; download
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-panel" id="p3">
+    <div class="step-header">
+      <div class="step-eyebrow">Step 3 of 3</div>
+      <h1 class="step-title">Your download is ready.</h1>
+      <p class="step-sub">Your package has been assembled. Download the ZIP and follow the quick-start guide.</p>
+    </div>
+
+    <div class="dl-box">
+      <div style="font-size:32px;margin-bottom:12px;color:#F20D0D;"><i class="ti ti-file-zip"></i></div>
+      <div class="dl-box-name">AnticipaLead_ScenarioA_Standard_DE.zip</div>
+      <div class="dl-box-meta">5 files · 12.4 MB · Scenario A · Standard · Deutsch</div>
+      <button class="btn-black" style="width:100%;justify-content:center;">
+        <i class="ti ti-download"></i> Download ZIP ↗
+      </button>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem;">
+      <button class="btn-ghost-sm" style="flex:1;justify-content:center;" onclick="go(1)"><i class="ti ti-plus"></i> Download another scenario</button>
+      <button class="btn-ghost-sm" style="flex:1;justify-content:center;"><i class="ti ti-book"></i> Quick-start guide</button>
+    </div>
+
+    <div class="note">
+      <i class="ti ti-checklist" aria-hidden="true"></i>
+      <div class="note-text"><strong style="font-weight:600;color:#111;">Before your session:</strong> print Technology Cards (A4, cut out), both Canvases (A3), and Role Cards (A4). Load the audio file on a device all players can hear. No external moderator required.</div>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<script>
+function go(n) {
+  [1,2,3].forEach(i => {
+    document.getElementById('p'+i).classList.toggle('active', i===n);
+    const d = document.getElementById('d'+i), l = document.getElementById('l'+i);
+    d.className = 'ps-dot ' + (i<n?'done':i===n?'active':'todo');
+    d.innerHTML = i<n ? '<i class="ti ti-check" style="font-size:11px"></i>' : i;
+    l.className = 'ps-label' + (i===n?' active':'');
+    if(i<3) document.getElementById('c'+i).classList.toggle('done', i<n);
+  });
+}
+function pickSc(el) {
+  el.closest('.scenarios-grid').querySelectorAll('.sc-card').forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-checked','false'); });
+  el.classList.add('selected'); el.setAttribute('aria-checked','true');
+}
+function pickOpt(el) {
+  el.closest('.opt-rows').querySelectorAll('.opt-row').forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-checked','false'); });
+  el.classList.add('selected'); el.setAttribute('aria-checked','true');
+}
+function pickLang(el) {
+  el.closest('.lang-row').querySelectorAll('.lang-btn').forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-checked','false'); });
+  el.classList.add('selected'); el.setAttribute('aria-checked','true');
+}
+</script>
+
+</body>
+</html>
