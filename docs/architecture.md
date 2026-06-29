@@ -40,6 +40,7 @@ anticipalead-download-website/
 The application is structured around a set of decoupled core modules:
 
 *   **app.js (Orchestrator):** The main entry point of the application. It bootstraps the page, initializes state and UI controllers, and binds global DOM event listeners.
+*   **ui.js (UI Layer):** The DOM manipulation and template rendering layer.
 *   **core/state.js:** Tracks user selections, choices, and current interactive configuration. It manages state transitions and fires events to notify components when selections change.
 *   **core/engine.js:** The logic layer responsible for fetching external materials, assembling game files, and generating downloadable .zip files using the JSZip library.
 *   **core/config.json:** The declarative data model that maps user choices to their corresponding asset file paths. This separates business configurations from source code execution.
