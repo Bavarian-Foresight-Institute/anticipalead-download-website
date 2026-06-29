@@ -6,15 +6,166 @@ dependencies: styles, src/app.js
 -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnticipaLead</title>
+    <title>AnticipaLead - Experience the future of leadership decisions</title>
+    <link href="./assets/output.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
+<body class="bg-brand-light font-sans text-brand-dark antialiased">
+    
+    <!-- Hero Section -->
+    <header class="bg-brand-dark text-white min-h-screen flex flex-col">
+        <!-- Top Navigation -->
+        <nav class="flex items-center justify-between px-6 py-4 md:px-12 md:py-6 max-w-7xl mx-auto w-full">
+            <div class="flex items-center">
+                <span class="text-2xl font-bold tracking-tight">Anticipa<span class="text-brand-red">Lead</span></span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#" class="hover:text-gray-300 transition-colors">About</a>
+                <a href="#" class="hover:text-gray-300 transition-colors">Research</a>
+                <a href="#" class="hover:text-gray-300 transition-colors">How to play</a>
+            </div>
+            <div>
+                <a href="download.html" class="bg-white text-brand-dark px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-100 transition-colors">
+                    Download
+                </a>
+            </div>
+        </nav>
 
-<body>
+        <!-- Hero Content -->
+        <div class="flex-grow flex flex-col items-center justify-center text-center px-4 max-w-4xl mx-auto">
+            <p class="text-brand-red text-sm font-bold tracking-widest uppercase mb-6 flex items-center justify-center space-x-4">
+                <span class="w-8 h-px bg-brand-red"></span>
+                <span>Serious Game - Leadership & AI</span>
+                <span class="w-8 h-px bg-brand-red"></span>
+            </p>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-tight">
+                Experience the future of <br/> <span class="text-brand-red">leadership</span> decisions.
+            </h1>
+            <p class="text-gray-300 text-lg md:text-xl mb-12 max-w-2xl">
+                AnticipaLead is a scenario-based serious game for teams of 5-7. No moderator needed - download the materials and start playing within the hour.
+            </p>
+            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="download.html" class="bg-brand-red text-white px-8 py-4 rounded-full font-semibold hover:bg-red-700 transition-colors flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Get the game materials
+                </a>
+                <a href="#" class="bg-white text-brand-dark px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Watch the video guide
+                </a>
+            </div>
+        </div>
+
+        <!-- Info Bar -->
+        <div class="bg-brand-darker py-6 border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-4 text-sm text-gray-400 font-medium">
+                <div class="flex items-center"><svg class="w-4 h-4 mr-2 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg> 5-7 players per group</div>
+                <div class="flex items-center"><svg class="w-4 h-4 mr-2 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> 60-90 min per session</div>
+                <div class="flex items-center"><svg class="w-4 h-4 mr-2 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg> 8 scenarios available</div>
+                <div class="flex items-center"><svg class="w-4 h-4 mr-2 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg> DE - EN - FR</div>
+            </div>
+            <div class="max-w-7xl mx-auto px-6 mt-6 flex justify-center items-center space-x-6 text-gray-500 text-sm">
+                <span>THI Ingolstadt</span>
+                <span>ETH Zürich</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- How it works section -->
+    <section class="py-24 px-6">
+        <div class="max-w-3xl mx-auto">
+            <p class="text-brand-red text-sm font-bold tracking-widest uppercase mb-4 flex items-center space-x-4">
+                <span class="w-6 h-px bg-brand-red"></span>
+                <span>How it works</span>
+            </p>
+            <h2 class="text-4xl font-extrabold mb-6 tracking-tight">Ready in four steps</h2>
+            <p class="text-gray-600 mb-12 text-lg">Everything you need is in the download package. Follow the steps below to set up your first session.</p>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="p-8 border-b border-gray-100 flex items-start">
+                    <div class="text-brand-red font-bold mr-6 mt-1">01</div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Choose your scenario</h3>
+                        <p class="text-gray-600">Pick from 8 scenarios spanning AI in HR, healthcare, manufacturing, logistics, and more. Each challenges a different leadership dilemma.</p>
+                    </div>
+                </div>
+                <div class="p-8 border-b border-gray-100 flex items-start">
+                    <div class="text-brand-red font-bold mr-6 mt-1">02</div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Download and print</h3>
+                        <p class="text-gray-600">The assistant bundles exactly the files you need. Technology cards print at A4; canvases at A3.</p>
+                    </div>
+                </div>
+                <div class="p-8 border-b border-gray-100 flex items-start">
+                    <div class="text-brand-red font-bold mr-6 mt-1">03</div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Set up the table</h3>
+                        <p class="text-gray-600">Arrange materials as shown in the quick start guide. The audio file replaces a human moderator entirely.</p>
+                    </div>
+                </div>
+                <div class="p-8 flex items-start">
+                    <div class="text-brand-red font-bold mr-6 mt-1">04</div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Play and reflect</h3>
+                        <p class="text-gray-600">Work through Canvas 1, draw technology cards, and discuss on Canvas 2. Repeat rounds, then share results across groups.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Package Contents -->
+    <section class="py-24 px-6 bg-brand-light">
+        <div class="max-w-4xl mx-auto">
+            <p class="text-brand-red text-sm font-bold tracking-widest uppercase mb-4 flex items-center space-x-4">
+                <span class="w-6 h-px bg-brand-red"></span>
+                <span>Package contents</span>
+            </p>
+            <h2 class="text-4xl font-extrabold mb-6 tracking-tight">Everything in one download</h2>
+            <p class="text-gray-600 mb-12 text-lg">Each package is assembled for your exact scenario and version - nothing extra, nothing missing.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                    <svg class="w-8 h-8 text-brand-red mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"></path></svg>
+                    <h3 class="font-bold mb-2">Role cards</h3>
+                    <p class="text-sm text-gray-500">Ethicist, Executor, Integrator, Analyst</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                    <svg class="w-8 h-8 text-brand-red mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path></svg>
+                    <h3 class="font-bold mb-2">Canvases 1 and 2</h3>
+                    <p class="text-sm text-gray-500">A3 format - 1 copy per group</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                    <svg class="w-8 h-8 text-brand-red mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    <h3 class="font-bold mb-2">Technology cards</h3>
+                    <p class="text-sm text-gray-500">Scenario specific - A4 cut outs</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                    <svg class="w-8 h-8 text-brand-red mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                    <h3 class="font-bold mb-2">Audio guide</h3>
+                    <p class="text-sm text-gray-500">Replaces an external moderator</p>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="download.html" class="inline-flex items-center justify-center bg-brand-dark text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-800 transition-colors">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Start the download process
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-gray-500 text-xs py-12 text-center border-t border-gray-800">
+        <div class="max-w-4xl mx-auto px-6">
+            <p class="mb-2">Technische Hochschule Ingolstadt - Bayerisches Foresight-Institut - ETH Zürich</p>
+            <p>AnticipaLead is a research-based serious game for leadership education. Free for educational use.</p>
+        </div>
+    </footer>
 
 </body>
-
 </html>
