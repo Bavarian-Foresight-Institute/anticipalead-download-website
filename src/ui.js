@@ -171,3 +171,126 @@ export function renderStepper(currentStep) {
         </div>
     `;
 }
+
+/**
+ * Purpose: Render the navigation button.
+ * @param {Object} props - Configuration object.
+ */
+export function NavButton({ id, text, href = '#', additionalClasses = '' }) {
+    return `
+        <a id="${id}" href="${href}" class="interactive-base inline-flex items-center justify-center bg-white text-brand-dark px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-100 transition-colors ${additionalClasses}">
+            ${text}
+        </a>
+    `;
+}
+
+/**
+ * Purpose: Render a text link for the navigation bar.
+ * @param {Object} props - Configuration object.
+ */
+export function NavLink({ id, text, href = '#', additionalClasses = '' }) {
+    return `
+        <a id="${id}" href="${href}" class="interactive-base hover:text-gray-300 transition-colors ${additionalClasses}">
+            ${text}
+        </a>
+    `;
+}
+
+/**
+ * Purpose: Render the primary CTA button (Red).
+ * @param {Object} props - Configuration object.
+ */
+export function PrimaryButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
+    return `
+        <a id="${id}" href="${href}" class="interactive-base inline-flex items-center justify-center bg-brand-red text-white px-8 py-4 rounded-full font-semibold hover:bg-red-700 transition-colors ${additionalClasses}">
+            ${icon}
+            ${text}
+        </a>
+    `;
+}
+
+/**
+ * Purpose: Render the secondary CTA button (White).
+ * @param {Object} props - Configuration object.
+ */
+export function SecondaryButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
+    return `
+        <a id="${id}" href="${href}" class="interactive-base inline-flex items-center justify-center bg-white text-brand-dark px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors ${additionalClasses}">
+            ${icon}
+            ${text}
+        </a>
+    `;
+}
+
+/**
+ * Purpose: Render the dark CTA button.
+ * @param {Object} props - Configuration object.
+ */
+export function DarkButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
+    return `
+        <a id="${id}" href="${href}" class="interactive-base inline-flex items-center justify-center bg-brand-dark text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-800 transition-colors ${additionalClasses}">
+            ${icon}
+            ${text}
+        </a>
+    `;
+}
+
+/**
+ * Purpose: Render a Solid Action Button (e.g. Continue, Confirm).
+ * @param {Object} props - Configuration object.
+ */
+export function SolidButton({ id, text, icon = '', iconEnd = '', size = 'md', isFullWidth = false }) {
+    let sizeClasses = size === 'lg' ? 'px-8 py-3' : 'px-6 py-3';
+    if (size === 'xl') sizeClasses = 'py-4';
+    
+    const widthClass = isFullWidth ? 'w-full' : '';
+
+    return `
+        <button id="${id}" class="bg-brand-dark text-white ${sizeClasses} ${widthClass} interactive-base font-semibold inline-flex items-center justify-center transition-colors">
+            ${icon}
+            ${text}
+            ${iconEnd}
+        </button>
+    `;
+}
+
+/**
+ * Purpose: Render an Outline Action Button (e.g. Back).
+ * @param {Object} props - Configuration object.
+ */
+export function OutlineButton({ id, text, icon = '', isFlexible = false }) {
+    const sizeClasses = isFlexible ? 'flex-1 py-3 text-sm' : 'px-6 py-3';
+
+    return `
+        <button id="${id}" class="bg-white border border-gray-200 text-gray-600 ${sizeClasses} interactive-base font-semibold hover:bg-gray-50 inline-flex items-center justify-center transition-colors">
+            ${icon}
+            ${text}
+        </button>
+    `;
+}
+
+/**
+ * Purpose: Render a plain Text Icon Button (e.g. Edit).
+ * @param {Object} props - Configuration object.
+ */
+export function TextIconButton({ id, text, icon = '' }) {
+    return `
+        <button id="${id}" class="text-brand-red text-sm font-semibold inline-flex items-center hover:underline transition-colors">
+            ${icon}
+            ${text}
+        </button>
+    `;
+}
+
+/**
+ * Purpose: Render a plain Text Icon Link (e.g. Back to overview).
+ * @param {Object} props - Configuration object.
+ */
+export function TextIconLink({ id, text, href = '#', icon = '' }) {
+    return `
+        <a id="${id}" href="${href}" class="text-sm font-medium text-gray-500 hover:text-brand-dark transition-colors inline-flex items-center">
+            ${icon}
+            ${text}
+        </a>
+    `;
+}

@@ -11,8 +11,6 @@
   --color-brand-gray-600: #4B5563;
   --color-brand-gray-800: #1F2937;
   --font-sans: "Clear Sans", sans-serif;
-  --radius-xl: 0.75rem;
-  --radius-2xl: 1rem;
 }
 
 @layer base {
