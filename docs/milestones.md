@@ -16,8 +16,8 @@ This document outlines the project phases and progress status for the developmen
 *   Milestone 2 - Project Architecture [COMPLETED]: Define folder structure, data model, and configuration matrix.
 *   Milestone 3 - Base Website [COMPLETED]: Build responsive layout, navigation, and typography system using Tailwind CSS.
 *   Milestone 4 - Reusable UI Components [COMPLETED]: Create standardized buttons, cards, and step indicators.
-*   Milestone 5 - User Selection Flow [IN PROGRESS]: Implement UI for the 4-step decision process and state management.
-*   Milestone 6 - Data Model Implementation [PENDING]: Create the config.json and file mapping logic.
+*   Milestone 5 - User Selection Flow [COMPLETED]: Implement UI for the 4-step decision process and state management.
+*   Milestone 6 - Data Model Implementation [NEXT]: Create the config.json and file mapping logic.
 *   Milestone 7 - Download Engine [PENDING]: Implement JSZip, fetch mapped files, and generate local download.
 *   Milestone 8 - Polish [PENDING]: Improve animations, loading states, and error handling.
 *   Milestone 9 - Testing [PENDING]: Verify edge cases, cross-browser support, and responsiveness.

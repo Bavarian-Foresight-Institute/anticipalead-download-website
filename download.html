@@ -35,30 +35,7 @@ dependencies: styles, src/app.js
     </nav>
 
     <!-- Stepper -->
-    <div class="bg-white border-b border-gray-200 py-6">
-        <div class="max-w-3xl mx-auto px-6 flex items-center justify-center">
-            <div class="flex items-center">
-                <div
-                    class="w-6 h-6 rounded-full bg-brand-dark text-white flex items-center justify-center text-xs font-bold">
-                    1</div>
-                <span class="ml-2 text-sm font-semibold text-brand-dark">Configure</span>
-            </div>
-            <div class="w-12 h-px bg-gray-300 mx-4"></div>
-            <div class="flex items-center">
-                <div
-                    class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-xs font-bold">
-                    2</div>
-                <span class="ml-2 text-sm font-semibold text-gray-400">Review</span>
-            </div>
-            <div class="w-12 h-px bg-gray-300 mx-4"></div>
-            <div class="flex items-center">
-                <div
-                    class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-xs font-bold">
-                    3</div>
-                <span class="ml-2 text-sm font-semibold text-gray-400">Download</span>
-            </div>
-        </div>
-    </div>
+    <div id="stepper-container" class="bg-white border-b border-gray-200 py-6"></div>
 
     <!-- Main Content -->
     <main class="max-w-3xl mx-auto px-6 py-12">
@@ -76,20 +53,7 @@ dependencies: styles, src/app.js
             <!-- Language Selection -->
             <div class="mb-10">
                 <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Language</h2>
-                <div id="language-grid" class="flex space-x-3">
-                    <div data-lang="de"
-                        class="flex-1 bg-white rounded-xl ring-1 ring-inset ring-gray-200 p-4 text-center cursor-pointer text-gray-500 hover:shadow transition-shadow duration-200">
-                        🇩🇪 Deutsch
-                    </div>
-                    <div data-lang="en"
-                        class="flex-1 bg-white rounded-xl ring-1 ring-inset ring-gray-200 p-4 text-center cursor-pointer text-gray-500 hover:shadow transition-shadow duration-200">
-                        🇬🇧 English
-                    </div>
-                    <div data-lang="fr"
-                        class="flex-1 bg-white rounded-xl ring-1 ring-inset ring-gray-200 p-4 text-center cursor-pointer text-gray-500 hover:shadow transition-shadow duration-200">
-                        🇫🇷 Français
-                    </div>
-                </div>
+                <div id="language-grid" class="flex space-x-3"></div>
             </div>
 
             <!-- Perspective Selection -->
@@ -115,7 +79,7 @@ dependencies: styles, src/app.js
 
             <div>
                 <button id="btn-continue"
-                    class="bg-brand-dark text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors flex items-center">
+                    class="bg-brand-dark text-white px-6 py-3 interactive-base standard-shadow font-semibold flex items-center">
                     Continue to review
                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -147,7 +111,7 @@ dependencies: styles, src/app.js
             <div class="bg-white rounded-xl border border-gray-200 overflow-hidden mb-8 shadow-sm">
                 <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                     <h2 class="font-bold text-brand-dark">Package configuration</h2>
-                    <button class="text-brand-red text-sm font-semibold flex items-center hover:underline">
+                    <button id="btn-edit" class="text-brand-red text-sm font-semibold flex items-center hover:underline">
                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
@@ -251,15 +215,15 @@ dependencies: styles, src/app.js
 
             <div class="flex justify-between items-center">
                 <button id="btn-back"
-                    class="px-6 py-3 rounded-lg font-semibold border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors flex items-center">
+                    class="px-6 py-3 interactive-base font-semibold border border-gray-200 text-gray-600 hover:bg-gray-50 flex items-center">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                     </svg>
                     Back
                 </button>
-                <button
-                    class="bg-brand-dark text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors flex items-center">
+                <button id="btn-confirm"
+                    class="bg-brand-dark text-white px-8 py-3 interactive-base standard-shadow font-semibold flex items-center">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
@@ -290,7 +254,7 @@ dependencies: styles, src/app.js
                 <h2 class="text-lg font-bold mb-1">AnticipaLead_ScenarioA_Standard_DE.zip</h2>
                 <p class="text-sm text-gray-500 mb-8">5 files - 12.4 MB - Scenario A - Standard - Deutsch</p>
                 <button
-                    class="w-full bg-brand-dark text-white py-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors flex items-center justify-center">
+                    class="w-full bg-brand-dark text-white py-4 interactive-base standard-shadow font-semibold flex items-center justify-center">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
@@ -305,14 +269,14 @@ dependencies: styles, src/app.js
 
             <div class="flex flex-col sm:flex-row justify-center gap-4 max-w-lg mx-auto mb-8">
                 <button
-                    class="flex-1 bg-white border border-gray-200 text-gray-600 py-3 rounded-lg text-sm font-semibold hover:bg-gray-50 transition-colors flex items-center justify-center">
+                    class="flex-1 bg-white border border-gray-200 text-gray-600 py-3 interactive-base text-sm font-semibold hover:bg-gray-50 flex items-center justify-center">
                     <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
                     Download another scenario
                 </button>
                 <button
-                    class="flex-1 bg-white border border-gray-200 text-gray-600 py-3 rounded-lg text-sm font-semibold hover:bg-gray-50 transition-colors flex items-center justify-center">
+                    class="flex-1 bg-white border border-gray-200 text-gray-600 py-3 interactive-base text-sm font-semibold hover:bg-gray-50 flex items-center justify-center">
                     <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">

@@ -6,72 +6,10 @@
  */
 
 import { getState, setScenario, setPerspective, setTimeHorizon, setLanguage, subscribe } from './core/state.js';
-import { renderScenarioCard, renderPerspectiveCard, renderTimeHorizonCard, renderSummaryRow } from './ui.js';
+import { renderScenarioCard, renderPerspectiveCard, renderTimeHorizonCard, renderLanguageCard, renderSummaryRow, renderStepper } from './ui.js';
+import { scenarios, perspectives, timeHorizons, languages } from './core/content.js';
 
-// Mock Data for Scenarios
-const scenarios = [
-    {
-        id: 'A',
-        title: 'AI in talent management',
-        description: 'AI-driven hiring and performance evaluation. Ethics, accountability, and bias.',
-        badgeText: 'HR & PEOPLE',
-        badgeColorClass: 'bg-red-800'
-    },
-    {
-        id: 'B',
-        title: 'Predictive maintenance & workforce',
-        description: 'AI in a factory setting. Job displacement, retraining, and leadership legitimacy.',
-        badgeText: 'MANUFACTURING',
-        badgeColorClass: 'bg-purple-700'
-    },
-    {
-        id: 'C',
-        title: 'Autonomous diagnostics',
-        description: 'AI-assisted clinical decisions. Patient trust, data governance, accountability.',
-        badgeText: 'HEALTHCARE',
-        badgeColorClass: 'bg-blue-700'
-    }
-];
 
-// Mock Data for Perspectives
-const perspectives = [
-    {
-        id: 'gen',
-        title: 'General',
-        description: 'Players keep their role throughout. Ideal for first-time groups or fewer than 7 players.',
-        isRecommended: true
-    },
-    {
-        id: 'corp',
-        title: 'Corporate with changes',
-        description: 'Players switch roles between rounds. Requires exactly 7 players and double-sided printing.',
-        isRecommended: false
-    }
-];
-
-// Mock Data for Time Horizons
-const timeHorizons = [
-    {
-        id: 'all',
-        title: 'All Time Horizons',
-        description: 'Play with all available cards for a complete experience.'
-    },
-    {
-        id: 's',
-        title: 'Short-term',
-        description: 'Focus on immediate technological impacts.'
-    },
-    {
-        id: 'm',
-        title: 'Medium-term',
-        description: 'Explore emerging trends and their adoption.'
-    },
-    {
-        id: 'l',
-        title: 'Long-term',
-        description: 'Analyze distant futures and paradigm shifts.'
-    }
-];
 
 // DOM Elements
 const viewConfigure = document.getElementById('view-configure');
@@ -86,7 +24,10 @@ const btnBack = document.getElementById('btn-back');
 const summaryTableBody = document.getElementById('summary-table-body');
 
 /**
- * Switches the active view by toggling Tailwind's 'hidden' class.
+ * Purpose: Switch the active view in the application interface.
+ * @param {string} viewId - The DOM ID of the view to display.
+ * @returns {void}
+ * Logic reason: Toggles Tailwind's 'hidden' class to ensure only one main view is visible at a time.
  */
 function switchView(viewId) {
     [viewConfigure, viewReview, viewDownload].forEach(view => {
@@ -98,10 +39,21 @@ function switchView(viewId) {
             }
         }
     });
+
+    const stepperContainer = document.getElementById('stepper-container');
+    if (stepperContainer) {
+        let step = 1;
+        if (viewId === 'view-review') step = 2;
+        if (viewId === 'view-download') step = 3;
+        stepperContainer.innerHTML = renderStepper(step);
+    }
 }
 
 /**
- * Re-renders the UI components based on the current state.
+ * Purpose: Re-render the UI components based on the current state.
+ * @param {Object} state - The current state object containing user selections.
+ * @returns {void}
+ * Logic reason: Maps through mock data and uses UI rendering functions to update the DOM based on state.
  */
 function renderUI(state) {
     // Render Scenarios
@@ -127,19 +79,17 @@ function renderUI(state) {
 
     // Render Languages
     if (languageGrid) {
-        const langElements = languageGrid.querySelectorAll('[data-lang]');
-        langElements.forEach(el => {
-            const lang = el.getAttribute('data-lang');
-            if (state.language === lang) {
-                el.className = 'flex-1 bg-white rounded-lg ring-2 ring-inset ring-black shadow-sm p-4 text-center cursor-pointer font-medium hover:shadow transition-shadow duration-200';
-            } else {
-                el.className = 'flex-1 bg-white rounded-lg ring-1 ring-inset ring-gray-200 p-4 text-center cursor-pointer text-gray-500 hover:shadow transition-shadow duration-200';
-            }
-        });
+        languageGrid.innerHTML = languages.map(l => 
+            renderLanguageCard(l.id, l.title, state.language === l.id)
+        ).join('');
     }
 }
 
-// Bind DOM Events
+/**
+ * Purpose: Bind all DOM event listeners for the application.
+ * @returns {void}
+ * Logic reason: Uses event delegation on container grids to handle user selections efficiently.
+ */
 function bindEvents() {
     // Scenario selection delegation
     if (scenarioGrid) {
@@ -198,12 +148,12 @@ function bindEvents() {
             const selectedScenario = scenarios.find(s => s.id === state.scenario);
             const selectedPerspective = perspectives.find(p => p.id === state.perspective);
             const selectedTimeHorizon = timeHorizons.find(t => t.id === state.timeHorizon);
-            const langMap = { 'de': 'Deutsch', 'en': 'English', 'fr': 'Français' };
+            const selectedLanguage = languages.find(l => l.id === state.language) || { title: state.language };
 
             // Populate Summary Table
             if (summaryTableBody) {
                 summaryTableBody.innerHTML = [
-                    renderSummaryRow('Language', langMap[state.language] || state.language),
+                    renderSummaryRow('Language', selectedLanguage.title),
                     renderSummaryRow('Perspective', selectedPerspective.title),
                     renderSummaryRow('Scenario', `${selectedScenario.id} - ${selectedScenario.title}`),
                     renderSummaryRow('Time Horizon', selectedTimeHorizon.title),
@@ -221,9 +171,29 @@ function bindEvents() {
             switchView('view-configure');
         });
     }
+
+    // Edit button in Review view
+    const btnEdit = document.getElementById('btn-edit');
+    if (btnEdit) {
+        btnEdit.addEventListener('click', () => {
+            switchView('view-configure');
+        });
+    }
+
+    // Confirm & Download button in Review view
+    const btnConfirm = document.getElementById('btn-confirm');
+    if (btnConfirm) {
+        btnConfirm.addEventListener('click', () => {
+            switchView('view-download');
+        });
+    }
 }
 
-// Initialize Application
+/**
+ * Purpose: Initialize the application on page load.
+ * @returns {void}
+ * Logic reason: Subscribes the UI to state changes, renders the initial view, and binds events to bootstrap the app.
+ */
 function init() {
     // Subscribe UI renderer to state changes
     subscribe(renderUI);
