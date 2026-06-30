@@ -96,3 +96,16 @@ export function subscribe(callback) {
 function notifyListeners() {
     listeners.forEach(cb => cb(state));
 }
+
+/**
+ * Purpose: Revert state to default values.
+ * @returns {void}
+ * Logic reason: Allows user to start over with a fresh configuration.
+ */
+export function resetState() {
+    state.scenario = null;
+    state.perspective = 'gen';
+    state.timeHorizon = 'all';
+    state.language = 'de';
+    notifyListeners();
+}

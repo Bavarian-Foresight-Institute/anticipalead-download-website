@@ -1,5 +1,19 @@
 @import "tailwindcss";
-@config "../tailwind.config.js";
+
+@theme {
+  --color-brand-red: #ED1C24;
+  --color-brand-dark: #111111;
+  --color-brand-darker: #0a0a0a;
+  --color-brand-light: #F8F8F7;
+  --color-brand-gray-100: #F3F4F6;
+  --color-brand-gray-200: #E5E7EB;
+  --color-brand-gray-400: #9CA3AF;
+  --color-brand-gray-600: #4B5563;
+  --color-brand-gray-800: #1F2937;
+  --font-sans: "Clear Sans", sans-serif;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+}
 
 @layer base {
   html {
@@ -7,14 +21,7 @@
   }
 }
 
-@layer components {
-  /* Applies uniform rounded corners and the active click ring */
-  .interactive-base {
-    @apply rounded-lg transition-all active:ring-2 active:ring-inset active:ring-black;
-  }
-  
-  /* Applies a uniform shadow for elements that need it */
-  .standard-shadow {
-    @apply shadow-md hover:shadow-lg;
-  }
+/* Applies uniform rounded corners and the active click ring */
+@utility interactive-base {
+  @apply rounded-lg transition-all active:ring-2 active:ring-inset active:ring-black;
 }

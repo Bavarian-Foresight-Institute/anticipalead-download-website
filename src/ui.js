@@ -16,6 +16,7 @@
  * @returns {string} The HTML string for the scenario card.
  * Logic reason: Uses template literals to construct HTML dynamically with proper styling based on selection state.
  */
+
 export function renderScenarioCard(id, title, description, badgeText, badgeColorClass, isSelected = false) {
     const ringClass = isSelected ? 'ring-2 ring-inset ring-black' : 'ring-1 ring-inset ring-gray-200';
     const dotClass = isSelected ? 'border-4 border-brand-red' : 'border border-gray-300';
@@ -94,7 +95,7 @@ export function renderTimeHorizonCard(id, title, description, isSelected = false
  */
 export function renderLanguageCard(id, title, isSelected = false) {
     const ringClass = isSelected ? 'ring-2 ring-inset ring-black font-medium' : 'ring-1 ring-inset ring-gray-200 text-gray-500';
-    
+
     return `
         <div data-lang="${id}" class="flex-1 bg-white interactive-base standard-shadow p-4 text-center cursor-pointer ${ringClass}">
             ${title}

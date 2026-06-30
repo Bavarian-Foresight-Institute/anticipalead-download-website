@@ -5,7 +5,7 @@
  * dependencies: src/core/state.js, src/core/engine.js, src/ui.js
  */
 
-import { getState, setScenario, setPerspective, setTimeHorizon, setLanguage, subscribe } from './core/state.js';
+import { getState, setScenario, setPerspective, setTimeHorizon, setLanguage, subscribe, resetState } from './core/state.js';
 import { renderScenarioCard, renderPerspectiveCard, renderTimeHorizonCard, renderLanguageCard, renderSummaryRow, renderStepper } from './ui.js';
 import { scenarios, perspectives, timeHorizons, languages } from './core/content.js';
 
@@ -58,28 +58,28 @@ function switchView(viewId) {
 function renderUI(state) {
     // Render Scenarios
     if (scenarioGrid) {
-        scenarioGrid.innerHTML = scenarios.map(s => 
+        scenarioGrid.innerHTML = scenarios.map(s =>
             renderScenarioCard(s.id, s.title, s.description, s.badgeText, s.badgeColorClass, state.scenario === s.id)
         ).join('');
     }
 
     // Render Perspectives
     if (perspectiveGrid) {
-        perspectiveGrid.innerHTML = perspectives.map(p => 
+        perspectiveGrid.innerHTML = perspectives.map(p =>
             renderPerspectiveCard(p.id, p.title, p.description, p.isRecommended, state.perspective === p.id)
         ).join('');
     }
 
     // Render Time Horizons
     if (timeHorizonGrid) {
-        timeHorizonGrid.innerHTML = timeHorizons.map(t => 
+        timeHorizonGrid.innerHTML = timeHorizons.map(t =>
             renderTimeHorizonCard(t.id, t.title, t.description, state.timeHorizon === t.id)
         ).join('');
     }
 
     // Render Languages
     if (languageGrid) {
-        languageGrid.innerHTML = languages.map(l => 
+        languageGrid.innerHTML = languages.map(l =>
             renderLanguageCard(l.id, l.title, state.language === l.id)
         ).join('');
     }
@@ -185,6 +185,15 @@ function bindEvents() {
     if (btnConfirm) {
         btnConfirm.addEventListener('click', () => {
             switchView('view-download');
+        });
+    }
+
+    // Download another scenario button
+    const btnDownloadAnother = document.getElementById('btn-download-another');
+    if (btnDownloadAnother) {
+        btnDownloadAnother.addEventListener('click', () => {
+            resetState();
+            switchView('view-configure');
         });
     }
 }
