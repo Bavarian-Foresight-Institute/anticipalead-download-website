@@ -5,14 +5,21 @@
  * dependencies: None
  */
 
-const state = {
+let defaultState = {
     scenario: null,
-    perspective: 'gen',  // 'corp', 'gen'
-    timeHorizon: 'all',  // 's', 'm', 'l', 'all'
-    language: 'de'       // 'de', 'en', 'fr'
+    perspective: null,
+    timeHorizon: null,
+    language: null
 };
 
-const listeners = [];
+let state = { ...defaultState };
+
+let listeners = [];
+
+export function initState(defaults) {
+    defaultState = { ...defaultState, ...defaults };
+    state = { ...defaultState };
+}
 
 /**
  * Purpose: Retrieve a copy of the current state.
@@ -86,6 +93,9 @@ export function setLanguage(lang) {
  */
 export function subscribe(callback) {
     listeners.push(callback);
+    return () => {
+        listeners = listeners.filter(cb => cb !== callback);
+    };
 }
 
 /**
@@ -103,9 +113,6 @@ function notifyListeners() {
  * Logic reason: Allows user to start over with a fresh configuration.
  */
 export function resetState() {
-    state.scenario = null;
-    state.perspective = 'gen';
-    state.timeHorizon = 'all';
-    state.language = 'de';
+    state = { ...defaultState };
     notifyListeners();
 }

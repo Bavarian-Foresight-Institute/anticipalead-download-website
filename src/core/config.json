@@ -5,7 +5,7 @@
         "language",
         "perspective"
       ],
-      "template": "canvas_{language}_{perspective}.pdf"
+      "template": "canvases/canvas_{language}_{perspective}.pdf"
     },
     "nameTag": {
       "dependencies": [
@@ -13,34 +13,34 @@
         "perspective",
         "scenario"
       ],
-      "template": "nametag_{language}_{perspective}_{scenario}.pdf"
+      "template": "nametags/nametag_{language}_{perspective}_{scenario}.pdf"
     },
     "playerCard": {
       "dependencies": [
         "language",
         "perspective"
       ],
-      "template": "playercard_{language}_{perspective}.pdf"
+      "template": "playercards/playercard_{language}_{perspective}.pdf"
     },
     "audio": {
       "dependencies": [
         "language",
         "scenario"
       ],
-      "template": "audio_{language}_{scenario}.mp3"
+      "template": "audio/audio_{language}_{scenario}.mp3"
     },
     "techCards": {
       "dependencies": [
         "language",
         "timeHorizon"
       ],
-      "template": "techcards_{language}_{timeHorizon}.pdf"
+      "template": "techcards/techcards_{language}_{timeHorizon}.pdf"
     },
     "quickstartGuide": {
       "dependencies": [
         "language"
       ],
-      "template": "quickstart_{language}.pdf"
+      "template": "guides/quickstart_{language}.pdf"
     }
   }
 }

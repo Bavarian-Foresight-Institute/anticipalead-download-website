@@ -29,8 +29,12 @@ anticipalead-download-website/
 ├── README.md
 └── src/
     ├── app.js
+    ├── ui.js
+    ├── ui/
+    │   └── icons.js
     └── core/
         ├── config.json
+        ├── content.js
         ├── engine.js
         └── state.js
 ```
@@ -39,11 +43,13 @@ anticipalead-download-website/
 
 The application is structured around a set of decoupled core modules:
 
-*   **app.js (Orchestrator):** The main entry point of the application. It bootstraps the page, initializes state and UI controllers, and binds global DOM event listeners.
-*   **ui.js (DOM Rendering):** The DOM manipulation and template rendering layer.
-*   **core/state.js (Data Tracking):** Tracks user selections, choices, and current interactive configuration. It manages state transitions and fires events to notify components when selections change.
-*   **core/engine.js:** The logic layer responsible for fetching external materials, assembling game files, and generating downloadable .zip files using the JSZip library.
-*   **core/config.json:** The declarative data model that maps user choices to their corresponding asset file paths. This separates business configurations from source code execution.
+*   **app.js (Orchestrator):** The main entry point of the application. It uses a lightweight page router (`if (page-download)`) to only boot interactive grids when necessary. It bootstraps the page, initializes state dynamically, and binds global DOM event listeners.
+*   **ui.js (DOM Rendering):** Pure component layer. Exported functions accept destructured prop objects and return strictly defined template literals.
+*   **ui/icons.js (Assets):** A library of exported SVG string constants to keep markup out of controller logic.
+*   **core/content.js (Data Definitions):** Centralized static UI content (scenarios, perspectives, time horizons). This is the single source of truth from which the initial state is derived.
+*   **core/state.js (Data Tracking):** Tracks user selections using an observer pattern.
+*   **core/engine.js (Resolution Logic):** A pure function layer that cross-references the active state against `config.json` templates to yield an array of final download paths.
+*   **core/config.json:** The declarative data model mapping user choices to their corresponding asset file paths.
 
 ## Data Model & Configuration Schema
 

@@ -5,6 +5,8 @@
  * dependencies: None
  */
 
+import { IconCheckSm } from './ui/icons.js';
+
 /**
  * Purpose: Render the HTML template for a scenario selection card.
  * @param {string} id - The ID of the scenario.
@@ -17,7 +19,7 @@
  * Logic reason: Uses template literals to construct HTML dynamically with proper styling based on selection state.
  */
 
-export function renderScenarioCard(id, title, description, badgeText, badgeColorClass, isSelected = false) {
+export function renderScenarioCard({ id, title, description, badgeText, badgeColorClass, isSelected = false }) {
     const ringClass = isSelected ? 'ring-2 ring-inset ring-black' : 'ring-1 ring-inset ring-gray-200';
     const dotClass = isSelected ? 'border-4 border-brand-red' : 'border border-gray-300';
     const textClass = isSelected ? 'text-black' : 'text-gray-300';
@@ -43,7 +45,7 @@ export function renderScenarioCard(id, title, description, badgeText, badgeColor
  * @returns {string} The HTML string for the perspective card.
  * Logic reason: Conditionally renders a recommendation badge and toggles selection styles.
  */
-export function renderPerspectiveCard(id, title, description, isRecommended, isSelected = false) {
+export function renderPerspectiveCard({ id, title, description, isRecommended, isSelected = false }) {
     const badgeHTML = isRecommended
         ? `<span class="bg-white ring-1 ring-inset ring-gray-200 text-gray-500 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider pointer-events-none">Recommended</span>`
         : '';
@@ -72,7 +74,7 @@ export function renderPerspectiveCard(id, title, description, isRecommended, isS
  * @returns {string} The HTML string for the time horizon card.
  * Logic reason: Uses dynamic Tailwind classes to reflect the selected state.
  */
-export function renderTimeHorizonCard(id, title, description, isSelected = false) {
+export function renderTimeHorizonCard({ id, title, description, isSelected = false }) {
     const ringClass = isSelected ? 'ring-2 ring-inset ring-black' : 'ring-1 ring-inset ring-gray-200';
     const dotClass = isSelected ? 'border-4 border-brand-red' : 'border border-gray-300';
     const textClass = isSelected ? 'text-black' : 'text-gray-400';
@@ -93,7 +95,7 @@ export function renderTimeHorizonCard(id, title, description, isSelected = false
  * @param {boolean} [isSelected=false] - Whether this card is currently selected.
  * @returns {string} The HTML string for the language card.
  */
-export function renderLanguageCard(id, title, isSelected = false) {
+export function renderLanguageCard({ id, title, isSelected = false }) {
     const ringClass = isSelected ? 'ring-2 ring-inset ring-black font-medium' : 'ring-1 ring-inset ring-gray-200 text-gray-500';
 
     return `
@@ -137,7 +139,7 @@ export function renderStepper(currentStep) {
             return `
             <div class="flex items-center">
                 <div class="w-6 h-6 rounded-full bg-brand-dark text-white flex items-center justify-center text-xs font-bold">
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                    ${IconCheckSm}
                 </div>
                 <span class="ml-2 text-sm font-semibold text-brand-dark">${label}</span>
             </div>
@@ -175,6 +177,11 @@ export function renderStepper(currentStep) {
 /**
  * Purpose: Render the navigation button.
  * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID of the button.
+ * @param {string} props.text - Button label.
+ * @param {string} [props.href='#'] - Link URL.
+ * @param {string} [props.additionalClasses=''] - Extra classes to append.
+ * @returns {string} The HTML string for the navigation button.
  */
 export function NavButton({ id, text, href = '#', additionalClasses = '' }) {
     return `
@@ -187,6 +194,11 @@ export function NavButton({ id, text, href = '#', additionalClasses = '' }) {
 /**
  * Purpose: Render a text link for the navigation bar.
  * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID of the link.
+ * @param {string} props.text - Link text.
+ * @param {string} [props.href='#'] - Link URL.
+ * @param {string} [props.additionalClasses=''] - Extra classes to append.
+ * @returns {string} The HTML string for the navigation link.
  */
 export function NavLink({ id, text, href = '#', additionalClasses = '' }) {
     return `
@@ -199,6 +211,12 @@ export function NavLink({ id, text, href = '#', additionalClasses = '' }) {
 /**
  * Purpose: Render the primary CTA button (Red).
  * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID.
+ * @param {string} props.text - Label.
+ * @param {string} [props.href='#'] - Link.
+ * @param {string} [props.icon=''] - SVG icon string.
+ * @param {string} [props.additionalClasses=''] - Extra classes.
+ * @returns {string} The HTML string for the primary button.
  */
 export function PrimaryButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
     return `
@@ -212,6 +230,12 @@ export function PrimaryButton({ id, text, href = '#', icon = '', additionalClass
 /**
  * Purpose: Render the secondary CTA button (White).
  * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID.
+ * @param {string} props.text - Label.
+ * @param {string} [props.href='#'] - Link.
+ * @param {string} [props.icon=''] - SVG icon string.
+ * @param {string} [props.additionalClasses=''] - Extra classes.
+ * @returns {string} The HTML string for the secondary button.
  */
 export function SecondaryButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
     return `
@@ -225,6 +249,12 @@ export function SecondaryButton({ id, text, href = '#', icon = '', additionalCla
 /**
  * Purpose: Render the dark CTA button.
  * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID.
+ * @param {string} props.text - Label.
+ * @param {string} [props.href='#'] - Link.
+ * @param {string} [props.icon=''] - SVG icon string.
+ * @param {string} [props.additionalClasses=''] - Extra classes.
+ * @returns {string} The HTML string for the dark button.
  */
 export function DarkButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
     return `
@@ -238,6 +268,13 @@ export function DarkButton({ id, text, href = '#', icon = '', additionalClasses 
 /**
  * Purpose: Render a Solid Action Button (e.g. Continue, Confirm).
  * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID.
+ * @param {string} props.text - Label.
+ * @param {string} [props.icon=''] - Start icon SVG string.
+ * @param {string} [props.iconEnd=''] - End icon SVG string.
+ * @param {string} [props.size='md'] - 'md', 'lg', or 'xl'.
+ * @param {boolean} [props.isFullWidth=false] - Whether button takes full width.
+ * @returns {string} The HTML string for the solid action button.
  */
 export function SolidButton({ id, text, icon = '', iconEnd = '', size = 'md', isFullWidth = false }) {
     let sizeClasses = size === 'lg' ? 'px-8 py-3' : 'px-6 py-3';
@@ -257,6 +294,11 @@ export function SolidButton({ id, text, icon = '', iconEnd = '', size = 'md', is
 /**
  * Purpose: Render an Outline Action Button (e.g. Back).
  * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID.
+ * @param {string} props.text - Label.
+ * @param {string} [props.icon=''] - SVG icon string.
+ * @param {boolean} [props.isFlexible=false] - Whether button flexes to fill space.
+ * @returns {string} The HTML string for the outline action button.
  */
 export function OutlineButton({ id, text, icon = '', isFlexible = false }) {
     const sizeClasses = isFlexible ? 'flex-1 py-3 text-sm' : 'px-6 py-3';
@@ -272,6 +314,10 @@ export function OutlineButton({ id, text, icon = '', isFlexible = false }) {
 /**
  * Purpose: Render a plain Text Icon Button (e.g. Edit).
  * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID.
+ * @param {string} props.text - Label.
+ * @param {string} [props.icon=''] - SVG icon string.
+ * @returns {string} The HTML string for the text icon button.
  */
 export function TextIconButton({ id, text, icon = '' }) {
     return `
@@ -285,6 +331,11 @@ export function TextIconButton({ id, text, icon = '' }) {
 /**
  * Purpose: Render a plain Text Icon Link (e.g. Back to overview).
  * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID.
+ * @param {string} props.text - Label.
+ * @param {string} [props.href='#'] - Link URL.
+ * @param {string} [props.icon=''] - SVG icon string.
+ * @returns {string} The HTML string for the text icon link.
  */
 export function TextIconLink({ id, text, href = '#', icon = '' }) {
     return `

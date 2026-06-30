@@ -5,6 +5,10 @@
  * dependencies: None
  */
 
+/**
+ * @type {Array<{id: string, title: string, description: string, badgeText: string, badgeColorClass: string}>}
+ * Purpose: Defines the available game scenarios.
+ */
 export const scenarios = [
     {
         id: 'A',
@@ -29,6 +33,10 @@ export const scenarios = [
     }
 ];
 
+/**
+ * @type {Array<{id: string, title: string, description: string, isRecommended: boolean}>}
+ * Purpose: Defines the available player perspectives.
+ */
 export const perspectives = [
     {
         id: 'gen',
@@ -44,6 +52,10 @@ export const perspectives = [
     }
 ];
 
+/**
+ * @type {Array<{id: string, title: string, description: string}>}
+ * Purpose: Defines the available time horizons for technology cards.
+ */
 export const timeHorizons = [
     {
         id: 'all',
@@ -67,6 +79,10 @@ export const timeHorizons = [
     }
 ];
 
+/**
+ * @type {Array<{id: string, title: string}>}
+ * Purpose: Defines the supported languages for the game materials.
+ */
 export const languages = [
     {
         id: 'de',
