@@ -9,6 +9,7 @@ import { getState, setScenario, setPerspective, setTimeHorizon, setLanguage, sub
 import { renderScenarioCard, renderPerspectiveCard, renderTimeHorizonCard, renderLanguageCard, renderSummaryRow, renderStepper, NavButton, NavLink, PrimaryButton, SecondaryButton, DarkButton, SolidButton, OutlineButton, TextIconButton, TextIconLink } from './ui.js';
 import { IconDownloadLg, IconVideoLg, IconArrowLeftSm, IconArrowRightSm, IconEditSm, IconArrowLeftMd, IconDownloadSm, IconArrowLeftOpacity, IconArrowDownSm, IconDocumentSm } from './ui/icons.js';
 import { scenarios, perspectives, timeHorizons, languages } from './core/content.js';
+import { generateAndDownloadZip } from './core/download.js';
 
 // DOM Elements
 const DOM = {};
@@ -44,6 +45,7 @@ function cacheDOM() {
     DOM.btnEdit = document.getElementById('btn-edit');
     DOM.btnConfirm = document.getElementById('btn-confirm');
     DOM.btnDownloadAnother = document.getElementById('btn-download-another');
+    DOM.btnDownloadZip = document.getElementById('btn-download-zip');
 }
 
 /**
@@ -212,6 +214,22 @@ function bindEvents() {
         DOM.btnDownloadAnother.addEventListener('click', () => {
             resetState();
             switchView('view-configure');
+        });
+    }
+
+    // Final Download ZIP button
+    if (DOM.btnDownloadZip) {
+        DOM.btnDownloadZip.addEventListener('click', async () => {
+            const originalText = DOM.btnDownloadZip.innerHTML;
+            DOM.btnDownloadZip.innerHTML = 'Assembling ZIP...';
+            
+            try {
+                await generateAndDownloadZip(getState());
+            } catch (error) {
+                alert(`The following files are missing on the server:\n${error.message}\n\nPlease contact the website administrator for assistance.`);
+            } finally {
+                DOM.btnDownloadZip.innerHTML = originalText;
+            }
         });
     }
 }

@@ -11,21 +11,21 @@
  */
 export const scenarios = [
     {
-        id: 'A',
+        id: '1',
         title: 'AI in talent management',
         description: 'AI-driven hiring and performance evaluation. Ethics, accountability, and bias.',
         badgeText: 'HR & PEOPLE',
         badgeColorClass: 'bg-red-800'
     },
     {
-        id: 'B',
+        id: '2',
         title: 'Predictive maintenance & workforce',
         description: 'AI in a factory setting. Job displacement, retraining, and leadership legitimacy.',
         badgeText: 'MANUFACTURING',
         badgeColorClass: 'bg-purple-700'
     },
     {
-        id: 'C',
+        id: '3',
         title: 'Autonomous diagnostics',
         description: 'AI-assisted clinical decisions. Patient trust, data governance, accountability.',
         badgeText: 'HEALTHCARE',

@@ -7,20 +7,20 @@
       ],
       "template": "canvases/canvas_{language}_{perspective}.pdf"
     },
-    "nameTag": {
+    "nameTags": {
       "dependencies": [
         "language",
         "perspective",
         "scenario"
       ],
-      "template": "nametags/nametag_{language}_{perspective}_{scenario}.pdf"
+      "template": "nametags/nametags_{language}_{perspective}_{scenario}.pdf"
     },
-    "playerCard": {
+    "playerCards": {
       "dependencies": [
         "language",
         "perspective"
       ],
-      "template": "playercards/playercard_{language}_{perspective}.pdf"
+      "template": "playercards/playercards_{language}_{perspective}.pdf"
     },
     "audio": {
       "dependencies": [
