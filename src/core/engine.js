@@ -7,7 +7,7 @@
 
 import config from './config.json' with { type: 'json' };
 
-const BASE_PATH = 'assets/downloads/';
+const BASE_PATH = './assets/downloads/';
 
 /**
  * Purpose: Resolves the list of files to download based on the provided state.

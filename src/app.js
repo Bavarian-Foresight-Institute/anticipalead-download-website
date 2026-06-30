@@ -258,7 +258,7 @@ function init() {
         DOM.navBtnContainer.innerHTML = NavButton({
             id: 'nav-download-btn',
             text: 'Download',
-            href: 'download.html'
+            href: './download.html'
         });
     }
 
@@ -267,7 +267,7 @@ function init() {
             DOM.heroDownloadContainer.innerHTML = PrimaryButton({
                 id: 'hero-download-btn',
                 text: 'Get the game materials',
-                href: 'download.html',
+                href: './download.html',
                 icon: IconDownloadLg
             });
         }
@@ -285,7 +285,7 @@ function init() {
             DOM.bottomDownloadContainer.innerHTML = DarkButton({
                 id: 'bottom-download-btn',
                 text: 'Start the download process',
-                href: 'download.html',
+                href: './download.html',
                 icon: IconDownloadLg
             });
         }
@@ -315,7 +315,7 @@ function init() {
             DOM.navBackContainer.innerHTML = TextIconLink({
                 id: 'nav-back-btn',
                 text: 'Back to overview',
-                href: 'index.html',
+                href: './index.html',
                 icon: IconArrowLeftSm
             });
         }
