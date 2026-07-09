@@ -11,6 +11,11 @@
   --color-brand-gray-600: #4B5563;
   --color-brand-gray-800: #1F2937;
   --font-sans: "Clear Sans", sans-serif;
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.2), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-invisible: 0 1px 3px 0 rgb(0 0 0 / 0), 0 1px 2px -1px rgb(0 0 0 / 0);
+  --radius: 0.5rem;
+  --brightness-101: 1.01;
+  --brightness-98: .98;
 }
 
 @layer base {
@@ -19,7 +24,34 @@
   }
 }
 
-/* Applies uniform rounded corners and the active click ring */
+/* Applies transitions and base properties to prevent visual flashes */
 @utility interactive-base {
-  @apply rounded-lg transition-all active:ring-8 active:ring-inset active:ring-gray-400;
+  transition-property: filter, color, background-color, border-color, opacity;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  @apply shadow-invisible brightness-100;
+  transform: translateZ(0);
+}
+
+
+/* Applies hover interaction */
+@utility interactive-hover {
+  @apply hover:shadow active:shadow hover:brightness-101;
+}
+
+/* Card Selection Styles */
+@utility card-ring {
+  @apply ring-1 ring-inset ring-gray-200;
+}
+
+@utility card-ring-selected {
+  @apply ring-1 ring-inset ring-gray-400;
+}
+
+@utility card-dot {
+  @apply border border-gray-300;
+}
+
+@utility card-dot-selected {
+  @apply border-4 border-brand-red;
 }

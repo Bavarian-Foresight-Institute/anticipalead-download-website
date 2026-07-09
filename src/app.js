@@ -24,7 +24,7 @@ function cacheDOM() {
     DOM.languageGrid = document.getElementById('language-grid');
     DOM.summaryTableBody = document.getElementById('summary-table-body');
     DOM.stepperContainer = document.getElementById('stepper-container');
-    
+
     DOM.navLinksContainer = document.getElementById('nav-links-container');
     DOM.navBtnContainer = document.getElementById('nav-btn-container');
     DOM.heroDownloadContainer = document.getElementById('hero-download-btn-container');
@@ -38,7 +38,7 @@ function cacheDOM() {
     DOM.btnDownloadZipContainer = document.getElementById('btn-download-zip-container');
     DOM.btnDownloadAnotherContainer = document.getElementById('btn-download-another-container');
     DOM.btnQuickstartContainer = document.getElementById('btn-quickstart-container');
-    
+
     // Dynamically injected buttons
     DOM.btnContinue = document.getElementById('btn-continue');
     DOM.btnBack = document.getElementById('btn-back');
@@ -117,7 +117,7 @@ function renderUI(state) {
 function bindEvents() {
     // Scenario selection delegation
     if (DOM.scenarioGrid) {
-        DOM.scenarioGrid.addEventListener('click', (e) => {
+        DOM.scenarioGrid.addEventListener('mousedown', (e) => {
             const card = e.target.closest('[data-scenario]');
             if (card) {
                 const scenarioId = card.getAttribute('data-scenario');
@@ -128,7 +128,7 @@ function bindEvents() {
 
     // Perspective selection delegation
     if (DOM.perspectiveGrid) {
-        DOM.perspectiveGrid.addEventListener('click', (e) => {
+        DOM.perspectiveGrid.addEventListener('mousedown', (e) => {
             const card = e.target.closest('[data-perspective]');
             if (card) {
                 const perspectiveId = card.getAttribute('data-perspective');
@@ -139,7 +139,7 @@ function bindEvents() {
 
     // Time Horizon selection delegation
     if (DOM.timeHorizonGrid) {
-        DOM.timeHorizonGrid.addEventListener('click', (e) => {
+        DOM.timeHorizonGrid.addEventListener('mousedown', (e) => {
             const card = e.target.closest('[data-time]');
             if (card) {
                 const timeId = card.getAttribute('data-time');
@@ -150,7 +150,7 @@ function bindEvents() {
 
     // Language selection delegation
     if (DOM.languageGrid) {
-        DOM.languageGrid.addEventListener('click', (e) => {
+        DOM.languageGrid.addEventListener('mousedown', (e) => {
             const card = e.target.closest('[data-lang]');
             if (card) {
                 const lang = card.getAttribute('data-lang');
@@ -161,7 +161,7 @@ function bindEvents() {
 
     // Continue to Review button
     if (DOM.btnContinue) {
-        DOM.btnContinue.addEventListener('click', () => {
+        DOM.btnContinue.addEventListener('mousedown', () => {
             const state = getState();
             if (!state.scenario) {
                 alert('Please choose a scenario before continuing.');
@@ -190,28 +190,28 @@ function bindEvents() {
 
     // Back button in Review view
     if (DOM.btnBack) {
-        DOM.btnBack.addEventListener('click', () => {
+        DOM.btnBack.addEventListener('mousedown', () => {
             switchView('view-configure');
         });
     }
 
     // Edit button in Review view
     if (DOM.btnEdit) {
-        DOM.btnEdit.addEventListener('click', () => {
+        DOM.btnEdit.addEventListener('mousedown', () => {
             switchView('view-configure');
         });
     }
 
     // Confirm & Download button in Review view
     if (DOM.btnConfirm) {
-        DOM.btnConfirm.addEventListener('click', () => {
+        DOM.btnConfirm.addEventListener('mousedown', () => {
             switchView('view-download');
         });
     }
 
     // Download another scenario button
     if (DOM.btnDownloadAnother) {
-        DOM.btnDownloadAnother.addEventListener('click', () => {
+        DOM.btnDownloadAnother.addEventListener('mousedown', () => {
             resetState();
             switchView('view-configure');
         });
@@ -219,10 +219,10 @@ function bindEvents() {
 
     // Final Download ZIP button
     if (DOM.btnDownloadZip) {
-        DOM.btnDownloadZip.addEventListener('click', async () => {
+        DOM.btnDownloadZip.addEventListener('mousedown', async () => {
             const originalText = DOM.btnDownloadZip.innerHTML;
             DOM.btnDownloadZip.innerHTML = 'Assembling ZIP...';
-            
+
             try {
                 await generateAndDownloadZip(getState());
             } catch (error) {
