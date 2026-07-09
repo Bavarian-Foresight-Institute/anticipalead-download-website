@@ -19,20 +19,23 @@ dependencies: styles, src/app.js
 <body id="page-download" class="bg-brand-light font-sans text-brand-dark antialiased">
 
     <!-- Top Navigation -->
-    <nav class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+    <nav class="bg-white border-b border-gray-200 py-4 w-full">
+        <div class="max-w-3xl mx-auto w-full px-6 flex items-center justify-between">
         <div class="flex items-center">
             <span class="text-xl font-bold tracking-tight">Anticipa<span class="text-brand-red">Lead</span></span>
         </div>
         <div>
             <div id="nav-back-container" class="contents"></div>
         </div>
+        </div>
     </nav>
 
     <!-- Stepper -->
-    <div id="stepper-container" class="bg-white border-b border-gray-200 py-6"></div>
+    <div id="stepper-container" class="bg-white border-b border-gray-200 py-6 w-full"></div>
 
     <!-- Main Content -->
-    <main class="max-w-3xl mx-auto px-6 py-12">
+    <main class="py-12 w-full">
+        <div class="max-w-3xl mx-auto w-full px-6">
 
         <!-- STEP 1: CONFIGURE -->
         <div id="view-configure" class="mb-24">
@@ -241,6 +244,7 @@ dependencies: styles, src/app.js
             </div>
         </div>
 
+        </div>
     </main>
 
     <script type="module" src="./src/app.js"></script>

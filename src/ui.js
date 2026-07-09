@@ -164,12 +164,14 @@ export function renderStepper(currentStep) {
     };
 
     return `
-        <div class="max-w-3xl mx-auto px-6 flex items-center justify-center">
-            ${getStepHtml(1, steps[0].label)}
-            <div class="w-12 h-px ${currentStep > 1 ? 'bg-brand-dark' : 'bg-gray-300'} mx-4"></div>
-            ${getStepHtml(2, steps[1].label)}
-            <div class="w-12 h-px ${currentStep > 2 ? 'bg-brand-dark' : 'bg-gray-300'} mx-4"></div>
-            ${getStepHtml(3, steps[2].label)}
+        <div class="w-full">
+            <div class="max-w-3xl mx-auto w-full px-6 flex items-center justify-center">
+                ${getStepHtml(1, steps[0].label)}
+                <div class="w-12 h-px ${currentStep > 1 ? 'bg-brand-dark' : 'bg-gray-300'} mx-4"></div>
+                ${getStepHtml(2, steps[1].label)}
+                <div class="w-12 h-px ${currentStep > 2 ? 'bg-brand-dark' : 'bg-gray-300'} mx-4"></div>
+                ${getStepHtml(3, steps[2].label)}
+            </div>
         </div>
     `;
 }
@@ -279,7 +281,7 @@ export function DarkButton({ id, text, href = '#', icon = '', additionalClasses 
 export function SolidButton({ id, text, icon = '', iconEnd = '', size = 'md', isFullWidth = false }) {
     let sizeClasses = size === 'lg' ? 'px-8 py-3' : 'px-6 py-3';
     if (size === 'xl') sizeClasses = 'py-4';
-    
+
     const widthClass = isFullWidth ? 'w-full' : '';
 
     return `
