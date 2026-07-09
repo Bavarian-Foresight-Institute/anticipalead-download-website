@@ -35,9 +35,12 @@ export function resolveDownloadList(currentState) {
         if (!isSatisfied) continue;
 
         // Interpolate Template
-        dependencies.forEach(dep => {
-            const token = `{${dep}}`;
-            templateString = templateString.replace(token, currentState[dep]);
+        templateString = templateString.replace(/{([^{}]+)}/g, (match, key) => {
+            const val = currentState[key];
+            if (val === undefined || val === null || val === '') {
+                throw new Error(`Engine Error: Unresolved token '{${key}}' found in path blueprint.`);
+            }
+            return val;
         });
 
         // Prepend Base Path

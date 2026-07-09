@@ -78,7 +78,13 @@ export async function generateAndDownloadZip(currentState, onProgress = () => {}
 
     // Main fetch mapping
     const fetchPromises = filePaths.map(async (path) => {
-        const response = await fetch(path);
+        let response;
+        try {
+            response = await fetch(path);
+        } catch (e) {
+            throw new Error("NETWORK_OFFLINE");
+        }
+
         if (!response.ok) {
             throw new Error(path.split('/').pop());
         }

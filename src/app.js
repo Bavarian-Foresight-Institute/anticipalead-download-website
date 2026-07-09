@@ -13,6 +13,7 @@ import { generateAndDownloadZip, getEstimatedZipSize, getDownloadFilename } from
 
 // DOM Elements
 const DOM = {};
+let estimationRequestId = 0;
 
 function cacheDOM() {
     DOM.viewConfigure = document.getElementById('view-configure');
@@ -38,7 +39,7 @@ function cacheDOM() {
     DOM.btnDownloadZipContainer = document.getElementById('btn-download-zip-container');
     DOM.btnDownloadAnotherContainer = document.getElementById('btn-download-another-container');
     DOM.btnQuickstartContainer = document.getElementById('btn-quickstart-container');
-    
+
     DOM.downloadFilename = document.getElementById('download-filename');
     DOM.downloadInfo = document.getElementById('download-info');
 
@@ -186,13 +187,17 @@ function bindEvents() {
             if (DOM.downloadFilename && DOM.downloadInfo) {
                 DOM.downloadFilename.innerHTML = getDownloadFilename(state);
                 DOM.downloadInfo.innerHTML = `Calculating file size...`;
-                
+
+                const currentRequestId = ++estimationRequestId;
+
                 getEstimatedZipSize(state).then(({ filesCount, missingFiles, totalBytes }) => {
-                    if (missingFiles.length > 0) {
-                        DOM.downloadInfo.innerHTML = `<span class="text-brand-red font-semibold">Warning: ${missingFiles.length} of ${filesCount} files are missing on the server!</span>`;
-                    } else {
-                        const mb = (totalBytes / (1024 * 1024)).toFixed(1);
-                        DOM.downloadInfo.innerHTML = `${filesCount} files - ${mb} MB - Scenario ${selectedScenario.id} - ${selectedPerspective.title} - ${selectedLanguage.title}`;
+                    if (currentRequestId === estimationRequestId) {
+                        if (missingFiles.length > 0) {
+                            DOM.downloadInfo.innerHTML = `<span class="text-brand-red font-semibold">Warning: ${missingFiles.length} of ${filesCount} files are missing on the server!</span>`;
+                        } else {
+                            const mb = (totalBytes / (1024 * 1024)).toFixed(1);
+                            DOM.downloadInfo.innerHTML = `${filesCount} files - ${mb} MB - Scenario ${selectedScenario.id} - ${selectedPerspective.title} - ${selectedLanguage.title}`;
+                        }
                     }
                 });
             }
@@ -250,7 +255,11 @@ function bindEvents() {
             try {
                 await generateAndDownloadZip(getState(), handleProgress);
             } catch (error) {
-                alert(`The following files are missing on the server:\n${error.message}\n\nPlease contact the website administrator for assistance.`);
+                if (error.message === "NETWORK_OFFLINE") {
+                    alert("A network error occurred. Please check your internet connection and try again.");
+                } else {
+                    alert(`The following files are missing on the server:\n${error.message}\n\nPlease contact the website administrator for assistance.`);
+                }
             } finally {
                 DOM.btnDownloadZip.innerHTML = originalText;
                 DOM.btnDownloadZip.disabled = false;
