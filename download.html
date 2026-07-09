@@ -51,13 +51,13 @@ dependencies: styles, src/app.js
                 <!-- Language Selection -->
                 <div class="mb-10">
                     <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Language</h2>
-                    <div id="language-grid" class="flex gap-3"></div>
+                    <div id="language-grid" class="flex flex-col sm:flex-row gap-4"></div>
                 </div>
 
                 <!-- Perspective Selection -->
                 <div class="mb-10">
                     <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Perspective</h2>
-                    <div id="perspective-grid" class="space-y-3">
+                    <div id="perspective-grid" class="space-y-4">
                     </div>
                 </div>
 
@@ -75,11 +75,11 @@ dependencies: styles, src/app.js
                     </div>
                 </div>
 
-                <div>
+                <div class="mb-10">
                     <div id="btn-continue-container" class="contents"></div>
                 </div>
 
-                <div class="mt-6 bg-gray-100 p-4 rounded flex items-start text-xs text-gray-500">
+                <div class="bg-gray-100 p-4 rounded flex items-start text-xs text-gray-500">
                     <svg class="w-4 h-4 mr-2 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -99,7 +99,7 @@ dependencies: styles, src/app.js
                 <p class="text-gray-600 mb-10">Check the configuration below before we assemble your package.</p>
 
                 <!-- Configuration Summary -->
-                <div class="bg-white rounded border border-gray-200 overflow-hidden mb-8 shadow">
+                <div class="bg-white rounded border border-gray-200 overflow-hidden mb-10 shadow">
                     <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                         <h2 class="font-bold text-brand-dark">Package configuration</h2>
                         <div id="btn-edit-container" class="contents"></div>
@@ -130,7 +130,7 @@ dependencies: styles, src/app.js
                     quick-start
                     guide.</p>
 
-                <div class="bg-white rounded border border-gray-800 p-10 max-w-lg mx-auto shadow mb-6 text-center">
+                <div class="bg-white rounded border border-gray-800 p-10 max-w-lg mx-auto shadow mb-10 text-center">
                     <svg class="w-12 h-12 text-brand-red mx-auto mb-4" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -142,7 +142,7 @@ dependencies: styles, src/app.js
                     <div id="btn-download-zip-container" class="contents"></div>
                 </div>
 
-                <div class="flex flex-col sm:flex-row justify-center gap-4 max-w-lg mx-auto mb-8">
+                <div class="flex flex-col sm:flex-row justify-center gap-4 max-w-lg mx-auto mb-10">
                     <div id="btn-download-another-container" class="contents"></div>
                     <div id="btn-quickstart-container" class="contents"></div>
                 </div>

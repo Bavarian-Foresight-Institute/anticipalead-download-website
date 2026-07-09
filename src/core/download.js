@@ -7,26 +7,40 @@
 
 import { resolveDownloadList } from './engine.js';
 
-const verifiedFilesCache = new Set();
+const verifiedFilesCache = new Set(); // Cache verified files to avoid redundant network requests
 
+/**
+ * Purpose: Generate a formatted filename for the resulting ZIP file.
+ * @param {Object} currentState - The application state object containing user selections.
+ * @returns {string} The constructed ZIP filename.
+ * Logic reason: Standardizes the naming convention so users can easily identify downloaded scenario packages.
+ */
 export function getDownloadFilename(currentState) {
     const { scenario, perspective, timeHorizon, language } = currentState;
     const perspectiveTag = perspective === 'corp' ? 'Corporate' : 'General';
     return `AnticipaLead_Scenario${scenario}_${perspectiveTag}_${language.toUpperCase()}.zip`;
 }
 
+/**
+ * Purpose: Fetch the sizes of all required files to provide a download estimate.
+ * @param {Object} currentState - The application state.
+ * @returns {Promise<{filesCount: number, missingFiles: Array<string>, totalBytes: number}>} Metadata about the download.
+ * Logic reason: Enhances user experience by providing file size and warning about missing files *before* they click download.
+ */
 export async function getEstimatedZipSize(currentState) {
     const filePaths = resolveDownloadList(currentState);
     let totalBytes = 0;
     let missingFiles = [];
     
+    // We map to promises and resolve them concurrently to minimize waiting time for the user.
     const promises = filePaths.map(async (path) => {
         try {
+            // Use HEAD request to get headers without downloading the full file payload
             const res = await fetch(path, { method: 'HEAD' });
             if (res.ok) {
                 const size = parseInt(res.headers.get('content-length'), 10) || 0;
                 totalBytes += size;
-                verifiedFilesCache.add(path);
+                verifiedFilesCache.add(path); // Cache to speed up the actual download phase
             } else {
                 missingFiles.push(path);
             }
@@ -41,10 +55,10 @@ export async function getEstimatedZipSize(currentState) {
 }
 
 /**
- * Generates and downloads a flat zip file based on the current state.
- * Validates file existence on the server and aborts if missing.
+ * Purpose: Generates and downloads a flat zip file containing all selected scenario assets.
  * @param {Object} currentState - The application state.
  * @param {Function} [onProgress] - Callback for tracking fetch/zip progress.
+ * Logic reason: We validate file existence on the server first to avoid partial downloads or corrupted zip files.
  */
 export async function generateAndDownloadZip(currentState, onProgress = () => {}) {
     const filePaths = resolveDownloadList(currentState);

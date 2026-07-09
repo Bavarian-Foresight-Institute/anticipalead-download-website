@@ -7,6 +7,11 @@
 
 import { scenarios, perspectives, timeHorizons, languages } from './content.js';
 
+/**
+ * @type {Object}
+ * Purpose: Defines the initial fallback state values.
+ * Logic reason: Ensures that there is always a valid state to revert to or initialize from.
+ */
 let defaultState = {
     scenario: null,
     perspective: null,
@@ -14,10 +19,18 @@ let defaultState = {
     language: null
 };
 
+// Current active state
 let state = { ...defaultState };
 
+// Array of subscriber callbacks
 let listeners = [];
 
+/**
+ * Purpose: Initialize the state with dynamically provided defaults (e.g. from UI content).
+ * @param {Object} defaults - Object containing default selections.
+ * @returns {void}
+ * Logic reason: Allows the application to bootstrap with the recommended default values without hardcoding them here.
+ */
 export function initState(defaults) {
     defaultState = { ...defaultState, ...defaults };
     state = { ...defaultState };

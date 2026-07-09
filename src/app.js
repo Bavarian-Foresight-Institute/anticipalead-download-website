@@ -11,10 +11,18 @@ import { IconDownloadLg, IconVideoLg, IconArrowLeftSm, IconArrowRightSm, IconEdi
 import { scenarios, perspectives, timeHorizons, languages } from './core/content.js';
 import { generateAndDownloadZip, getEstimatedZipSize, getDownloadFilename } from './core/download.js';
 
-// DOM Elements
+// DOM Elements Cache
+// Purpose: Store references to DOM nodes to avoid redundant queries during rendering.
 const DOM = {};
+
+// ID used to handle race conditions in asynchronous file size estimations
 let estimationRequestId = 0;
 
+/**
+ * Purpose: Query and store references to all relevant DOM elements.
+ * @returns {void}
+ * Logic reason: Caching DOM nodes improves performance by preventing multiple reflows or querySelector calls when the UI updates.
+ */
 function cacheDOM() {
     DOM.viewConfigure = document.getElementById('view-configure');
     DOM.viewReview = document.getElementById('view-review');
@@ -43,7 +51,7 @@ function cacheDOM() {
     DOM.downloadFilename = document.getElementById('download-filename');
     DOM.downloadInfo = document.getElementById('download-info');
 
-    // Dynamically injected buttons
+    // Dynamically injected buttons (re-cached after injection)
     DOM.btnContinue = document.getElementById('btn-continue');
     DOM.btnBack = document.getElementById('btn-back');
     DOM.btnEdit = document.getElementById('btn-edit');
