@@ -57,54 +57,67 @@
 }
 
 /* Typography Presets */
-@utility text-preset-highlight-big {
-  @apply text-sm font-bold tracking-widest uppercase;
+/* Used for: The main landing page hero title */
+@utility text-preset-hero-title {
+  @apply text-6xl font-extrabold tracking-tight leading-tight;
 }
 
+/* Used for: Main page section headings (e.g. "Configure your package") */
 @utility text-preset-main-heading {
   @apply text-3xl font-extrabold;
 }
 
-@utility text-preset-normal {
-  @apply text-base font-normal leading-relaxed;
-}
-
-@utility text-preset-card {
-  @apply text-sm font-normal;
-}
-
-@utility text-preset-highlight-tag {
-  @apply text-[10px] font-bold tracking-wider uppercase;
-}
-
-@utility text-preset-highlight-category {
-  @apply text-xs font-bold tracking-wider uppercase;
-}
-
-@utility text-preset-button-main {
-  @apply text-base font-semibold;
-}
-
-@utility text-preset-sub-heading {
-  @apply text-base font-bold;
-}
-
-@utility text-preset-small-note {
-  @apply text-xs font-normal;
-}
-
+/* Used for: Navigation bar logos */
 @utility text-preset-logo {
   @apply text-xl font-bold tracking-tight;
 }
 
+/* Used for: The main landing page hero subtitle */
+@utility text-preset-hero-subtitle {
+  @apply text-xl;
+}
+
+/* Used for: Card titles, numbered steps (01-04), and secondary block titles */
+@utility text-preset-sub-heading {
+  @apply text-base font-semibold;
+}
+
+/* Used for: Primary and secondary action buttons */
+@utility text-preset-button-main {
+  @apply text-base font-semibold;
+}
+
+/* Used for: Standard body text, descriptive paragraphs, and stepper component */
+@utility text-preset-normal {
+  @apply text-base font-normal leading-relaxed;
+}
+
+/* Used for: "Step X of 3" trackers and main overhead tags */
+@utility text-preset-highlight-big {
+  @apply text-sm font-bold tracking-widest uppercase;
+}
+
+/* Used for: Card descriptions, summary table rows, and file warnings */
+@utility text-preset-card {
+  @apply text-sm font-normal;
+}
+
+/* Used for: Configuration grid category titles (e.g. "Language", "Perspective") */
+@utility text-preset-highlight-category {
+  @apply text-xs font-bold tracking-wider uppercase;
+}
+
+/* Used for: Emphasized notes (e.g. "Before your session:") */
 @utility text-preset-small-note-bold {
   @apply text-xs font-bold;
 }
 
-@utility text-preset-hero-title {
-  @apply text-5xl md:text-7xl font-extrabold tracking-tight leading-tight;
+/* Used for: Information bars, footers, and supplementary notes */
+@utility text-preset-small-note {
+  @apply text-xs font-normal;
 }
 
-@utility text-preset-hero-subtitle {
-  @apply text-lg md:text-xl;
+/* Used for: "Recommended" badges and Scenario category tags (e.g. HR & PEOPLE) */
+@utility text-preset-highlight-tag {
+  @apply text-[10px] font-bold tracking-wider uppercase;
 }

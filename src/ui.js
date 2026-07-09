@@ -141,26 +141,26 @@ export function renderStepper(currentStep) {
             // Completed: black background, checkmark, black text
             return `
             <div class="flex items-center">
-                <div class="w-6 h-6 rounded-full bg-brand-dark text-white flex items-center justify-center text-preset-card">
+                <div class="w-6 h-6 rounded-full bg-brand-dark text-white flex items-center justify-center text-preset-normal">
                     ${IconCheckSm}
                 </div>
-                <span class="ml-2 text-preset-card text-brand-dark">${label}</span>
+                <span class="ml-2 text-preset-normal text-brand-dark">${label}</span>
             </div>
             `;
         } else if (stepNum === currentStep) {
             // Active: red background, number, red text
             return `
             <div class="flex items-center">
-                <div class="w-6 h-6 rounded-full bg-brand-red text-white flex items-center justify-center text-preset-card">${stepNum}</div>
-                <span class="ml-2 text-preset-card text-brand-red">${label}</span>
+                <div class="w-6 h-6 rounded-full bg-brand-red text-white flex items-center justify-center text-preset-normal">${stepNum}</div>
+                <span class="ml-2 text-preset-normal text-brand-red">${label}</span>
             </div>
             `;
         } else {
             // Next: gray background, number, gray text
             return `
             <div class="flex items-center">
-                <div class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-preset-card">${stepNum}</div>
-                <span class="ml-2 text-preset-card text-gray-400">${label}</span>
+                <div class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-preset-normal">${stepNum}</div>
+                <span class="ml-2 text-preset-normal text-gray-400">${label}</span>
             </div>
             `;
         }
