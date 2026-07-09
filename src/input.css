@@ -55,3 +55,56 @@
 @utility card-dot-selected {
   @apply border-4 border-brand-red;
 }
+
+/* Typography Presets */
+@utility text-preset-highlight-big {
+  @apply text-sm font-bold tracking-widest uppercase;
+}
+
+@utility text-preset-main-heading {
+  @apply text-3xl font-extrabold;
+}
+
+@utility text-preset-normal {
+  @apply text-base font-normal leading-relaxed;
+}
+
+@utility text-preset-card {
+  @apply text-sm font-normal;
+}
+
+@utility text-preset-highlight-tag {
+  @apply text-[10px] font-bold tracking-wider uppercase;
+}
+
+@utility text-preset-highlight-category {
+  @apply text-xs font-bold tracking-wider uppercase;
+}
+
+@utility text-preset-button-main {
+  @apply text-base font-semibold;
+}
+
+@utility text-preset-sub-heading {
+  @apply text-base font-bold;
+}
+
+@utility text-preset-small-note {
+  @apply text-xs font-normal;
+}
+
+@utility text-preset-logo {
+  @apply text-xl font-bold tracking-tight;
+}
+
+@utility text-preset-small-note-bold {
+  @apply text-xs font-bold;
+}
+
+@utility text-preset-hero-title {
+  @apply text-5xl md:text-7xl font-extrabold tracking-tight leading-tight;
+}
+
+@utility text-preset-hero-subtitle {
+  @apply text-lg md:text-xl;
+}

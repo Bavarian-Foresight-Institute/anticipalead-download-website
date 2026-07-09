@@ -26,9 +26,9 @@ export function renderScenarioCard({ id, title, description, badgeText, badgeCol
 
     return `
         <div data-scenario="${id}" class="bg-white rounded interactive-base ${ringClass} p-5 cursor-pointer relative interactive-hover">
-            <div class="${badgeColorClass} text-white text-xs font-bold px-2 py-1 inline-block rounded mb-3 pointer-events-none">${badgeText}</div>
-            <h3 class="${headingClass} font-bold mb-1 pointer-events-none"> ${id} ${title}</h3>
-            <p class="text-sm text-gray-500 mb-4 pointer-events-none">${description}</p>
+            <div class="${badgeColorClass} text-white text-preset-highlight-tag px-2 py-1 inline-block rounded mb-3 pointer-events-none">${badgeText}</div>
+            <h3 class="${headingClass} text-preset-sub-heading mb-1 pointer-events-none"> ${id} ${title}</h3>
+            <p class="text-gray-500 text-preset-card mb-4 pointer-events-none">${description}</p>
             <div class="absolute bottom-5 right-5 w-[16px] h-[16px] rounded-full ${dotClass} pointer-events-none"></div>
         </div>
     `;
@@ -46,7 +46,7 @@ export function renderScenarioCard({ id, title, description, badgeText, badgeCol
  */
 export function renderPerspectiveCard({ id, title, description, isRecommended, isSelected = false }) {
     const badgeHTML = isRecommended
-        ? `<span class="bg-white ring-1 ring-inset ring-gray-200 text-gray-500 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider pointer-events-none">Recommended</span>`
+        ? `<span class="bg-white ring-1 ring-inset ring-gray-200 text-gray-500 text-preset-highlight-tag px-2 py-1 rounded pointer-events-none">Recommended</span>`
         : '';
 
     const ringClass = isSelected ? 'card-ring-selected' : 'card-ring';
@@ -56,10 +56,10 @@ export function renderPerspectiveCard({ id, title, description, isRecommended, i
     return `
         <div data-perspective="${id}" class="bg-white rounded interactive-base ${ringClass} pt-4 pb-5 px-5 cursor-pointer relative interactive-hover">
             <div class="flex justify-between items-start mb-1 pointer-events-none">
-                <h3 class="${headingClass} font-bold pointer-events-none">${title}</h3>
+                <h3 class="${headingClass} text-preset-sub-heading pointer-events-none">${title}</h3>
                 ${badgeHTML}
             </div>
-            <p class="text-sm text-gray-500 mb-4 pointer-events-none">${description}</p>
+            <p class="text-gray-500 text-preset-card mb-4 pointer-events-none">${description}</p>
             <div class="absolute bottom-5 right-5 w-[16px] h-[16px] rounded-full ${dotClass} pointer-events-none"></div>
         </div>
     `;
@@ -81,8 +81,8 @@ export function renderTimeHorizonCard({ id, title, description, isSelected = fal
 
     return `
         <div data-time="${id}" class="bg-white rounded interactive-base ${ringClass} pt-4 pb-5 px-5 cursor-pointer relative interactive-hover">
-            <h3 class="${headingClass} font-bold mb-1 pointer-events-none">${title}</h3>
-            <p class="text-sm text-gray-500 mb-4 pointer-events-none">${description}</p>
+            <h3 class="${headingClass} text-preset-sub-heading mb-1 pointer-events-none">${title}</h3>
+            <p class="text-gray-500 text-preset-card mb-4 pointer-events-none">${description}</p>
             <div class="absolute bottom-5 right-5 w-[16px] h-[16px] rounded-full ${dotClass} pointer-events-none"></div>
         </div>
     `;
@@ -102,7 +102,7 @@ export function renderLanguageCard({ id, title, isSelected = false }) {
 
     return `
         <div data-lang="${id}" class="flex-1 bg-white rounded interactive-base relative py-4 pl-5 pr-12 text-left cursor-pointer ${ringClass} interactive-hover">
-            <h3 class="${headingClass} font-bold pointer-events-none">${title}</h3>
+            <h3 class="${headingClass} text-preset-sub-heading pointer-events-none">${title}</h3>
             <div class="absolute bottom-5 right-5 w-[16px] h-[16px] rounded-full ${dotClass} pointer-events-none"></div>
         </div>
     `;
@@ -118,8 +118,8 @@ export function renderLanguageCard({ id, title, isSelected = false }) {
 export function renderSummaryRow(label, value) {
     return `
         <tr>
-            <td class="w-1/3 text-gray-500 text-sm py-2 align-top">${label}</td>
-            <td class="w-2/3 font-medium text-sm py-2 align-top">${value}</td>
+            <td class="w-1/3 text-gray-500 text-preset-card py-2 align-top">${label}</td>
+            <td class="w-2/3 text-preset-card py-2 align-top">${value}</td>
         </tr>
     `;
 }
@@ -141,26 +141,26 @@ export function renderStepper(currentStep) {
             // Completed: black background, checkmark, black text
             return `
             <div class="flex items-center">
-                <div class="w-6 h-6 rounded-full bg-brand-dark text-white flex items-center justify-center text-xs font-bold">
+                <div class="w-6 h-6 rounded-full bg-brand-dark text-white flex items-center justify-center text-preset-card">
                     ${IconCheckSm}
                 </div>
-                <span class="ml-2 text-sm font-semibold text-brand-dark">${label}</span>
+                <span class="ml-2 text-preset-card text-brand-dark">${label}</span>
             </div>
             `;
         } else if (stepNum === currentStep) {
             // Active: red background, number, red text
             return `
             <div class="flex items-center">
-                <div class="w-6 h-6 rounded-full bg-brand-red text-white flex items-center justify-center text-xs font-bold">${stepNum}</div>
-                <span class="ml-2 text-sm font-semibold text-brand-red">${label}</span>
+                <div class="w-6 h-6 rounded-full bg-brand-red text-white flex items-center justify-center text-preset-card">${stepNum}</div>
+                <span class="ml-2 text-preset-card text-brand-red">${label}</span>
             </div>
             `;
         } else {
             // Next: gray background, number, gray text
             return `
             <div class="flex items-center">
-                <div class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-xs font-bold">${stepNum}</div>
-                <span class="ml-2 text-sm font-semibold text-gray-400">${label}</span>
+                <div class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-preset-card">${stepNum}</div>
+                <span class="ml-2 text-preset-card text-gray-400">${label}</span>
             </div>
             `;
         }
@@ -190,7 +190,7 @@ export function renderStepper(currentStep) {
  */
 export function NavButton({ id, text, href = '#', additionalClasses = '' }) {
     return `
-        <a id="${id}" href="${href}" class="interactive-base rounded inline-flex items-center justify-center bg-white text-brand-dark px-6 py-2.5 text-sm font-semibold interactive-hover ${additionalClasses}">
+        <a id="${id}" href="${href}" class="interactive-base rounded inline-flex items-center justify-center bg-white text-brand-dark px-6 py-2.5 text-preset-button-main interactive-hover ${additionalClasses}">
             ${text}
         </a>
     `;
@@ -225,7 +225,7 @@ export function NavLink({ id, text, href = '#', additionalClasses = '' }) {
  */
 export function PrimaryButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
     return `
-        <a id="${id}" href="${href}" class="interactive-base rounded inline-flex items-center justify-center bg-brand-red text-white px-8 py-4 font-semibold interactive-hover ${additionalClasses}">
+        <a id="${id}" href="${href}" class="interactive-base rounded inline-flex items-center justify-center bg-brand-red text-white px-8 py-4 text-preset-button-main interactive-hover ${additionalClasses}">
             ${icon}
             ${text}
         </a>
@@ -244,7 +244,7 @@ export function PrimaryButton({ id, text, href = '#', icon = '', additionalClass
  */
 export function SecondaryButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
     return `
-        <a id="${id}" href="${href}" class="interactive-base rounded inline-flex items-center justify-center bg-white text-brand-dark px-8 py-4 font-semibold interactive-hover ${additionalClasses}">
+        <a id="${id}" href="${href}" class="interactive-base rounded inline-flex items-center justify-center bg-white text-brand-dark px-8 py-4 text-preset-button-main interactive-hover ${additionalClasses}">
             ${icon}
             ${text}
         </a>
@@ -263,7 +263,7 @@ export function SecondaryButton({ id, text, href = '#', icon = '', additionalCla
  */
 export function DarkButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
     return `
-        <a id="${id}" href="${href}" class="interactive-base rounded inline-flex items-center justify-center bg-brand-dark text-white px-8 py-4 font-semibold interactive-hover ${additionalClasses}">
+        <a id="${id}" href="${href}" class="interactive-base rounded inline-flex items-center justify-center bg-brand-dark text-white px-8 py-4 text-preset-button-main interactive-hover ${additionalClasses}">
             ${icon}
             ${text}
         </a>
@@ -288,7 +288,7 @@ export function SolidButton({ id, text, icon = '', iconEnd = '', size = 'md', is
     const widthClass = isFullWidth ? 'w-full' : '';
 
     return `
-        <button id="${id}" class="bg-brand-dark text-white ${sizeClasses} ${widthClass} interactive-base rounded font-semibold inline-flex items-center justify-center interactive-hover">
+        <button id="${id}" class="bg-brand-dark text-white ${sizeClasses} ${widthClass} interactive-base rounded text-preset-button-main inline-flex items-center justify-center interactive-hover">
             ${icon}
             ${text}
             ${iconEnd}
@@ -306,10 +306,10 @@ export function SolidButton({ id, text, icon = '', iconEnd = '', size = 'md', is
  * @returns {string} The HTML string for the outline action button.
  */
 export function OutlineButton({ id, text, icon = '', isFlexible = false }) {
-    const sizeClasses = isFlexible ? 'flex-1 py-3 text-sm' : 'px-6 py-3';
+    const sizeClasses = isFlexible ? 'flex-1 py-3 text-preset-button-main' : 'px-6 py-3';
 
     return `
-        <button id="${id}" class="bg-white border border-gray-200 text-gray-600 ${sizeClasses} interactive-base rounded font-semibold inline-flex items-center justify-center interactive-hover">
+        <button id="${id}" class="bg-white border border-gray-200 text-gray-600 ${sizeClasses} interactive-base rounded text-preset-button-main inline-flex items-center justify-center interactive-hover">
             ${icon}
             ${text}
         </button>
@@ -326,7 +326,7 @@ export function OutlineButton({ id, text, icon = '', isFlexible = false }) {
  */
 export function TextIconButton({ id, text, icon = '' }) {
     return `
-        <button id="${id}" class="interactive-base text-brand-red text-sm font-semibold inline-flex items-center hover:underline">
+        <button id="${id}" class="interactive-base text-brand-red text-preset-normal inline-flex items-center hover:underline">
             ${icon}
             ${text}
         </button>
@@ -344,7 +344,7 @@ export function TextIconButton({ id, text, icon = '' }) {
  */
 export function TextIconLink({ id, text, href = '#', icon = '' }) {
     return `
-        <a id="${id}" href="${href}" class="interactive-base text-sm font-medium text-gray-500 hover:text-brand-dark inline-flex items-center">
+        <a id="${id}" href="${href}" class="interactive-base text-preset-button-main text-gray-500 hover:text-brand-dark inline-flex items-center">
             ${icon}
             ${text}
         </a>

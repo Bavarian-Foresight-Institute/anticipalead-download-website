@@ -201,7 +201,7 @@ function bindEvents() {
                 getEstimatedZipSize(state).then(({ filesCount, missingFiles, totalBytes }) => {
                     if (currentRequestId === estimationRequestId) {
                         if (missingFiles.length > 0) {
-                            DOM.downloadInfo.innerHTML = `<span class="text-brand-red font-semibold">Warning: ${missingFiles.length} of ${filesCount} files are missing on the server!</span>`;
+                            DOM.downloadInfo.innerHTML = `<span class="text-brand-red text-preset-card">Warning: ${missingFiles.length} of ${filesCount} files are missing on the server!</span>`;
                         } else {
                             const mb = (totalBytes / (1024 * 1024)).toFixed(1);
                             DOM.downloadInfo.innerHTML = `${filesCount} files - ${mb} MB - Scenario ${selectedScenario.id} - ${selectedPerspective.title} - ${selectedLanguage.title}`;
