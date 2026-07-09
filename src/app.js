@@ -163,10 +163,6 @@ function bindEvents() {
     if (DOM.btnContinue) {
         DOM.btnContinue.addEventListener('mousedown', () => {
             const state = getState();
-            if (!state.scenario) {
-                alert('Please choose a scenario before continuing.');
-                return;
-            }
 
             // Find full titles for display
             const selectedScenario = scenarios.find(s => s.id === state.scenario);
@@ -206,6 +202,9 @@ function bindEvents() {
     if (DOM.btnConfirm) {
         DOM.btnConfirm.addEventListener('mousedown', () => {
             switchView('view-download');
+            if (DOM.btnDownloadZip) {
+                DOM.btnDownloadZip.dispatchEvent(new Event('mousedown'));
+            }
         });
     }
 
@@ -221,14 +220,23 @@ function bindEvents() {
     if (DOM.btnDownloadZip) {
         DOM.btnDownloadZip.addEventListener('mousedown', async () => {
             const originalText = DOM.btnDownloadZip.innerHTML;
-            DOM.btnDownloadZip.innerHTML = 'Assembling ZIP...';
+            DOM.btnDownloadZip.disabled = true;
+
+            const handleProgress = ({ phase, completed, total, percent }) => {
+                if (phase === 'fetching') {
+                    DOM.btnDownloadZip.innerHTML = `Fetching ${completed} / ${total}...`;
+                } else if (phase === 'zipping') {
+                    DOM.btnDownloadZip.innerHTML = `Compressing ${percent}%...`;
+                }
+            };
 
             try {
-                await generateAndDownloadZip(getState());
+                await generateAndDownloadZip(getState(), handleProgress);
             } catch (error) {
                 alert(`The following files are missing on the server:\n${error.message}\n\nPlease contact the website administrator for assistance.`);
             } finally {
                 DOM.btnDownloadZip.innerHTML = originalText;
+                DOM.btnDownloadZip.disabled = false;
             }
         });
     }
@@ -296,9 +304,10 @@ function init() {
         const defaultPerspective = perspectives.find(p => p.isRecommended)?.id || perspectives[0].id;
         const defaultTimeHorizon = timeHorizons[0].id;
         const defaultLanguage = languages[0].id;
+        const defaultScenario = scenarios[0].id;
 
         initState({
-            scenario: null,
+            scenario: defaultScenario,
             perspective: defaultPerspective,
             timeHorizon: defaultTimeHorizon,
             language: defaultLanguage
