@@ -7,6 +7,8 @@
 
 import { resolveDownloadList } from './engine.js';
 
+const verifiedFilesCache = new Set();
+
 export function getDownloadFilename(currentState) {
     const { scenario, perspective, timeHorizon, language } = currentState;
     const perspectiveTag = perspective === 'corp' ? 'Corporate' : 'General';
@@ -24,6 +26,7 @@ export async function getEstimatedZipSize(currentState) {
             if (res.ok) {
                 const size = parseInt(res.headers.get('content-length'), 10) || 0;
                 totalBytes += size;
+                verifiedFilesCache.add(path);
             } else {
                 missingFiles.push(path);
             }
@@ -48,17 +51,36 @@ export async function generateAndDownloadZip(currentState, onProgress = () => {}
     const zip = new window.JSZip();
     const missingFiles = [];
 
+    // Pre-flight validation logic
+    const pathsToVerify = filePaths.filter(path => !verifiedFilesCache.has(path));
+    if (pathsToVerify.length > 0) {
+        const verifyPromises = pathsToVerify.map(async (path) => {
+            try {
+                const res = await fetch(path, { method: 'HEAD' });
+                if (res.ok) {
+                    verifiedFilesCache.add(path);
+                } else {
+                    missingFiles.push(path.split('/').pop());
+                }
+            } catch (e) {
+                missingFiles.push(path.split('/').pop());
+            }
+        });
+        await Promise.all(verifyPromises);
+    }
+
+    if (missingFiles.length > 0) {
+        throw new Error(missingFiles.join(', '));
+    }
+
     let completed = 0;
     const total = filePaths.length;
 
-    // Fetch and flatten logic
-    for (const path of filePaths) {
+    // Main fetch mapping
+    const fetchPromises = filePaths.map(async (path) => {
         const response = await fetch(path);
-
         if (!response.ok) {
-            const filename = path.split('/').pop();
-            missingFiles.push(filename);
-            continue;
+            throw new Error(path.split('/').pop());
         }
 
         const blob = await response.blob();
@@ -67,12 +89,9 @@ export async function generateAndDownloadZip(currentState, onProgress = () => {}
 
         completed++;
         onProgress({ phase: 'fetching', completed, total });
-    }
+    });
 
-    // Error throwing
-    if (missingFiles.length > 0) {
-        throw new Error(missingFiles.join(', '));
-    }
+    await Promise.all(fetchPromises);
 
     // Browser download trigger
     const zipBlob = await zip.generateAsync(
