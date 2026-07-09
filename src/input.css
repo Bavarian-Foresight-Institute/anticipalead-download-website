@@ -45,7 +45,7 @@
 }
 
 @utility card-ring-selected {
-  @apply ring-1 ring-inset ring-gray-400;
+  @apply ring-1 ring-inset ring-gray-300;
 }
 
 @utility card-dot {

@@ -22,14 +22,13 @@ import { IconCheckSm } from './ui/icons.js';
 export function renderScenarioCard({ id, title, description, badgeText, badgeColorClass, isSelected = false }) {
     const ringClass = isSelected ? 'card-ring-selected' : 'card-ring';
     const dotClass = isSelected ? 'card-dot-selected' : 'card-dot';
-    const textClass = isSelected ? 'text-black' : 'text-gray-300';
+    const headingClass = isSelected ? 'text-black' : 'text-gray-400';
 
     return `
         <div data-scenario="${id}" class="bg-white rounded interactive-base ${ringClass} p-5 cursor-pointer relative interactive-hover">
             <div class="${badgeColorClass} text-white text-xs font-bold px-2 py-1 inline-block rounded mb-3 pointer-events-none">${badgeText}</div>
-            <div class="${textClass} font-bold text-xl mb-1 pointer-events-none">${id}</div>
-            <h3 class="font-bold text-sm mb-2 pointer-events-none">${title}</h3>
-            <p class="text-xs text-gray-500 mb-4 pointer-events-none">${description}</p>
+            <h3 class="${headingClass} font-bold mb-1 pointer-events-none"> ${id} ${title}</h3>
+            <p class="text-sm text-gray-500 mb-4 pointer-events-none">${description}</p>
             <div class="absolute bottom-5 right-5 w-[16px] h-[16px] rounded-full ${dotClass} pointer-events-none"></div>
         </div>
     `;
@@ -52,14 +51,15 @@ export function renderPerspectiveCard({ id, title, description, isRecommended, i
 
     const ringClass = isSelected ? 'card-ring-selected' : 'card-ring';
     const dotClass = isSelected ? 'card-dot-selected' : 'card-dot';
+    const headingClass = isSelected ? 'text-black' : 'text-gray-400';
 
     return `
-        <div data-perspective="${id}" class="bg-white rounded interactive-base ${ringClass} p-5 cursor-pointer relative interactive-hover">
-            <div class="flex justify-between items-center mb-1 pointer-events-none">
-                <h3 class="font-bold pointer-events-none">${title}</h3>
+        <div data-perspective="${id}" class="bg-white rounded interactive-base ${ringClass} pt-4 pb-5 px-5 cursor-pointer relative interactive-hover">
+            <div class="flex justify-between items-start mb-1 pointer-events-none">
+                <h3 class="${headingClass} font-bold pointer-events-none">${title}</h3>
                 ${badgeHTML}
             </div>
-            <p class="text-sm ${isSelected ? 'text-gray-600' : 'text-gray-500'} mb-4 pointer-events-none">${description}</p>
+            <p class="text-sm text-gray-500 mb-4 pointer-events-none">${description}</p>
             <div class="absolute bottom-5 right-5 w-[16px] h-[16px] rounded-full ${dotClass} pointer-events-none"></div>
         </div>
     `;
@@ -77,12 +77,12 @@ export function renderPerspectiveCard({ id, title, description, isRecommended, i
 export function renderTimeHorizonCard({ id, title, description, isSelected = false }) {
     const ringClass = isSelected ? 'card-ring-selected' : 'card-ring';
     const dotClass = isSelected ? 'card-dot-selected' : 'card-dot';
-    const textClass = isSelected ? 'text-black' : 'text-gray-400';
+    const headingClass = isSelected ? 'text-black' : 'text-gray-400';
 
     return `
-        <div data-time="${id}" class="bg-white rounded interactive-base ${ringClass} p-5 cursor-pointer relative interactive-hover">
-            <div class="${textClass} font-bold text-lg mb-1 pointer-events-none">${title}</div>
-            <p class="text-xs text-gray-500 mb-4 pointer-events-none">${description}</p>
+        <div data-time="${id}" class="bg-white rounded interactive-base ${ringClass} pt-4 pb-5 px-5 cursor-pointer relative interactive-hover">
+            <h3 class="${headingClass} font-bold mb-1 pointer-events-none">${title}</h3>
+            <p class="text-sm text-gray-500 mb-4 pointer-events-none">${description}</p>
             <div class="absolute bottom-5 right-5 w-[16px] h-[16px] rounded-full ${dotClass} pointer-events-none"></div>
         </div>
     `;
@@ -96,12 +96,13 @@ export function renderTimeHorizonCard({ id, title, description, isSelected = fal
  * @returns {string} The HTML string for the language card.
  */
 export function renderLanguageCard({ id, title, isSelected = false }) {
-    const ringClass = isSelected ? 'card-ring-selected font-medium' : 'card-ring text-gray-500';
+    const ringClass = isSelected ? 'card-ring-selected' : 'card-ring';
     const dotClass = isSelected ? 'card-dot-selected' : 'card-dot';
+    const headingClass = isSelected ? 'text-black' : 'text-gray-400';
 
     return `
-        <div data-lang="${id}" class="flex-1 bg-white rounded interactive-base relative p-4 text-center cursor-pointer ${ringClass} interactive-hover">
-            <span class="pointer-events-none">${title}</span>
+        <div data-lang="${id}" class="flex-1 bg-white rounded interactive-base relative py-4 pl-5 pr-12 text-left cursor-pointer ${ringClass} interactive-hover">
+            <h3 class="${headingClass} font-bold pointer-events-none">${title}</h3>
             <div class="absolute bottom-5 right-5 w-[16px] h-[16px] rounded-full ${dotClass} pointer-events-none"></div>
         </div>
     `;

@@ -2,8 +2,10 @@
  * file: src/core/state.js
  * purpose: Centralized state manager for user selections.
  * responsibilities: Track user choices and notify listeners of state changes.
- * dependencies: None
+ * dependencies: src/core/content.js
  */
+
+import { scenarios, perspectives, timeHorizons, languages } from './content.js';
 
 let defaultState = {
     scenario: null,
@@ -37,9 +39,11 @@ export function getState() {
  * Logic reason: Notifies listeners immediately after updating the state.
  */
 export function setScenario(id) {
-    if (typeof id === 'string') {
+    if (scenarios.some(s => s.id === id)) {
         state.scenario = id;
         notifyListeners();
+    } else {
+        console.warn(`Invalid scenario ID: ${id}`);
     }
 }
 
@@ -50,10 +54,11 @@ export function setScenario(id) {
  * Logic reason: Validates the perspective before updating to prevent invalid states.
  */
 export function setPerspective(perspective) {
-    const validPerspectives = ['corp', 'gen'];
-    if (validPerspectives.includes(perspective)) {
+    if (perspectives.some(p => p.id === perspective)) {
         state.perspective = perspective;
         notifyListeners();
+    } else {
+        console.warn(`Invalid perspective ID: ${perspective}`);
     }
 }
 
@@ -64,10 +69,11 @@ export function setPerspective(perspective) {
  * Logic reason: Validates the time horizon before updating to ensure only supported values are set.
  */
 export function setTimeHorizon(th) {
-    const validTimeHorizons = ['s', 'm', 'l', 'all'];
-    if (validTimeHorizons.includes(th)) {
+    if (timeHorizons.some(t => t.id === th)) {
         state.timeHorizon = th;
         notifyListeners();
+    } else {
+        console.warn(`Invalid time horizon ID: ${th}`);
     }
 }
 
@@ -78,10 +84,11 @@ export function setTimeHorizon(th) {
  * Logic reason: Validates the language against supported codes.
  */
 export function setLanguage(lang) {
-    const validLangs = ['de', 'en', 'fr'];
-    if (validLangs.includes(lang)) {
+    if (languages.some(l => l.id === lang)) {
         state.language = lang;
         notifyListeners();
+    } else {
+        console.warn(`Invalid language ID: ${lang}`);
     }
 }
 

@@ -9,7 +9,7 @@ import { getState, setScenario, setPerspective, setTimeHorizon, setLanguage, sub
 import { renderScenarioCard, renderPerspectiveCard, renderTimeHorizonCard, renderLanguageCard, renderSummaryRow, renderStepper, NavButton, NavLink, PrimaryButton, SecondaryButton, DarkButton, SolidButton, OutlineButton, TextIconButton, TextIconLink } from './ui.js';
 import { IconDownloadLg, IconVideoLg, IconArrowLeftSm, IconArrowRightSm, IconEditSm, IconArrowLeftMd, IconDownloadSm, IconArrowLeftOpacity, IconArrowDownSm, IconDocumentSm } from './ui/icons.js';
 import { scenarios, perspectives, timeHorizons, languages } from './core/content.js';
-import { generateAndDownloadZip } from './core/download.js';
+import { generateAndDownloadZip, getEstimatedZipSize, getDownloadFilename } from './core/download.js';
 
 // DOM Elements
 const DOM = {};
@@ -38,6 +38,9 @@ function cacheDOM() {
     DOM.btnDownloadZipContainer = document.getElementById('btn-download-zip-container');
     DOM.btnDownloadAnotherContainer = document.getElementById('btn-download-another-container');
     DOM.btnQuickstartContainer = document.getElementById('btn-quickstart-container');
+    
+    DOM.downloadFilename = document.getElementById('download-filename');
+    DOM.downloadInfo = document.getElementById('download-info');
 
     // Dynamically injected buttons
     DOM.btnContinue = document.getElementById('btn-continue');
@@ -178,6 +181,20 @@ function bindEvents() {
                     renderSummaryRow('Scenario', `${selectedScenario.id} - ${selectedScenario.title}`),
                     renderSummaryRow('Time Horizon', selectedTimeHorizon.title)
                 ].join('');
+            }
+
+            if (DOM.downloadFilename && DOM.downloadInfo) {
+                DOM.downloadFilename.innerHTML = getDownloadFilename(state);
+                DOM.downloadInfo.innerHTML = `Calculating file size...`;
+                
+                getEstimatedZipSize(state).then(({ filesCount, missingFiles, totalBytes }) => {
+                    if (missingFiles.length > 0) {
+                        DOM.downloadInfo.innerHTML = `<span class="text-brand-red font-semibold">Warning: ${missingFiles.length} of ${filesCount} files are missing on the server!</span>`;
+                    } else {
+                        const mb = (totalBytes / (1024 * 1024)).toFixed(1);
+                        DOM.downloadInfo.innerHTML = `${filesCount} files - ${mb} MB - Scenario ${selectedScenario.id} - ${selectedPerspective.title} - ${selectedLanguage.title}`;
+                    }
+                });
             }
 
             switchView('view-review');
@@ -369,7 +386,6 @@ function init() {
                 size: 'xl',
                 isFullWidth: true,
                 icon: IconDownloadLg,
-                iconEnd: IconArrowLeftOpacity
             });
         }
 
