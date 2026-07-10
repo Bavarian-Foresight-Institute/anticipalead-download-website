@@ -6,9 +6,9 @@
  */
 
 import { getState, setScenario, setPerspective, setTimeHorizon, setLanguage, subscribe, resetState, initState } from './core/state.js';
-import { renderScenarioCard, renderPerspectiveCard, renderTimeHorizonCard, renderLanguageCard, renderSummaryRow, renderStepper, NavButton, NavLink, PrimaryButton, SecondaryButton, DarkButton, SolidButton, OutlineButton, TextIconButton, TextIconLink } from './ui.js';
-import { IconDownloadLg, IconVideoLg, IconArrowLeftSm, IconArrowRightSm, IconEditSm, IconArrowLeftMd, IconDownloadSm, IconVideoSm, IconSpinner, IconCheckmarkDark, IconPlusSm } from './ui/icons.js';
-import { scenarios, perspectives, timeHorizons, languages } from './core/content.js';
+import { renderFooterContent, renderPackageContentCard, renderHowItWorksStep, renderScenarioCard, renderPerspectiveCard, renderTimeHorizonCard, renderLanguageCard, renderSummaryRow, renderStepper, NavButton, NavLink, PrimaryButton, SecondaryButton, DarkButton, SolidButton, OutlineButton, TextIconButton, TextIconLink } from './ui.js';
+import { IconRoleCards, IconCanvases, IconTechCards, IconAudioGuide, IconDownloadLg, IconVideoLg, IconArrowLeftSm, IconArrowRightSm, IconEditSm, IconArrowLeftMd, IconDownloadSm, IconVideoSm, IconSpinner, IconCheckmarkDark, IconPlusSm, IconPrinterSm } from './ui/icons.js';
+import { footerContent, packageContents, howItWorksSteps, scenarios, perspectives, timeHorizons, languages } from './core/content.js';
 import { generateAndDownloadZip, getEstimatedZipSize, getDownloadFilename } from './core/download.js';
 
 // DOM Elements Cache
@@ -27,6 +27,7 @@ function cacheDOM() {
     DOM.viewConfigure = document.getElementById('view-configure');
     DOM.viewReview = document.getElementById('view-review');
     DOM.viewDownload = document.getElementById('view-download');
+    DOM.howItWorksContainer = document.getElementById('how-it-works-container');
     DOM.scenarioGrid = document.getElementById('scenario-grid');
     DOM.perspectiveGrid = document.getElementById('perspective-grid');
     DOM.timeHorizonGrid = document.getElementById('time-horizon-grid');
@@ -39,14 +40,19 @@ function cacheDOM() {
     DOM.heroDownloadContainer = document.getElementById('hero-download-btn-container');
     DOM.heroVideoContainer = document.getElementById('hero-video-btn-container');
     DOM.bottomDownloadContainer = document.getElementById('bottom-download-btn-container');
+    DOM.packageContentsContainer = document.getElementById('package-contents-container');
     DOM.navBackContainer = document.getElementById('nav-back-container');
     DOM.btnContinueContainer = document.getElementById('btn-continue-container');
     DOM.btnEditContainer = document.getElementById('btn-edit-container');
     DOM.btnBackContainer = document.getElementById('btn-back-container');
+    DOM.btnDownloadContainer = document.getElementById('btn-download-container');
+    DOM.stepperContainer = document.getElementById('stepper-container');
+    DOM.footerContainer = document.getElementById('footer-content-container');
     DOM.btnConfirmContainer = document.getElementById('btn-confirm-container');
     DOM.downloadProgressContainer = document.getElementById('download-progress-container');
     DOM.btnDownloadAnotherContainer = document.getElementById('btn-download-another-container');
     DOM.btnQuickstartContainer = document.getElementById('btn-quickstart-container');
+    DOM.btnPrintingGuideContainer = document.getElementById('btn-printing-guide-container');
     DOM.btnDownloadAgainContainer = document.getElementById('btn-download-again-container');
 
     DOM.downloadFilename = document.getElementById('download-filename');
@@ -311,7 +317,38 @@ function init() {
         });
     }
 
+    // Always render footer if container exists
+    if (DOM.footerContainer) {
+        DOM.footerContainer.innerHTML = renderFooterContent({
+            ...footerContent,
+            titleClass: isIndexPage ? '' : 'text-brand-dark'
+        });
+    }
+
     if (isIndexPage) {
+        if (DOM.packageContentsContainer) {
+            const packageContentIcons = {
+                IconRoleCards,
+                IconCanvases,
+                IconTechCards,
+                IconAudioGuide
+            };
+            DOM.packageContentsContainer.innerHTML = packageContents.map(card => 
+                renderPackageContentCard({ 
+                    ...card, 
+                    icon: packageContentIcons[card.id] 
+                })
+            ).join('');
+        }
+
+        if (DOM.howItWorksContainer) {
+            DOM.howItWorksContainer.innerHTML = howItWorksSteps.map((step, index) => 
+                renderHowItWorksStep({ 
+                    ...step, 
+                    isLast: index === howItWorksSteps.length - 1 
+                })
+            ).join('');
+        }
         if (DOM.heroDownloadContainer) {
             DOM.heroDownloadContainer.innerHTML = PrimaryButton({
                 id: 'hero-download-btn',
@@ -420,11 +457,19 @@ function init() {
             });
         }
 
+        if (DOM.btnPrintingGuideContainer) {
+            DOM.btnPrintingGuideContainer.innerHTML = OutlineButton({
+                id: 'btn-printing-guide',
+                text: 'Printing guide',
+                isFlexible: true,
+                icon: IconPrinterSm
+            });
+        }
+
         if (DOM.btnDownloadAgainContainer) {
-            DOM.btnDownloadAgainContainer.innerHTML = OutlineButton({
+            DOM.btnDownloadAgainContainer.innerHTML = SolidButton({
                 id: 'btn-download-again',
                 text: 'Download again',
-                isFlexible: true,
                 icon: IconDownloadSm
             });
         }

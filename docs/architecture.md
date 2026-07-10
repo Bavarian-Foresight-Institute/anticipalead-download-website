@@ -28,15 +28,18 @@ anticipalead-download-website/
 ├── package.json
 ├── README.md
 └── src/
-    ├── app.js
-    ├── ui.js
-    ├── ui/
-    │   └── icons.js
-    └── core/
-        ├── config.json
-        ├── content.js
-        ├── engine.js
-        └── state.js
+    ├── css/
+    │   └── input.css
+    └── js/
+        ├── app.js
+        ├── ui.js
+        ├── ui/
+        │   └── icons.js
+        └── core/
+            ├── config.json
+            ├── content.js
+            ├── engine.js
+            └── state.js
 ```
 
 ## Core Modules

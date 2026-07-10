@@ -29,6 +29,11 @@ To maintain code quality and ease of collaboration, all development in this repo
 *   **No Hardcoded Arrays:** Hardcoded file lists or asset arrays inside JavaScript files are strictly banned.
 *   **Configuration Models:** All files, resources, assets, and game relationships must live in declarative configuration models (such as JSON config files).
 
+## CSS Architecture
+
+*   **Variables Over Hardcoding:** Never hardcode margins or paddings. Use central theme variables (e.g. `--spacing-section`, `--spacing-small`) to ensure layout consistency.
+*   **Tailwind `@utility` Extraction:** Repeated, complex design patterns (like component cards) should be extracted into `@utility` custom directives in `input.css` to keep HTML and JS templates clean.
+
 ## Text and Character Constraints
 
 *   **Standard Hyphens Only:** Standard hyphens (-) must be used exclusively. Do not use em-dashes or en-dashes anywhere in text or code files.

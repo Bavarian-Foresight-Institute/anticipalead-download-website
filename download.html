@@ -81,7 +81,8 @@ dependencies: styles, src/js/app.js
                 </div>
 
                 <div class="card-info">
-                    <svg class="w-4 h-4 mr-2 shrink-0 mt-0.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 mr-2 shrink-0 mt-0.5 text-gray-400" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
@@ -101,7 +102,7 @@ dependencies: styles, src/js/app.js
                     your package.</p>
 
                 <!-- Configuration Summary -->
-                <div class="bg-white rounded border border-gray-200 overflow-hidden mb-medium shadow">
+                <div class="card-static overflow-hidden mb-medium p-0">
                     <div class="bg-gray-50 px-6 py-small border-b border-gray-200 flex justify-between items-center">
                         <h2 class="text-brand-dark text-preset-sub-heading">Package configuration</h2>
                         <div id="btn-edit-container" class="contents"></div>
@@ -131,29 +132,25 @@ dependencies: styles, src/js/app.js
                 <p class="text-gray-600 text-preset-normal mb-medium">Your package is being assembled and downloaded
                     automatically. This may take a few seconds.</p>
 
-                <div class="bg-white rounded border border-gray-200 p-medium w-full shadow mb-medium text-center">
-                    <svg class="w-12 h-12 text-brand-red mx-auto mb-small" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                        </path>
-                    </svg>
+                <div class="card-static w-full mb-medium text-center">
                     <h2 id="download-filename" class="text-preset-sub-heading mb-xs">
                         AnticipaLead_ScenarioA_Standard_DE.zip</h2>
-                    <p id="download-info" class="text-gray-500 text-preset-card mb-medium">...</p>
+                    <p id="download-info" class="text-gray-500 text-preset-card mb-card-padding">...</p>
                     <div id="download-progress-container" class="contents">
                         <!-- Progress text/spinner injected here -->
+                    </div>
+                    <div class="mt-card-padding">
+                        <div id="btn-download-again-container" class="contents"></div>
                     </div>
                 </div>
 
                 <div class="flex flex-col sm:flex-row justify-center gap-small w-full mb-medium">
                     <div id="btn-download-another-container" class="contents"></div>
                     <div id="btn-quickstart-container" class="contents"></div>
-                    <div id="btn-download-again-container" class="contents"></div>
+                    <div id="btn-printing-guide-container" class="contents"></div>
                 </div>
 
-                <div
-                    class="card-info">
+                <div class="card-info">
                     <svg class="w-4 h-4 mr-2 shrink-0 mt-0.5 text-gray-400" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -172,12 +169,10 @@ dependencies: styles, src/js/app.js
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white text-gray-500 text-preset-small-note py-medium text-center border-t border-gray-200 w-full">
+    <footer class="bg-white text-gray-500 text-preset-small-note py-small text-center border-t border-gray-200 w-full">
         <div class="max-w-3xl mx-auto w-full px-medium">
-            <div class="max-w-4xl mx-auto px-medium">
-                <p class="mb-xs text-brand-dark">Technische Hochschule Ingolstadt - Bayerisches Foresight-Institut - ETH
-                    Zürich</p>
-                <p>AnticipaLead is a research-based serious game for leadership education. Free for educational use.</p>
+            <div id="footer-content-container" class="max-w-4xl mx-auto px-medium">
+                <!-- Footer content dynamically injected here -->
             </div>
         </div>
     </footer>

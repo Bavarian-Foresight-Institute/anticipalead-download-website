@@ -97,3 +97,77 @@ export const languages = [
         title: '🇫🇷 Français'
     }
 ];
+
+/**
+ * @type {Array<{num: string, title: string, description: string}>}
+ * Purpose: Defines the steps for the 'How it works' section on the homepage.
+ */
+export const howItWorksSteps = [
+    {
+        num: '01',
+        title: 'Choose your scenario',
+        description: 'Pick from 8 scenarios spanning AI in HR, healthcare, manufacturing, logistics, and more. Each challenges a different leadership dilemma.'
+    },
+    {
+        num: '02',
+        title: 'Download and print',
+        description: 'The assistant bundles exactly the files you need. Technology cards print at A4; canvases at A3.'
+    },
+    {
+        num: '03',
+        title: 'Set up the table',
+        description: 'Arrange materials as shown in the quick start guide. The audio file replaces a human moderator entirely.'
+    },
+    {
+        num: '04',
+        title: 'Play and reflect',
+        description: 'Work through Canvas 1, draw technology cards, and discuss on Canvas 2. Repeat rounds, then share results across groups.'
+    }
+];
+
+
+/**
+ * @type {Array<{id: string, title: string, description: string}>}
+ * Purpose: Defines the package contents cards for the index page.
+ */
+export const packageContents = [
+    {
+        id: 'IconRoleCards',
+        title: 'Role cards',
+        description: 'Ethicist, Executor, Integrator, Analyst'
+    },
+    {
+        id: 'IconCanvases',
+        title: 'Canvases 1 and 2',
+        description: 'A3 format - 1 copy per group'
+    },
+    {
+        id: 'IconTechCards',
+        title: 'Technology cards',
+        description: 'Scenario specific - A4 cut outs'
+    },
+    {
+        id: 'IconAudioGuide',
+        title: 'Audio guide',
+        description: 'Replaces an external moderator'
+    },
+    {
+        id: 'IconAudioGuide',
+        title: 'Audio guide',
+        description: 'Replaces an external moderator'
+    },
+    {
+        id: 'IconAudioGuide',
+        title: 'Audio guide',
+        description: 'Replaces an external moderator'
+    }
+];
+
+/**
+ * @type {Object}
+ * Purpose: Defines the centralized footer text for all pages.
+ */
+export const footerContent = {
+    institutions: 'Technische Hochschule Ingolstadt - Bayerisches Foresight-Institut - ETH Zürich',
+    description: 'AnticipaLead is a research-based serious game for leadership education. Free for educational use.'
+};

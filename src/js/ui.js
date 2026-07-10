@@ -349,3 +349,60 @@ export function TextIconLink({ id, text, href = '#', icon = '' }) {
         </a>
     `;
 }
+
+/**
+ * Purpose: Render a single step row for the 'How it works' section.
+ * @param {Object} props
+ * @param {string} props.num - Step number string (e.g. '01')
+ * @param {string} props.title - Step title
+ * @param {string} props.description - Step description
+ * @param {boolean} [props.isLast=false] - Whether this is the last step (removes bottom border)
+ * @returns {string} HTML string for the step row
+ */
+export function renderHowItWorksStep({ num, title, description, isLast = false }) {
+    const borderClass = isLast ? '' : 'border-b border-gray-100';
+    return `
+        <div class="p-card-padding ${borderClass} flex items-start">
+            <div class="text-brand-red text-preset-sub-heading w-medium shrink-0">${num}</div>
+            <div>
+                <h3 class="text-preset-sub-heading mb-xs">${title}</h3>
+                <p class="text-gray-600 text-preset-normal">${description}</p>
+            </div>
+        </div>
+    `;
+}
+
+
+/**
+ * Purpose: Render a package content card for the index page.
+ * @param {Object} props
+ * @param {string} props.title - Card title
+ * @param {string} props.description - Card description
+ * @param {string} props.icon - SVG string for the icon
+ * @returns {string} HTML string for the package content card
+ */
+export function renderPackageContentCard({ title, description, icon }) {
+    return `
+        <div class="card-static">
+            ${icon}
+            <h3 class="text-preset-sub-heading mb-xs">${title}</h3>
+            <p class="text-gray-500 text-preset-card">${description}</p>
+        </div>
+    `;
+}
+
+/**
+ * Purpose: Render the centralized footer content.
+ * @param {Object} props
+ * @param {string} props.institutions - Institution names
+ * @param {string} props.description - Game description
+ * @param {string} [props.titleClass=''] - Extra classes for the title
+ * @returns {string} HTML string for the footer inner content
+ */
+export function renderFooterContent({ institutions, description, titleClass = '' }) {
+    return `
+        <p class="mb-xs ${titleClass}">${institutions}</p>
+        <p>${description}</p>
+    `;
+}
+
