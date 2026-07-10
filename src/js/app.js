@@ -141,15 +141,15 @@ function renderUI(state) {
     // Update Printing Guide Button href
     const btnPrintingGuide = document.getElementById('btn-printing-guide');
     if (btnPrintingGuide) {
-        const perspective = state.perspective || 'corp';
-        btnPrintingGuide.setAttribute('href', `./printing-guide.html?perspective=${perspective}`);
+        const perspective = state.perspective || 'gen';
+        btnPrintingGuide.setAttribute('href', `./printing-guide.html#perspective=${perspective}`);
     }
 
     // Update Header Printing Guide Link
     const navPrintingGuide = document.getElementById('nav-printing-guide');
     if (navPrintingGuide) {
-        const perspective = state.perspective || 'corp';
-        navPrintingGuide.setAttribute('href', `./printing-guide.html?perspective=${perspective}`);
+        const perspective = state.perspective || 'gen';
+        navPrintingGuide.setAttribute('href', `./printing-guide.html#perspective=${perspective}`);
     }
 }
 
@@ -363,19 +363,19 @@ function init() {
                 IconTechCards,
                 IconAudioGuide
             };
-            DOM.packageContentsContainer.innerHTML = packageContents.map(card => 
-                renderPackageContentCard({ 
-                    ...card, 
-                    icon: packageContentIcons[card.id] 
+            DOM.packageContentsContainer.innerHTML = packageContents.map(card =>
+                renderPackageContentCard({
+                    ...card,
+                    icon: packageContentIcons[card.id]
                 })
             ).join('');
         }
 
         if (DOM.howItWorksContainer) {
-            DOM.howItWorksContainer.innerHTML = howItWorksSteps.map((step, index) => 
-                renderHowItWorksStep({ 
-                    ...step, 
-                    isLast: index === howItWorksSteps.length - 1 
+            DOM.howItWorksContainer.innerHTML = howItWorksSteps.map((step, index) =>
+                renderHowItWorksStep({
+                    ...step,
+                    isLast: index === howItWorksSteps.length - 1
                 })
             ).join('');
         }
@@ -488,7 +488,7 @@ function init() {
             DOM.btnPrintingGuideContainer.innerHTML = OutlineButton({
                 id: 'btn-printing-guide',
                 text: 'Printing guide',
-                href: './printing-guide.html?perspective=corp',
+                href: `./printing-guide.html#perspective=${getState().perspective || 'gen'}`,
                 isFlexible: true,
                 icon: IconPrinterSm
             });
@@ -524,10 +524,15 @@ function init() {
                 icon: IconArrowLeftMd
             });
         }
-        
-        // Initialize version from URL, fallback to 'corp'
-        const urlParams = new URLSearchParams(window.location.search);
-        let printingGuideVersion = urlParams.get('perspective') || 'corp';
+
+        // Robustly determine version by checking the full URL string directly
+        // Hashes (#) are preserved by the browser across server redirects, unlike query params (?)
+        let printingGuideVersion = 'corp'; // Default
+        if (window.location.href.includes('perspective=corp')) {
+            printingGuideVersion = 'corp';
+        } else if (window.location.href.includes('perspective=gen')) {
+            printingGuideVersion = 'gen';
+        }
 
         function renderPrintingGuide() {
             if (DOM.printingGuideTabsContainer) {

@@ -1,11 +1,18 @@
 {
   "fileMappings": {
-    "canvas": {
+    "canvas1": {
       "dependencies": [
         "language",
         "perspective"
       ],
-      "template": "canvases/canvas_{language}_{perspective}.pdf"
+      "template": "canvases/canvas1_{language}_{perspective}.pdf"
+    },
+    "canvas2": {
+      "dependencies": [
+        "language",
+        "perspective"
+      ],
+      "template": "canvases/canvas2_{language}_{perspective}.pdf"
     },
     "nameTags": {
       "dependencies": [

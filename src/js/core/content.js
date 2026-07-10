@@ -187,8 +187,14 @@ export const printingGuideData = [
         }
     },
     {
-        file: 'Canvases (1 & 2)',
-        amount: '1 set per group',
+        file: 'Canvas 1',
+        amount: '1 per group',
+        format: 'A3',
+        info: 'Single-sided. Place in the center of the table.'
+    },
+    {
+        file: 'Canvas 2',
+        amount: '1 per group',
         format: 'A3',
         info: 'Single-sided. Place in the center of the table.'
     },
