@@ -1,5 +1,5 @@
 /**
- * file: src/core/content.js
+ * file: src/js/core/content.js
  * purpose: Centralized static UI content definitions.
  * responsibilities: Export constants for scenarios, perspectives, time horizons, and languages.
  * dependencies: None

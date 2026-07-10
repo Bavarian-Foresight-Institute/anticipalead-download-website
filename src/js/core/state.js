@@ -1,8 +1,8 @@
 /**
- * file: src/core/state.js
+ * file: src/js/core/state.js
  * purpose: Centralized state manager for user selections.
  * responsibilities: Track user choices and notify listeners of state changes.
- * dependencies: src/core/content.js
+ * dependencies: src/js/core/content.js
  */
 
 import { scenarios, perspectives, timeHorizons, languages } from './content.js';

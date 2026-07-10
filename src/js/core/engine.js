@@ -1,8 +1,8 @@
 /**
- * file: src/core/engine.js
+ * file: src/js/core/engine.js
  * purpose: Core logic for resolving download paths based on state.
  * responsibilities: Interpolate file mappings and return an array of URLs.
- * dependencies: src/core/config.json
+ * dependencies: src/js/core/config.json
  */
 
 import config from './config.json' with { type: 'json' };

@@ -1,8 +1,8 @@
 /**
- * file: src/core/download.js
+ * file: src/js/core/download.js
  * purpose: Orchestrates the generation of the final ZIP file.
  * responsibilities: Fetch resolved files, compress them, and trigger the browser download.
- * dependencies: src/core/engine.js, JSZip (global)
+ * dependencies: src/js/core/engine.js, JSZip (global)
  */
 
 import { resolveDownloadList } from './engine.js';

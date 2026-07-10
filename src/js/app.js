@@ -1,8 +1,8 @@
 /**
- * file: src/app.js
+ * file: src/js/app.js
  * purpose: Main entry point for the AnticipaLead website.
  * responsibilities: Initialize the application, bind DOM events, and coordinate between state and UI.
- * dependencies: src/core/state.js, src/core/engine.js, src/ui.js
+ * dependencies: src/js/core/state.js, src/js/core/engine.js, src/js/ui.js
  */
 
 import { getState, setScenario, setPerspective, setTimeHorizon, setLanguage, subscribe, resetState, initState } from './core/state.js';

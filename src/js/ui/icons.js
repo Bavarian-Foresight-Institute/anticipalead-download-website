@@ -1,5 +1,5 @@
 /**
- * file: src/ui/icons.js
+ * file: src/js/ui/icons.js
  * purpose: Centralized SVG icon library.
  * responsibilities: Provide string templates for SVG icons used across the UI.
  * dependencies: None

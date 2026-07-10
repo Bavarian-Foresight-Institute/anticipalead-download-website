@@ -1,5 +1,5 @@
 /**
- * file: src/ui.js
+ * file: src/js/ui.js
  * purpose: DOM manipulation and template rendering layer.
  * responsibilities: Provide reusable rendering functions for UI components.
  * dependencies: None
