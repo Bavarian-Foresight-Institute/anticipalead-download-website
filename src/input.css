@@ -2,187 +2,210 @@
 
 @theme {
   /* --- Brand Core Colors --- */
-  /* Primary brand color, used for main CTA buttons and active state indicators */
   --color-brand-red: #ED1C24;
-
-  /* Main dark color, used for primary text, dark backgrounds, and dark buttons */
+  /* Primary brand color for main CTA buttons and active states */
   --color-brand-dark: #111111;
-
-  /* Darkest shade, used for selected card headings and hero section background */
+  /* Main dark color for text, backgrounds, and buttons */
   --color-brand-darker: #0a0a0a;
-
-  /* Primary off-white application background */
+  /* Darkest shade for selected headings and hero background */
   --color-brand-light: #F8F8F7;
-
-  /* Pure white, used for cards, primary content areas, and secondary buttons */
+  /* Primary off-white application background */
   --color-white: #ffffff;
+  /* Pure white for cards, content areas, and secondary buttons */
 
   /* --- Grayscale Palette --- */
-  /* Very subtle backgrounds and inactive states */
   --color-gray-50: #f9fafb;
-
-  /* Subtle borders, inactive backgrounds, and slight white button hover states */
+  /* Very subtle backgrounds and inactive states */
   --color-gray-100: #F3F4F6;
-
-  /* Default card borders, inactive stepper lines */
+  /* Subtle borders, inactive backgrounds, light hover states */
   --color-gray-200: #E5E7EB;
-
-  /* Selected card borders and outline elements */
+  /* Default card borders, inactive stepper lines */
   --color-gray-300: #d1d5db;
-
-  /* Inactive or unselected text, disabled icons */
+  /* Selected card borders and outline elements */
   --color-gray-400: #9CA3AF;
-
-  /* Secondary text, card descriptions, table labels */
+  /* Inactive or unselected text, disabled icons */
   --color-gray-500: #6b7280;
-
-  /* Outline button text */
+  /* Secondary text, card descriptions, table labels */
   --color-gray-600: #4B5563;
-
-  /* Darker secondary text elements */
+  /* Outline button text */
   --color-gray-700: #374151;
-
-  /* Deep gray backgrounds, dark overlays */
+  /* Darker secondary text elements */
   --color-gray-800: #1F2937;
+  /* Deep gray backgrounds, dark overlays */
 
   /* --- Specific UI Colors --- */
-  /* Used for dark red warning/new badges */
   --color-red-800: #991b1b;
+  /* Used for dark red warning/new badges */
 
   /* --- Hover States --- */
-  /* Hover state for primary red buttons (darkened) */
   --color-brand-red-hover: #D61A21;
-
-  /* Hover state for dark buttons (brightened) */
+  /* Hover state for primary red buttons */
   --color-brand-dark-hover: #2a2a2a;
-
-  /* Default hover state for white buttons (slight darken) */
+  /* Hover state for dark buttons */
   --color-brand-white-hover: #f9fafb;
-
-  /* Intense hover state for prominent white buttons like the video guide */
+  /* Default hover state for white buttons */
   --color-brand-white-hover-dark: #E5E7EB;
+  /* Intense hover state for prominent white buttons */
 
   /* --- Base Typography and Utilities --- */
   --spacing-xs: 0.5rem;
+  /* Micro text gaps */
   --spacing-small: 1rem;
+  /* Small gaps, banners, nav bars */
   --spacing-card-padding: 1.25rem;
+  /* Internal padding for cards */
   --spacing-medium: 2.5rem;
+  /* Page container margins and footers */
   --spacing-section: 6rem;
+  /* Standard section padding */
+  --spacing-section-double: 9rem;
+  /* Double section padding for Hero bottom */
   --font-sans: "Clear Sans", sans-serif;
+  /* Primary font family */
   --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.2), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  /* Standard drop shadow */
   --shadow-invisible: 0 1px 3px 0 rgb(0 0 0 / 0), 0 1px 2px -1px rgb(0 0 0 / 0);
+  /* Base state for shadow transitions */
   --radius: 0.5rem;
+  /* Standard border radius */
 }
 
 @layer base {
   html {
     font-size: 100%;
+    /* Base font size */
   }
 }
 
-/* Applies transitions and base properties to prevent visual flashes */
+/* --- Interactive Utilities --- */
 @utility interactive-base {
   transition-property: filter, color, background-color, border-color, opacity, box-shadow;
+  /* Base transition properties */
   transition-duration: 150ms;
+  /* Base transition speed */
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  /* Base transition easing */
   @apply shadow-invisible brightness-100;
+  /* Start with invisible shadow */
   transform: translateZ(0);
+  /* Hardware acceleration */
 }
 
-
-/* Applies hover interaction */
 @utility interactive-hover {
   @apply hover:shadow active:shadow;
+  /* Interactive hover shadow */
 }
 
-/* Card Selection Styles */
+/* --- Card Selection Styles --- */
 @utility card-ring {
   @apply ring-1 ring-inset ring-gray-200;
+  /* Default card outline */
 }
 
 @utility card-ring-selected {
   @apply ring-1 ring-inset ring-gray-300;
+  /* Selected card outline */
 }
 
 @utility card-dot {
   @apply border border-gray-300;
+  /* Default selection dot */
 }
 
 @utility card-dot-selected {
   @apply border-4 border-brand-red;
+  /* Selected selection dot */
 }
 
-/* Typography Presets */
-/* Used for: The main landing page hero title */
+/* --- Typography Presets --- */
 @utility text-preset-hero-title {
   @apply text-6xl font-bold tracking-tight leading-tight;
+  /* Main landing page hero title */
 }
 
-/* Used for: Main page section headings (e.g. "Configure your package") */
 @utility text-preset-main-heading {
   @apply text-3xl font-bold;
+  /* Main page section headings */
 }
 
-/* Used for: Navigation bar logos */
 @utility text-preset-logo {
   @apply text-xl font-bold tracking-tight;
+  /* Navigation bar logos */
 }
 
-/* Used for: The main landing page hero subtitle */
 @utility text-preset-hero-subtitle {
   @apply text-lg font-normal;
+  /* Main landing page hero subtitle */
 }
 
-/* Used for: Primary and secondary action buttons */
 @utility text-preset-button-main {
   @apply text-lg font-medium;
+  /* Primary and secondary action buttons */
 }
 
-/* Used for: Card titles, numbered steps (01-04), and secondary block titles */
 @utility text-preset-sub-heading {
   @apply text-base font-medium;
+  /* Card titles, steps, and secondary block titles */
 }
 
-/* Used for: Standard body text, descriptive paragraphs, and stepper component */
 @utility text-preset-normal {
   @apply text-base font-normal leading-relaxed;
+  /* Standard body text and stepper */
 }
 
-/* Used for: "Step X of 3" trackers and main overhead tags */
 @utility text-preset-highlight-big {
   @apply text-sm font-bold tracking-widest uppercase;
+  /* Step trackers and overhead tags */
 }
 
-/* Used for: Card descriptions, summary table rows, and file warnings */
 @utility text-preset-card {
   @apply text-sm font-normal;
+  /* Card descriptions and summary table rows */
 }
 
-/* Used for: Configuration grid category titles (e.g. "Language", "Perspective") */
 @utility text-preset-highlight-category {
   @apply text-xs font-bold tracking-wider uppercase;
+  /* Grid category titles */
 }
 
-/* Used for: Emphasized notes (e.g. "Before your session:") */
 @utility text-preset-small-note-bold {
   @apply text-xs font-bold;
+  /* Emphasized notes */
 }
 
-/* Used for: Information bars, footers, and supplementary notes */
 @utility text-preset-small-note {
   @apply text-xs font-normal;
+  /* Info bars, footers, and supplementary notes */
 }
 
-/* Used for: "Recommended" badges and Scenario category tags (e.g. HR & PEOPLE) */
 @utility text-preset-highlight-tag {
   @apply text-[10px] font-bold tracking-wider uppercase;
+  /* Recommended badges and tags */
 }
 
-/* Button Size Presets */
+/* --- Button Size Presets --- */
 @utility btn-large {
   @apply px-8 py-4 text-preset-button-main;
+  /* Large action buttons */
 }
 
 @utility btn-medium {
   @apply px-6 py-2.5 text-preset-normal;
+  /* Standard buttons */
+}
+
+/* --- Card Design Utilities --- */
+@utility card-info {
+  @apply bg-gray-50 border border-gray-200 p-card-padding rounded text-left text-gray-500 text-preset-small-note w-full flex items-start;
+  /* Information notice boxes */
+}
+
+@utility card-selectable {
+  @apply bg-white rounded interactive-base cursor-pointer relative interactive-hover;
+  /* Interactive choice cards */
+}
+
+@utility card-static {
+  @apply bg-white p-card-padding rounded border border-gray-100 shadow;
+  /* Non-interactive feature cards */
 }

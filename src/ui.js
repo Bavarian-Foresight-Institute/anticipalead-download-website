@@ -25,7 +25,7 @@ export function renderScenarioCard({ id, title, description, badgeText, badgeCol
     const headingClass = isSelected ? 'text-brand-darker' : 'text-gray-400';
 
     return `
-        <div data-scenario="${id}" class="bg-white rounded interactive-base ${ringClass} p-card-padding cursor-pointer relative interactive-hover">
+        <div data-scenario="${id}" class="card-selectable ${ringClass} p-card-padding">
             <div class="${badgeColorClass} text-white text-preset-highlight-tag px-2 py-1 inline-block rounded mb-xs pointer-events-none">${badgeText}</div>
             <h3 class="${headingClass} text-preset-sub-heading mb-xs pointer-events-none"> ${id} ${title}</h3>
             <p class="text-gray-500 text-preset-card mb-small pointer-events-none">${description}</p>
@@ -54,7 +54,7 @@ export function renderPerspectiveCard({ id, title, description, isRecommended, i
     const headingClass = isSelected ? 'text-brand-darker' : 'text-gray-400';
 
     return `
-        <div data-perspective="${id}" class="bg-white rounded interactive-base ${ringClass} pt-small pb-5 px-5 cursor-pointer relative interactive-hover">
+        <div data-perspective="${id}" class="card-selectable ${ringClass} pt-small pb-5 px-5">
             <div class="flex justify-between items-start mb-xs pointer-events-none">
                 <h3 class="${headingClass} text-preset-sub-heading pointer-events-none">${title}</h3>
                 ${badgeHTML}
@@ -80,7 +80,7 @@ export function renderTimeHorizonCard({ id, title, description, isSelected = fal
     const headingClass = isSelected ? 'text-brand-darker' : 'text-gray-400';
 
     return `
-        <div data-time="${id}" class="bg-white rounded interactive-base ${ringClass} pt-small pb-5 px-5 cursor-pointer relative interactive-hover">
+        <div data-time="${id}" class="card-selectable ${ringClass} pt-small pb-5 px-5">
             <h3 class="${headingClass} text-preset-sub-heading mb-xs pointer-events-none">${title}</h3>
             <p class="text-gray-500 text-preset-card mb-small pointer-events-none">${description}</p>
             <div class="absolute bottom-5 right-5 w-[16px] h-[16px] rounded-full ${dotClass} pointer-events-none"></div>
@@ -101,7 +101,7 @@ export function renderLanguageCard({ id, title, isSelected = false }) {
     const headingClass = isSelected ? 'text-brand-darker' : 'text-gray-400';
 
     return `
-        <div data-lang="${id}" class="flex-1 bg-white rounded interactive-base relative py-small pl-5 pr-12 text-left cursor-pointer ${ringClass} interactive-hover">
+        <div data-lang="${id}" class="card-selectable ${ringClass} flex-1 py-small pl-5 pr-12 text-left">
             <h3 class="${headingClass} text-preset-sub-heading pointer-events-none">${title}</h3>
             <div class="absolute bottom-5 right-5 w-[16px] h-[16px] rounded-full ${dotClass} pointer-events-none"></div>
         </div>
