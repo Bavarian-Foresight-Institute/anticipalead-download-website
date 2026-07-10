@@ -15,10 +15,12 @@ dependencies: styles, src/js/app.js
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/clear-sans@latest/index.min.css">
 </head>
 
-<body id="page-index" class="bg-brand-light font-sans text-brand-dark antialiased">
+<body id="page-index" class="bg-brand-light font-sans text-brand-dark antialiased min-h-screen flex flex-col">
 
-    <!-- Hero Section -->
-    <header class="bg-brand-dark text-white flex flex-col w-full">
+    <!-- Main wrapper for flex layout -->
+    <main class="flex-1">
+        <!-- Hero Section -->
+        <header class="bg-brand-dark text-white flex flex-col w-full">
         <div class="max-w-3xl mx-auto w-full px-medium flex flex-col">
             <!-- Top Navigation -->
             <nav class="flex items-center justify-between py-small w-full">
@@ -118,6 +120,7 @@ dependencies: styles, src/js/app.js
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer

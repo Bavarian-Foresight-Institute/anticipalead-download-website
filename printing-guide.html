@@ -1,0 +1,64 @@
+<!--
+file: download.html
+purpose: Download generation interface.
+responsibilities: Guide the user through the 4-step selection process and trigger the file download.
+dependencies: styles, src/js/app.js
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnticipaLead Download - Configure your package</title>
+    <link rel="stylesheet" href="./assets/output.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/clear-sans@latest/index.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+</head>
+
+<body id="page-printing-guide" class="bg-brand-light font-sans text-brand-dark antialiased min-h-screen flex flex-col">
+
+    <!-- Top Navigation -->
+    <nav class="bg-white border-b border-gray-200 py-small w-full">
+        <div class="max-w-3xl mx-auto w-full px-medium flex items-center justify-between">
+            <div class="flex items-center">
+                <span class="text-preset-logo">Anticipa<span class="text-brand-red">Lead</span></span>
+            </div>
+            <div>
+                <div id="nav-back-container" class="contents"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="w-full flex-1">
+        <div class="max-w-3xl mx-auto w-full px-medium py-section">
+
+            <p class="text-brand-red text-preset-highlight-big mb-small flex items-center gap-small">
+                <span class="w-4 h-px bg-brand-red"></span>
+                <span>How to print your files</span>
+            </p>
+            <h1 class="text-preset-main-heading mb-small">Printing guide</h1>
+            <p class="text-gray-600 text-preset-normal mb-small">For information on which files to print how please reference the table below.</p>
+
+            <div id="printing-guide-tabs-container" class="mb-small"></div>
+
+            <!-- Table Card -->
+            <div id="printing-guide-table-container" class="contents"></div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white text-gray-500 text-preset-small-note py-small text-center border-t border-gray-200 w-full">
+        <div class="max-w-3xl mx-auto w-full px-medium">
+            <div id="footer-content-container" class="max-w-4xl mx-auto px-medium">
+                <!-- Footer content dynamically injected here -->
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="./src/js/app.js"></script>
+</body>
+
+</html>

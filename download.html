@@ -16,7 +16,7 @@ dependencies: styles, src/js/app.js
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 </head>
 
-<body id="page-download" class="bg-brand-light font-sans text-brand-dark antialiased">
+<body id="page-download" class="bg-brand-light font-sans text-brand-dark antialiased min-h-screen flex flex-col">
 
     <!-- Top Navigation -->
     <nav class="bg-white border-b border-gray-200 py-small w-full">
@@ -34,7 +34,7 @@ dependencies: styles, src/js/app.js
     <div id="stepper-container" class="bg-white border-b border-gray-200 py-small w-full"></div>
 
     <!-- Main Content -->
-    <main class="w-full">
+    <main class="w-full flex-1">
         <div class="max-w-3xl mx-auto w-full px-medium">
 
             <!-- STEP 1: CONFIGURE -->
@@ -93,7 +93,8 @@ dependencies: styles, src/js/app.js
 
                 <!-- Configuration Summary -->
                 <div class="card-static overflow-hidden mb-medium p-0">
-                    <div class="bg-gray-50 px-6 py-small border-b border-gray-200 flex justify-between items-center">
+                    <div
+                        class="bg-white px-6 py-card-padding border-b border-gray-200 flex justify-between items-center">
                         <h2 class="text-brand-dark text-preset-sub-heading">Package configuration</h2>
                         <div id="btn-edit-container" class="contents"></div>
                     </div>

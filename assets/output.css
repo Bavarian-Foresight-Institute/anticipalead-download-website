@@ -283,14 +283,14 @@
   .mt-0\.5 {
     margin-top: calc(var(--spacing) * 0.5);
   }
+  .mt-1 {
+    margin-top: var(--spacing);
+  }
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
   }
   .mt-card-padding {
     margin-top: var(--spacing-card-padding);
-  }
-  .mt-medium {
-    margin-top: var(--spacing-medium);
   }
   .mr-1 {
     margin-right: var(--spacing);
@@ -369,14 +369,14 @@
   .h-8 {
     height: calc(var(--spacing) * 8);
   }
-  .h-12 {
-    height: calc(var(--spacing) * 12);
-  }
   .h-\[16px\] {
     height: 16px;
   }
   .h-px {
     height: 1px;
+  }
+  .min-h-screen {
+    min-height: 100vh;
   }
   .w-1\/3 {
     width: calc(1 / 3 * 100%);
@@ -420,11 +420,17 @@
   .max-w-4xl {
     max-width: var(--container-4xl);
   }
+  .min-w-max {
+    min-width: max-content;
+  }
   .flex-1 {
     flex: 1;
   }
   .shrink-0 {
     flex-shrink: 0;
+  }
+  .border-collapse {
+    border-collapse: collapse;
   }
   .interactive-base {
     transition-property: filter, color, background-color, border-color, opacity, box-shadow;
@@ -441,6 +447,9 @@
   }
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .flex-col {
     flex-direction: column;
@@ -460,6 +469,12 @@
   .justify-center {
     justify-content: center;
   }
+  .gap-1 {
+    gap: var(--spacing);
+  }
+  .gap-4 {
+    gap: calc(var(--spacing) * 4);
+  }
   .gap-8 {
     gap: calc(var(--spacing) * 8);
   }
@@ -468,6 +483,9 @@
   }
   .gap-small {
     gap: var(--spacing-small);
+  }
+  .gap-xs {
+    gap: var(--spacing-xs);
   }
   .space-y-4 {
     :where(& > :not(:last-child)) {
@@ -484,6 +502,9 @@
   }
   .overflow-hidden {
     overflow: hidden;
+  }
+  .overflow-x-auto {
+    overflow-x: auto;
   }
   .card-static {
     border-radius: var(--radius);
@@ -598,6 +619,9 @@
   .px-6 {
     padding-inline: calc(var(--spacing) * 6);
   }
+  .px-card-padding {
+    padding-inline: var(--spacing-card-padding);
+  }
   .px-medium {
     padding-inline: var(--spacing-medium);
   }
@@ -613,14 +637,20 @@
   .py-2\.5 {
     padding-block: calc(var(--spacing) * 2.5);
   }
-  .py-medium {
-    padding-block: var(--spacing-medium);
+  .py-4 {
+    padding-block: calc(var(--spacing) * 4);
+  }
+  .py-card-padding {
+    padding-block: var(--spacing-card-padding);
   }
   .py-section {
     padding-block: var(--spacing-section);
   }
   .py-small {
     padding-block: var(--spacing-small);
+  }
+  .pt-card-padding {
+    padding-top: var(--spacing-card-padding);
   }
   .pt-section {
     padding-top: var(--spacing-section);
@@ -634,8 +664,17 @@
   .pb-5 {
     padding-bottom: calc(var(--spacing) * 5);
   }
+  .pb-card-padding {
+    padding-bottom: var(--spacing-card-padding);
+  }
   .pb-section-double {
     padding-bottom: var(--spacing-section-double);
+  }
+  .pb-small {
+    padding-bottom: var(--spacing-small);
+  }
+  .pb-xs {
+    padding-bottom: var(--spacing-xs);
   }
   .pl-5 {
     padding-left: calc(var(--spacing) * 5);
@@ -726,12 +765,6 @@
     --tw-font-weight: var(--font-weight-normal);
     font-weight: var(--font-weight-normal);
   }
-  .text-preset-small-note-bold {
-    font-size: var(--text-xs);
-    line-height: var(--tw-leading, var(--text-xs--line-height));
-    --tw-font-weight: var(--font-weight-bold);
-    font-weight: var(--font-weight-bold);
-  }
   .text-preset-sub-heading {
     font-size: var(--text-base);
     line-height: var(--tw-leading, var(--text-base--line-height));
@@ -745,6 +778,10 @@
     --tw-tracking: var(--tracking-wider);
     letter-spacing: var(--tracking-wider);
     text-transform: uppercase;
+  }
+  .font-medium {
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
   }
   .text-brand-dark {
     color: var(--color-brand-dark);
@@ -873,9 +910,24 @@
       }
     }
   }
+  .sm\:mt-0 {
+    @media (width >= 40rem) {
+      margin-top: 0;
+    }
+  }
+  .sm\:grid-cols-2 {
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
   .sm\:flex-row {
     @media (width >= 40rem) {
       flex-direction: row;
+    }
+  }
+  .sm\:items-center {
+    @media (width >= 40rem) {
+      align-items: center;
     }
   }
   .md\:flex {

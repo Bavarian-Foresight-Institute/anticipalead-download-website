@@ -6,9 +6,9 @@
  */
 
 import { getState, setScenario, setPerspective, setTimeHorizon, setLanguage, subscribe, resetState, initState } from './core/state.js';
-import { renderFooterContent, renderPackageContentCard, renderHowItWorksStep, renderScenarioCard, renderPerspectiveCard, renderTimeHorizonCard, renderLanguageCard, renderSummaryRow, renderStepper, NavButton, NavLink, PrimaryButton, SecondaryButton, DarkButton, SolidButton, OutlineButton, TextIconButton, TextIconLink } from './ui.js';
+import { renderFooterContent, renderPackageContentCard, renderHowItWorksStep, renderScenarioCard, renderPerspectiveCard, renderTimeHorizonCard, renderLanguageCard, renderSummaryRow, renderStepper, NavButton, NavLink, PrimaryButton, SecondaryButton, DarkButton, SolidButton, OutlineButton, TextIconButton, TextIconLink, renderPrintingGuideCards } from './ui.js';
 import { IconRoleCards, IconCanvases, IconTechCards, IconAudioGuide, IconDownloadLg, IconVideoLg, IconArrowLeftSm, IconArrowRightSm, IconEditSm, IconArrowLeftMd, IconDownloadSm, IconVideoSm, IconSpinner, IconCheckmarkDark, IconPlusSm, IconPrinterSm, IconInfoSm, IconUsersSm, IconClockSm, IconBriefcaseSm, IconTranslateSm } from './ui/icons.js';
-import { footerContent, packageContents, howItWorksSteps, scenarios, perspectives, timeHorizons, languages } from './core/content.js';
+import { footerContent, packageContents, howItWorksSteps, scenarios, perspectives, timeHorizons, languages, printingGuideData } from './core/content.js';
 import { generateAndDownloadZip, getEstimatedZipSize, getDownloadFilename } from './core/download.js';
 
 // DOM Elements Cache
@@ -62,6 +62,9 @@ function cacheDOM() {
     DOM.iconClockContainer = document.getElementById('icon-clock-container');
     DOM.iconBriefcaseContainer = document.getElementById('icon-briefcase-container');
     DOM.iconTranslateContainer = document.getElementById('icon-translate-container');
+
+    DOM.printingGuideTableContainer = document.getElementById('printing-guide-table-container');
+    DOM.printingGuideTabsContainer = document.getElementById('printing-guide-tabs-container');
 
     // Dynamically injected buttons (re-cached after injection)
     DOM.btnContinue = document.getElementById('btn-continue');
@@ -133,6 +136,20 @@ function renderUI(state) {
         DOM.languageGrid.innerHTML = languages.map(l =>
             renderLanguageCard({ ...l, isSelected: state.language === l.id })
         ).join('');
+    }
+
+    // Update Printing Guide Button href
+    const btnPrintingGuide = document.getElementById('btn-printing-guide');
+    if (btnPrintingGuide) {
+        const perspective = state.perspective || 'corp';
+        btnPrintingGuide.setAttribute('href', `./printing-guide.html?perspective=${perspective}`);
+    }
+
+    // Update Header Printing Guide Link
+    const navPrintingGuide = document.getElementById('nav-printing-guide');
+    if (navPrintingGuide) {
+        const perspective = state.perspective || 'corp';
+        navPrintingGuide.setAttribute('href', `./printing-guide.html?perspective=${perspective}`);
     }
 }
 
@@ -304,13 +321,14 @@ function init() {
 
     const isDownloadPage = document.getElementById('page-download') !== null;
     const isIndexPage = document.getElementById('page-index') !== null;
+    const isPrintingGuidePage = document.getElementById('page-printing-guide') !== null;
 
     // Inject common buttons
     if (DOM.navLinksContainer) {
         DOM.navLinksContainer.innerHTML = [
             NavLink({ id: 'nav-about', text: 'About', href: '#' }),
             NavLink({ id: 'nav-research', text: 'Research', href: '#' }),
-            NavLink({ id: 'nav-how-to-play', text: 'How to play', href: '#' })
+            NavLink({ id: 'nav-printing-guide', text: 'Printing guide', href: './printing-guide.html' })
         ].join('');
     }
 
@@ -406,9 +424,6 @@ function init() {
         // Subscribe UI renderer to state changes
         subscribe(renderUI);
 
-        // Initial Render
-        renderUI(getState());
-
         // Inject download.html buttons
         if (DOM.navBackContainer) {
             DOM.navBackContainer.innerHTML = TextIconLink({
@@ -473,6 +488,7 @@ function init() {
             DOM.btnPrintingGuideContainer.innerHTML = OutlineButton({
                 id: 'btn-printing-guide',
                 text: 'Printing guide',
+                href: './printing-guide.html?perspective=corp',
                 isFlexible: true,
                 icon: IconPrinterSm
             });
@@ -494,6 +510,52 @@ function init() {
 
         // Set initial view
         switchView('view-configure');
+
+        // Initial Render
+        renderUI(getState());
+    }
+
+    if (isPrintingGuidePage) {
+        if (DOM.navBackContainer) {
+            DOM.navBackContainer.innerHTML = TextIconLink({
+                id: 'nav-back-btn',
+                text: 'Back to overview',
+                href: './index.html',
+                icon: IconArrowLeftMd
+            });
+        }
+        
+        // Initialize version from URL, fallback to 'corp'
+        const urlParams = new URLSearchParams(window.location.search);
+        let printingGuideVersion = urlParams.get('perspective') || 'corp';
+
+        function renderPrintingGuide() {
+            if (DOM.printingGuideTabsContainer) {
+                DOM.printingGuideTabsContainer.innerHTML = `
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-small w-full">
+                        ${renderLanguageCard({ id: 'corp', title: 'Corporate with changes', isSelected: printingGuideVersion === 'corp' })}
+                        ${renderLanguageCard({ id: 'gen', title: 'Generic', isSelected: printingGuideVersion === 'gen' })}
+                    </div>
+                `;
+            }
+
+            if (DOM.printingGuideTableContainer) {
+                DOM.printingGuideTableContainer.innerHTML = renderPrintingGuideCards(printingGuideData, printingGuideVersion);
+            }
+        }
+
+        // Bind event delegation for the tabs container once
+        if (DOM.printingGuideTabsContainer) {
+            DOM.printingGuideTabsContainer.addEventListener('mousedown', (e) => {
+                const card = e.target.closest('.card-selectable');
+                if (card) {
+                    printingGuideVersion = card.dataset.lang;
+                    renderPrintingGuide();
+                }
+            });
+        }
+
+        renderPrintingGuide();
     }
 }
 

@@ -171,3 +171,44 @@ export const footerContent = {
     institutions: 'Technische Hochschule Ingolstadt - Bayerisches Foresight-Institut - ETH Zürich',
     description: 'AnticipaLead is a research-based serious game for leadership education. Free for educational use.'
 };
+
+/**
+ * @type {Array<{file: string, amount: string, format: string, info: string}>}
+ * Purpose: Defines the rows for the printing guide table.
+ */
+export const printingGuideData = [
+    {
+        file: 'Role cards',
+        amount: '1 per player',
+        format: 'A4',
+        info: {
+            gen: 'Single-sided.',
+            corp: 'Double-sided printing required for role changes.'
+        }
+    },
+    {
+        file: 'Canvases (1 & 2)',
+        amount: '1 set per group',
+        format: 'A3',
+        info: 'Single-sided. Place in the center of the table.'
+    },
+    {
+        file: 'Technology cards',
+        amount: '1 set per group',
+        format: 'A4',
+        info: 'Cut out along the dashed lines after printing.'
+    },
+    {
+        file: 'Name tags',
+        amount: '1 per player',
+        format: 'A4 / Labels',
+    },
+    {
+        file: 'Corporate Specific File',
+        amount: '1 per group',
+        format: 'A4',
+        versions: ['corp'], // Only shows up when "Corporate" tab is active
+        info: 'Some text here.'
+    }
+
+];

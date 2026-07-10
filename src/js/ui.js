@@ -310,9 +310,10 @@ export function SolidButton({ id, text, icon = '', iconEnd = '', size = 'md', is
  * @param {boolean} [props.isFlexible=false] - Whether button flexes to fill space.
  * @returns {string} The HTML string for the outline action button.
  */
-export function OutlineButton({ id, text, icon = '', isFlexible = false }) {
+export function OutlineButton({ id, text, icon = '', isFlexible = false, href = null }) {
     const sizeClasses = isFlexible ? 'flex-1 btn-medium' : 'btn-medium';
-    return BaseButton({ tag: 'button', id, text, icon, baseClasses: 'bg-white border border-gray-200 text-gray-600 hover:bg-brand-white-hover', sizeClass: sizeClasses });
+    const tag = href ? 'a' : 'button';
+    return BaseButton({ tag, href, id, text, icon, baseClasses: 'bg-white border border-gray-200 text-gray-600 hover:bg-brand-white-hover', sizeClass: sizeClasses });
 }
 
 /**
@@ -403,6 +404,55 @@ export function renderFooterContent({ institutions, description, titleClass = ''
     return `
         <p class="mb-xs ${titleClass}">${institutions}</p>
         <p>${description}</p>
+    `;
+}
+
+/**
+ * Purpose: Render the printing guide cards component.
+ * @param {Array<{file: string, amount: string, format: string, info: string}>} data - Printing guide data.
+ * @returns {string} HTML string for the printing guide cards.
+ */
+export function renderPrintingGuideCards(data, selectedVersion = 'gen') {
+    // Filter data if a 'versions' array is specified and the selectedVersion is not in it
+    const filteredData = data.filter(item => !item.versions || item.versions.includes(selectedVersion));
+
+    const cardsHtml = filteredData.map(item => {
+        // Resolve info text
+        let infoText = '';
+        if (typeof item.info === 'string') {
+            infoText = item.info;
+        } else if (typeof item.info === 'object' && item.info !== null) {
+            infoText = item.info[selectedVersion] || '';
+        }
+
+        return `
+        <div class="card-static p-0 overflow-hidden flex flex-col">
+            <div class="px-card-padding pt-card-padding pb-small border-b border-gray-200 w-full">
+                <h2 class="text-preset-sub-heading text-brand-dark">${item.file}</h2>
+            </div>
+            <div class="px-card-padding pt-small ${infoText ? 'pb-xs' : 'pb-card-padding'} flex flex-col gap-xs">
+                <div class="grid grid-cols-2 gap-small text-preset-card text-gray-500 w-full">
+                    <span class="flex flex-col sm:flex-row sm:items-center gap-xs">
+                        <span class="font-medium text-gray-700">Amount:</span> ${item.amount}
+                    </span>
+                    <span class="flex flex-col sm:flex-row sm:items-center gap-xs">
+                        <span class="font-medium text-gray-700">Format:</span> ${item.format}
+                    </span>
+                </div>
+            </div>
+            ${infoText ? `
+            <div class="px-card-padding pb-card-padding">
+                <p class="text-preset-card text-gray-600">${infoText}</p>
+            </div>
+            ` : ''}
+        </div>
+        `;
+    }).join('');
+
+    return `
+        <div class="flex flex-col gap-small w-full">
+            ${cardsHtml}
+        </div>
     `;
 }
 
