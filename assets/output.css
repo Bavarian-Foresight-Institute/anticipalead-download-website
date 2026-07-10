@@ -76,8 +76,11 @@
     --color-brand-dark-hover: #2a2a2a;
     --color-brand-white-hover: #f9fafb;
     --color-brand-white-hover-dark: #E5E7EB;
-    --spacing-cards: 1rem;
-    --spacing-elements: 2.5rem;
+    --spacing-xs: 0.5rem;
+    --spacing-small: 1rem;
+    --spacing-card-padding: 1.25rem;
+    --spacing-medium: 2.5rem;
+    --spacing-section: 6rem;
   }
 }
 @layer base {
@@ -295,26 +298,17 @@
   .mr-6 {
     margin-right: calc(var(--spacing) * 6);
   }
-  .mb-1 {
-    margin-bottom: var(--spacing);
-  }
-  .mb-2 {
-    margin-bottom: calc(var(--spacing) * 2);
-  }
-  .mb-3 {
-    margin-bottom: calc(var(--spacing) * 3);
-  }
   .mb-6 {
     margin-bottom: calc(var(--spacing) * 6);
   }
-  .mb-24 {
-    margin-bottom: calc(var(--spacing) * 24);
+  .mb-medium {
+    margin-bottom: var(--spacing-medium);
   }
-  .mb-cards {
-    margin-bottom: var(--spacing-cards);
+  .mb-small {
+    margin-bottom: var(--spacing-small);
   }
-  .mb-elements {
-    margin-bottom: var(--spacing-elements);
+  .mb-xs {
+    margin-bottom: var(--spacing-xs);
   }
   .ml-2 {
     margin-left: calc(var(--spacing) * 2);
@@ -455,8 +449,8 @@
   .gap-8 {
     gap: calc(var(--spacing) * 8);
   }
-  .gap-cards {
-    gap: var(--spacing-cards);
+  .gap-small {
+    gap: var(--spacing-small);
   }
   .space-y-4 {
     :where(& > :not(:last-child)) {
@@ -547,20 +541,14 @@
   .bg-white {
     background-color: var(--color-white);
   }
-  .p-5 {
-    padding: calc(var(--spacing) * 5);
+  .p-card-padding {
+    padding: var(--spacing-card-padding);
   }
-  .p-6 {
-    padding: calc(var(--spacing) * 6);
+  .p-medium {
+    padding: var(--spacing-medium);
   }
-  .p-8 {
-    padding: calc(var(--spacing) * 8);
-  }
-  .p-cards {
-    padding: var(--spacing-cards);
-  }
-  .p-elements {
-    padding: var(--spacing-elements);
+  .p-small {
+    padding: var(--spacing-small);
   }
   .btn-medium {
     padding-inline: calc(var(--spacing) * 6);
@@ -589,8 +577,11 @@
   .px-6 {
     padding-inline: calc(var(--spacing) * 6);
   }
-  .px-cards {
-    padding-inline: var(--spacing-cards);
+  .px-medium {
+    padding-inline: var(--spacing-medium);
+  }
+  .px-small {
+    padding-inline: var(--spacing-small);
   }
   .py-1 {
     padding-block: var(--spacing);
@@ -601,23 +592,20 @@
   .py-2\.5 {
     padding-block: calc(var(--spacing) * 2.5);
   }
-  .py-6 {
-    padding-block: calc(var(--spacing) * 6);
+  .py-medium {
+    padding-block: var(--spacing-medium);
   }
-  .py-12 {
-    padding-block: calc(var(--spacing) * 12);
+  .py-section {
+    padding-block: var(--spacing-section);
   }
-  .py-24 {
-    padding-block: calc(var(--spacing) * 24);
+  .py-small {
+    padding-block: var(--spacing-small);
   }
-  .py-cards {
-    padding-block: var(--spacing-cards);
+  .pt-section {
+    padding-top: var(--spacing-section);
   }
-  .pt-12 {
-    padding-top: calc(var(--spacing) * 12);
-  }
-  .pt-cards {
-    padding-top: var(--spacing-cards);
+  .pt-small {
+    padding-top: var(--spacing-small);
   }
   .pr-12 {
     padding-right: calc(var(--spacing) * 12);
@@ -878,11 +866,6 @@
   .md\:grid-cols-2 {
     @media (width >= 48rem) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  .md\:py-6 {
-    @media (width >= 48rem) {
-      padding-block: calc(var(--spacing) * 6);
     }
   }
   .lg\:grid-cols-3 {

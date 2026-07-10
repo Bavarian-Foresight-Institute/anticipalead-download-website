@@ -19,8 +19,8 @@ dependencies: styles, src/app.js
 <body id="page-download" class="bg-brand-light font-sans text-brand-dark antialiased">
 
     <!-- Top Navigation -->
-    <nav class="bg-white border-b border-gray-200 py-cards md:py-6 w-full">
-        <div class="max-w-3xl mx-auto w-full px-6 flex items-center justify-between">
+    <nav class="bg-white border-b border-gray-200 py-small w-full">
+        <div class="max-w-3xl mx-auto w-full px-medium flex items-center justify-between">
             <div class="flex items-center">
                 <span class="text-preset-logo">Anticipa<span class="text-brand-red">Lead</span></span>
             </div>
@@ -31,56 +31,56 @@ dependencies: styles, src/app.js
     </nav>
 
     <!-- Stepper -->
-    <div id="stepper-container" class="bg-white border-b border-gray-200 py-6 w-full"></div>
+    <div id="stepper-container" class="bg-white border-b border-gray-200 py-small w-full"></div>
 
     <!-- Main Content -->
-    <main class="py-12 w-full">
-        <div class="max-w-3xl mx-auto w-full px-6">
+    <main class="w-full">
+        <div class="max-w-3xl mx-auto w-full px-medium">
 
             <!-- STEP 1: CONFIGURE -->
-            <div id="view-configure" class="pt-12 mb-24">
-                <p class="text-brand-red text-preset-highlight-big mb-cards flex items-center gap-cards">
+            <div id="view-configure" class="py-section">
+                <p class="text-brand-red text-preset-highlight-big mb-small flex items-center gap-small">
                     <span class="w-4 h-px bg-brand-red"></span>
                     <span>Step 1 of 3</span>
                 </p>
-                <h1 class="text-preset-main-heading mb-cards">Configure your package</h1>
-                <p class="text-gray-600 text-preset-normal mb-elements">Choose a scenario, game version, and language.
+                <h1 class="text-preset-main-heading mb-small">Configure your package</h1>
+                <p class="text-gray-600 text-preset-normal mb-medium">Choose a scenario, game version, and language.
                     The assistant bundles
                     exactly
                     the files you need.</p>
 
                 <!-- Language Selection -->
-                <div class="mb-elements">
-                    <h2 class="text-gray-400 text-preset-highlight-category mb-cards">Language</h2>
-                    <div id="language-grid" class="flex flex-col sm:flex-row gap-cards"></div>
+                <div class="mb-medium">
+                    <h2 class="text-gray-400 text-preset-highlight-category mb-small">Language</h2>
+                    <div id="language-grid" class="flex flex-col sm:flex-row gap-small"></div>
                 </div>
 
                 <!-- Perspective Selection -->
-                <div class="mb-elements">
-                    <h2 class="text-gray-400 text-preset-highlight-category mb-cards">Perspective</h2>
+                <div class="mb-medium">
+                    <h2 class="text-gray-400 text-preset-highlight-category mb-small">Perspective</h2>
                     <div id="perspective-grid" class="space-y-4">
                     </div>
                 </div>
 
                 <!-- Scenario Selection -->
-                <div class="mb-elements">
-                    <h2 class="text-gray-400 text-preset-highlight-category mb-cards">Scenario - Choose one</h2>
-                    <div id="scenario-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-cards">
+                <div class="mb-medium">
+                    <h2 class="text-gray-400 text-preset-highlight-category mb-small">Scenario - Choose one</h2>
+                    <div id="scenario-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-small">
                     </div>
                 </div>
 
                 <!-- Time Horizon Selection -->
-                <div class="mb-elements">
-                    <h2 class="text-gray-400 text-preset-highlight-category mb-cards">Time Horizon</h2>
-                    <div id="time-horizon-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-cards">
+                <div class="mb-medium">
+                    <h2 class="text-gray-400 text-preset-highlight-category mb-small">Time Horizon</h2>
+                    <div id="time-horizon-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-small">
                     </div>
                 </div>
 
-                <div class="mb-elements">
+                <div class="mb-medium">
                     <div id="btn-continue-container" class="contents"></div>
                 </div>
 
-                <div class="bg-gray-100 p-cards rounded flex items-start text-gray-500 text-preset-small-note">
+                <div class="bg-gray-100 p-small rounded flex items-start text-gray-500 text-preset-small-note">
                     <svg class="w-4 h-4 mr-2 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -91,22 +91,22 @@ dependencies: styles, src/app.js
             </div>
 
             <!-- STEP 2: REVIEW (Temporarily visible) -->
-            <div id="view-review" class="pt-12 mb-24">
-                <p class="text-brand-red text-preset-highlight-big mb-cards flex items-center gap-cards">
+            <div id="view-review" class="py-section">
+                <p class="text-brand-red text-preset-highlight-big mb-small flex items-center gap-small">
                     <span class="w-4 h-px bg-brand-red"></span>
                     <span>Step 2 of 3</span>
                 </p>
-                <h1 class="text-preset-main-heading mb-cards">Review your selection</h1>
-                <p class="text-gray-600 text-preset-normal mb-elements">Check the configuration below before we assemble
+                <h1 class="text-preset-main-heading mb-small">Review your selection</h1>
+                <p class="text-gray-600 text-preset-normal mb-medium">Check the configuration below before we assemble
                     your package.</p>
 
                 <!-- Configuration Summary -->
-                <div class="bg-white rounded border border-gray-200 overflow-hidden mb-elements shadow">
-                    <div class="bg-gray-50 px-6 py-cards border-b border-gray-200 flex justify-between items-center">
+                <div class="bg-white rounded border border-gray-200 overflow-hidden mb-medium shadow">
+                    <div class="bg-gray-50 px-6 py-small border-b border-gray-200 flex justify-between items-center">
                         <h2 class="text-brand-dark text-preset-sub-heading">Package configuration</h2>
                         <div id="btn-edit-container" class="contents"></div>
                     </div>
-                    <div class="p-6">
+                    <div class="p-card-padding">
                         <table class="w-full">
                             <tbody id="summary-table-body">
                             </tbody>
@@ -122,38 +122,38 @@ dependencies: styles, src/app.js
             </div>
 
             <!-- STEP 3: DOWNLOAD (Temporarily visible) -->
-            <div id="view-download" class="pt-12 mb-24">
-                <p class="text-brand-red text-preset-highlight-big mb-cards flex items-center gap-cards">
+            <div id="view-download" class="py-section">
+                <p class="text-brand-red text-preset-highlight-big mb-small flex items-center gap-small">
                     <span class="w-4 h-px bg-brand-red"></span>
                     <span>Step 3 of 3</span>
                 </p>
-                <h1 class="text-preset-main-heading mb-cards">Your download will start automatically.</h1>
-                <p class="text-gray-600 text-preset-normal mb-elements">Your package is being assembled and downloaded
+                <h1 class="text-preset-main-heading mb-small">Your download will start automatically.</h1>
+                <p class="text-gray-600 text-preset-normal mb-medium">Your package is being assembled and downloaded
                     automatically. This may take a few seconds.</p>
 
-                <div class="bg-white rounded border border-gray-200 p-elements w-full shadow mb-elements text-center">
-                    <svg class="w-12 h-12 text-brand-red mx-auto mb-cards" fill="none" stroke="currentColor"
+                <div class="bg-white rounded border border-gray-200 p-medium w-full shadow mb-medium text-center">
+                    <svg class="w-12 h-12 text-brand-red mx-auto mb-small" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
                         </path>
                     </svg>
-                    <h2 id="download-filename" class="text-preset-sub-heading mb-1">
+                    <h2 id="download-filename" class="text-preset-sub-heading mb-xs">
                         AnticipaLead_ScenarioA_Standard_DE.zip</h2>
-                    <p id="download-info" class="text-gray-500 text-preset-card mb-elements">...</p>
+                    <p id="download-info" class="text-gray-500 text-preset-card mb-medium">...</p>
                     <div id="download-progress-container" class="contents">
                         <!-- Progress text/spinner injected here -->
                     </div>
                 </div>
 
-                <div class="flex flex-col sm:flex-row justify-center gap-cards w-full mb-elements">
+                <div class="flex flex-col sm:flex-row justify-center gap-small w-full mb-medium">
                     <div id="btn-download-another-container" class="contents"></div>
                     <div id="btn-quickstart-container" class="contents"></div>
                     <div id="btn-download-again-container" class="contents"></div>
                 </div>
 
                 <div
-                    class="bg-gray-50 border border-gray-200 p-cards rounded text-left text-gray-500 text-preset-small-note w-full flex items-start">
+                    class="bg-gray-50 border border-gray-200 p-small rounded text-left text-gray-500 text-preset-small-note w-full flex items-start">
                     <svg class="w-4 h-4 mr-2 shrink-0 mt-0.5 text-gray-400" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -172,10 +172,10 @@ dependencies: styles, src/app.js
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white text-gray-500 text-preset-small-note py-12 text-center border-t border-gray-200 w-full">
-        <div class="max-w-3xl mx-auto w-full px-6">
-            <div class="max-w-4xl mx-auto px-6">
-                <p class="mb-2 text-brand-dark">Technische Hochschule Ingolstadt - Bayerisches Foresight-Institut - ETH
+    <footer class="bg-white text-gray-500 text-preset-small-note py-medium text-center border-t border-gray-200 w-full">
+        <div class="max-w-3xl mx-auto w-full px-medium">
+            <div class="max-w-4xl mx-auto px-medium">
+                <p class="mb-xs text-brand-dark">Technische Hochschule Ingolstadt - Bayerisches Foresight-Institut - ETH
                     Zürich</p>
                 <p>AnticipaLead is a research-based serious game for leadership education. Free for educational use.</p>
             </div>
