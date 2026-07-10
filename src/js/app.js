@@ -322,12 +322,12 @@ function init() {
     const isDownloadPage = document.getElementById('page-download') !== null;
     const isIndexPage = document.getElementById('page-index') !== null;
     const isPrintingGuidePage = document.getElementById('page-printing-guide') !== null;
+    const isAboutPage = document.getElementById('page-about') !== null;
 
     // Inject common buttons
     if (DOM.navLinksContainer) {
         DOM.navLinksContainer.innerHTML = [
-            NavLink({ id: 'nav-about', text: 'About', href: '#' }),
-            NavLink({ id: 'nav-research', text: 'Research', href: '#' }),
+            NavLink({ id: 'nav-about', text: 'About', href: './about.html' }),
             NavLink({ id: 'nav-printing-guide', text: 'Printing guide', href: './printing-guide.html' })
         ].join('');
     }
@@ -515,7 +515,7 @@ function init() {
         renderUI(getState());
     }
 
-    if (isPrintingGuidePage) {
+    if (isPrintingGuidePage || isAboutPage) {
         if (DOM.navBackContainer) {
             DOM.navBackContainer.innerHTML = TextIconLink({
                 id: 'nav-back-btn',
@@ -524,7 +524,9 @@ function init() {
                 icon: IconArrowLeftMd
             });
         }
+    }
 
+    if (isPrintingGuidePage) {
         // Robustly determine version by checking the full URL string directly
         // Hashes (#) are preserved by the browser across server redirects, unlike query params (?)
         let printingGuideVersion = 'corp'; // Default

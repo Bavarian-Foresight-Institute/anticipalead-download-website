@@ -289,6 +289,12 @@
   .mt-card-padding {
     margin-top: var(--spacing-card-padding);
   }
+  .mt-section {
+    margin-top: var(--spacing-section);
+  }
+  .mt-small {
+    margin-top: var(--spacing-small);
+  }
   .mr-1 {
     margin-right: var(--spacing);
   }
@@ -436,6 +442,9 @@
   .animate-spin {
     animation: var(--animate-spin);
   }
+  .cursor-pointer {
+    cursor: pointer;
+  }
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
@@ -468,6 +477,9 @@
   }
   .gap-medium {
     gap: var(--spacing-medium);
+  }
+  .gap-section {
+    gap: var(--spacing-section);
   }
   .gap-small {
     gap: var(--spacing-small);

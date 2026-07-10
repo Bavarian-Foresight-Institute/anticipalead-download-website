@@ -1,0 +1,94 @@
+<!--
+file: about.html
+purpose: Information about AnticipaLead, armasuisse/deftech, and the Bavarian Foresight Institute.
+dependencies: styles, src/js/app.js
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnticipaLead - About</title>
+    <link rel="stylesheet" href="./assets/output.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/clear-sans@latest/index.min.css">
+</head>
+
+<body id="page-about" class="bg-brand-light font-sans text-brand-dark antialiased min-h-screen flex flex-col">
+
+    <!-- Top Navigation -->
+    <nav class="bg-white border-b border-gray-200 py-small w-full">
+        <div class="max-w-3xl mx-auto w-full px-medium flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="./index.html" class="text-preset-logo cursor-pointer">Anticipa<span
+                        class="text-brand-red">Lead</span></a>
+            </div>
+            <div>
+                <div id="nav-back-container" class="contents"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="w-full flex-1">
+        <div class="max-w-3xl mx-auto w-full px-medium py-section flex flex-col gap-section">
+
+            <!-- Section 1: Project Overview -->
+            <div>
+                <p class="text-brand-red text-preset-highlight-big mb-small flex items-center gap-small">
+                    <span class="w-4 h-px bg-brand-red"></span>
+                    <span>About the project</span>
+                </p>
+                <h1 class="text-preset-main-heading mb-small">AnticipaLead</h1>
+                <p class="text-gray-600 text-preset-normal">
+                    AnticipaLead is a scenario-based serious game designed to immerse teams in the challenges of leading
+                    AI transformations. It replaces the traditional classroom setting with a self-guided, highly
+                    interactive experience that helps players understand both the strategic and ethical implications of
+                    integrating artificial intelligence into various organizational sectors. The game is free for
+                    educational purposes and provides all necessary materials for immediate play.
+                </p>
+            </div>
+
+            <!-- Section 2 & 3: Project Partners -->
+            <div class="flex flex-col gap-medium">
+                <div>
+                    <p class="text-brand-red text-preset-highlight-big mb-small flex items-center gap-small">
+                        <span class="w-4 h-px bg-brand-red"></span>
+                        <span>About the project partners</span>
+                    </p>
+                    <h2 class="text-preset-main-heading mb-small">armasuisse/deftech</h2>
+                    <p class="text-gray-600 text-preset-normal">
+                        Deftech (Defense Technology) is an initiative by armasuisse, the Swiss Federal Office for
+                        Defense Procurement. It anticipates technological developments and analyzes their potential
+                        impact on the military and society. By exploring disruptive innovations and fostering dialogue,
+                        armasuisse/deftech ensures that future challenges are addressed proactively and strategically.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-preset-main-heading mb-small">Bavarian Foresight Institute</h2>
+                    <p class="text-gray-600 text-preset-normal">
+                        The Bavarian Foresight Institute, based at THI Ingolstadt, is dedicated to scientific research
+                        and applied future studies. It develops methodologies to anticipate societal and technological
+                        shifts, equipping leaders with the tools needed to make robust, future-proof decisions. Their
+                        expertise strongly guided the pedagogical foundation of AnticipaLead.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white text-gray-500 text-preset-small-note py-small text-center border-t border-gray-200 w-full">
+        <div class="max-w-3xl mx-auto w-full px-medium">
+            <div id="footer-content-container" class="max-w-4xl mx-auto px-medium">
+                <!-- Footer content dynamically injected here -->
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="./src/js/app.js"></script>
+</body>
+
+</html>
