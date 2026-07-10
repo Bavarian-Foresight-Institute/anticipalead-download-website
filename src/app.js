@@ -7,7 +7,7 @@
 
 import { getState, setScenario, setPerspective, setTimeHorizon, setLanguage, subscribe, resetState, initState } from './core/state.js';
 import { renderScenarioCard, renderPerspectiveCard, renderTimeHorizonCard, renderLanguageCard, renderSummaryRow, renderStepper, NavButton, NavLink, PrimaryButton, SecondaryButton, DarkButton, SolidButton, OutlineButton, TextIconButton, TextIconLink } from './ui.js';
-import { IconDownloadLg, IconVideoLg, IconArrowLeftSm, IconArrowRightSm, IconEditSm, IconArrowLeftMd, IconDownloadSm, IconArrowLeftOpacity, IconArrowDownSm, IconDocumentSm } from './ui/icons.js';
+import { IconDownloadLg, IconVideoLg, IconArrowLeftSm, IconArrowRightSm, IconEditSm, IconArrowLeftMd, IconDownloadSm, IconVideoSm, IconSpinner, IconCheckmarkDark, IconPlusSm } from './ui/icons.js';
 import { scenarios, perspectives, timeHorizons, languages } from './core/content.js';
 import { generateAndDownloadZip, getEstimatedZipSize, getDownloadFilename } from './core/download.js';
 
@@ -44,9 +44,10 @@ function cacheDOM() {
     DOM.btnEditContainer = document.getElementById('btn-edit-container');
     DOM.btnBackContainer = document.getElementById('btn-back-container');
     DOM.btnConfirmContainer = document.getElementById('btn-confirm-container');
-    DOM.btnDownloadZipContainer = document.getElementById('btn-download-zip-container');
+    DOM.downloadProgressContainer = document.getElementById('download-progress-container');
     DOM.btnDownloadAnotherContainer = document.getElementById('btn-download-another-container');
     DOM.btnQuickstartContainer = document.getElementById('btn-quickstart-container');
+    DOM.btnDownloadAgainContainer = document.getElementById('btn-download-again-container');
 
     DOM.downloadFilename = document.getElementById('download-filename');
     DOM.downloadInfo = document.getElementById('download-info');
@@ -57,7 +58,7 @@ function cacheDOM() {
     DOM.btnEdit = document.getElementById('btn-edit');
     DOM.btnConfirm = document.getElementById('btn-confirm');
     DOM.btnDownloadAnother = document.getElementById('btn-download-another');
-    DOM.btnDownloadZip = document.getElementById('btn-download-zip');
+    DOM.btnDownloadAgain = document.getElementById('btn-download-again');
 }
 
 /**
@@ -83,6 +84,9 @@ function switchView(viewId) {
         if (viewId === 'view-download') step = 3;
         DOM.stepperContainer.innerHTML = renderStepper(step);
     }
+
+    // Always scroll to top when changing views
+    window.scrollTo(0, 0);
 }
 
 /**
@@ -204,7 +208,7 @@ function bindEvents() {
                             DOM.downloadInfo.innerHTML = `<span class="text-brand-red text-preset-card">Warning: ${missingFiles.length} of ${filesCount} files are missing on the server!</span>`;
                         } else {
                             const mb = (totalBytes / (1024 * 1024)).toFixed(1);
-                            DOM.downloadInfo.innerHTML = `${filesCount} files - ${mb} MB - Scenario ${selectedScenario.id} - ${selectedPerspective.title} - ${selectedLanguage.title}`;
+                            DOM.downloadInfo.innerHTML = `${filesCount} files - ${mb} MB - Scenario ${selectedScenario.id} - ${selectedPerspective.title} - ${selectedTimeHorizon.title} - ${selectedLanguage.title}`;
                         }
                     }
                 });
@@ -228,13 +232,38 @@ function bindEvents() {
         });
     }
 
+    // Define reusable download execution logic
+    const executeDownload = async () => {
+        if (!DOM.downloadProgressContainer) return;
+
+        DOM.downloadProgressContainer.innerHTML = `<div class="flex justify-center items-center text-preset-button-main text-brand-dark">${IconSpinner} Starting download...</div>`;
+
+        const handleProgress = ({ phase, completed, total, percent }) => {
+            if (phase === 'fetching') {
+                DOM.downloadProgressContainer.innerHTML = `<div class="flex justify-center items-center text-preset-button-main text-brand-dark">${IconSpinner} Fetching ${completed} / ${total}...</div>`;
+            } else if (phase === 'zipping') {
+                DOM.downloadProgressContainer.innerHTML = `<div class="flex justify-center items-center text-preset-button-main text-brand-dark">${IconSpinner} Compressing ${percent}%...</div>`;
+            }
+        };
+
+        try {
+            await generateAndDownloadZip(getState(), handleProgress);
+            DOM.downloadProgressContainer.innerHTML = `<div class="flex justify-center items-center text-preset-button-main text-brand-dark">${IconCheckmarkDark} Download complete</div>`;
+        } catch (error) {
+            if (error.message === "NETWORK_OFFLINE") {
+                alert("A network error occurred. Please check your internet connection and try again.");
+            } else {
+                alert(`The following files are missing on the server:\n${error.message}\n\nPlease contact the website administrator for assistance.`);
+            }
+            DOM.downloadProgressContainer.innerHTML = `<div class="flex justify-center items-center text-preset-button-main text-brand-red">Download failed. Please try again.</div>`;
+        }
+    };
+
     // Confirm & Download button in Review view
     if (DOM.btnConfirm) {
         DOM.btnConfirm.addEventListener('mousedown', () => {
             switchView('view-download');
-            if (DOM.btnDownloadZip) {
-                DOM.btnDownloadZip.dispatchEvent(new Event('mousedown'));
-            }
+            executeDownload();
         });
     }
 
@@ -246,32 +275,10 @@ function bindEvents() {
         });
     }
 
-    // Final Download ZIP button
-    if (DOM.btnDownloadZip) {
-        DOM.btnDownloadZip.addEventListener('mousedown', async () => {
-            const originalText = DOM.btnDownloadZip.innerHTML;
-            DOM.btnDownloadZip.disabled = true;
-
-            const handleProgress = ({ phase, completed, total, percent }) => {
-                if (phase === 'fetching') {
-                    DOM.btnDownloadZip.innerHTML = `Fetching ${completed} / ${total}...`;
-                } else if (phase === 'zipping') {
-                    DOM.btnDownloadZip.innerHTML = `Compressing ${percent}%...`;
-                }
-            };
-
-            try {
-                await generateAndDownloadZip(getState(), handleProgress);
-            } catch (error) {
-                if (error.message === "NETWORK_OFFLINE") {
-                    alert("A network error occurred. Please check your internet connection and try again.");
-                } else {
-                    alert(`The following files are missing on the server:\n${error.message}\n\nPlease contact the website administrator for assistance.`);
-                }
-            } finally {
-                DOM.btnDownloadZip.innerHTML = originalText;
-                DOM.btnDownloadZip.disabled = false;
-            }
+    // Download again button
+    if (DOM.btnDownloadAgain) {
+        DOM.btnDownloadAgain.addEventListener('mousedown', () => {
+            executeDownload();
         });
     }
 }
@@ -328,7 +335,7 @@ function init() {
                 id: 'bottom-download-btn',
                 text: 'Start the download process',
                 href: './download.html',
-                icon: IconDownloadLg
+                icon: IconDownloadSm
             });
         }
     }
@@ -391,36 +398,34 @@ function init() {
             DOM.btnConfirmContainer.innerHTML = SolidButton({
                 id: 'btn-confirm',
                 text: 'Confirm & download',
-                size: 'lg',
                 icon: IconDownloadSm
-            });
-        }
-
-        if (DOM.btnDownloadZipContainer) {
-            DOM.btnDownloadZipContainer.innerHTML = SolidButton({
-                id: 'btn-download-zip',
-                text: 'Download ZIP',
-                size: 'xl',
-                isFullWidth: true,
-                icon: IconDownloadLg,
             });
         }
 
         if (DOM.btnDownloadAnotherContainer) {
             DOM.btnDownloadAnotherContainer.innerHTML = OutlineButton({
                 id: 'btn-download-another',
-                text: 'Download another scenario',
+                text: 'Assemble new',
                 isFlexible: true,
-                icon: IconArrowDownSm
+                icon: IconPlusSm
             });
         }
 
         if (DOM.btnQuickstartContainer) {
             DOM.btnQuickstartContainer.innerHTML = OutlineButton({
                 id: 'btn-quickstart',
-                text: 'Quick-start guide',
+                text: 'Quick start video',
                 isFlexible: true,
-                icon: IconDocumentSm
+                icon: IconVideoSm
+            });
+        }
+
+        if (DOM.btnDownloadAgainContainer) {
+            DOM.btnDownloadAgainContainer.innerHTML = OutlineButton({
+                id: 'btn-download-again',
+                text: 'Download again',
+                isFlexible: true,
+                icon: IconDownloadSm
             });
         }
 

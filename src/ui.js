@@ -188,26 +188,55 @@ export function renderStepper(currentStep) {
  * @param {string} [props.additionalClasses=''] - Extra classes to append.
  * @returns {string} The HTML string for the navigation button.
  */
-export function NavButton({ id, text, href = '#', additionalClasses = '' }) {
-    return `
-        <a id="${id}" href="${href}" class="interactive-base rounded inline-flex items-center justify-center bg-white text-brand-dark px-6 py-2.5 text-preset-button-main interactive-hover ${additionalClasses}">
+/**
+ * Internal helper to generate consistent button markup.
+ */
+function BaseButton({ tag = 'a', id, text, href = '#', icon = '', iconEnd = '', baseClasses = '', sizeClass = 'btn-medium', additionalClasses = '' }) {
+    // Filter out extra spaces
+    const commonClasses = `interactive-base rounded inline-flex items-center justify-center interactive-hover ${baseClasses} ${sizeClass} ${additionalClasses}`.replace(/\s+/g, ' ').trim();
+
+    // Some buttons only have icon or iconEnd, wrap them to prevent empty spaces if possible, but JS templates easily handle empty strings.
+    const innerContent = `
+            ${icon}
             ${text}
+            ${iconEnd}
+    `.trim();
+
+    if (tag === 'button') {
+        return `
+        <button id="${id}" class="${commonClasses}">
+            ${innerContent}
+        </button>
+        `;
+    }
+
+    return `
+        <a id="${id}" href="${href}" class="${commonClasses}">
+            ${innerContent}
         </a>
     `;
 }
 
 /**
- * Purpose: Render a text link for the navigation bar.
+ * Purpose: Render a button for the navigation bar.
  * @param {Object} props - Configuration object.
- * @param {string} props.id - HTML ID of the link.
- * @param {string} props.text - Link text.
+ * @param {string} props.id - HTML ID of the button.
+ * @param {string} props.text - Button label.
  * @param {string} [props.href='#'] - Link URL.
  * @param {string} [props.additionalClasses=''] - Extra classes to append.
- * @returns {string} The HTML string for the navigation link.
+ * @returns {string} The HTML string for the navigation button.
+ */
+export function NavButton({ id, text, href = '#', additionalClasses = '' }) {
+    return BaseButton({ tag: 'a', id, text, href, baseClasses: 'bg-white text-brand-dark', sizeClass: 'btn-medium', additionalClasses });
+}
+
+/**
+ * Purpose: Render a text link for the navigation bar.
+ * ...
  */
 export function NavLink({ id, text, href = '#', additionalClasses = '' }) {
     return `
-        <a id="${id}" href="${href}" class="interactive-base hover:text-gray-300 ${additionalClasses}">
+        <a id="${id}" href="${href}" class="interactive-base hover:text-gray-300 hover:underline py-2.5 ${additionalClasses}">
             ${text}
         </a>
     `;
@@ -224,12 +253,7 @@ export function NavLink({ id, text, href = '#', additionalClasses = '' }) {
  * @returns {string} The HTML string for the primary button.
  */
 export function PrimaryButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
-    return `
-        <a id="${id}" href="${href}" class="interactive-base rounded inline-flex items-center justify-center bg-brand-red text-white px-8 py-4 text-preset-button-main interactive-hover ${additionalClasses}">
-            ${icon}
-            ${text}
-        </a>
-    `;
+    return BaseButton({ tag: 'a', id, text, href, icon, baseClasses: 'bg-brand-red text-white', sizeClass: 'btn-large', additionalClasses });
 }
 
 /**
@@ -243,12 +267,7 @@ export function PrimaryButton({ id, text, href = '#', icon = '', additionalClass
  * @returns {string} The HTML string for the secondary button.
  */
 export function SecondaryButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
-    return `
-        <a id="${id}" href="${href}" class="interactive-base rounded inline-flex items-center justify-center bg-white text-brand-dark px-8 py-4 text-preset-button-main interactive-hover ${additionalClasses}">
-            ${icon}
-            ${text}
-        </a>
-    `;
+    return BaseButton({ tag: 'a', id, text, href, icon, baseClasses: 'bg-white text-brand-dark border border-gray-200', sizeClass: 'btn-large', additionalClasses });
 }
 
 /**
@@ -262,12 +281,7 @@ export function SecondaryButton({ id, text, href = '#', icon = '', additionalCla
  * @returns {string} The HTML string for the dark button.
  */
 export function DarkButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
-    return `
-        <a id="${id}" href="${href}" class="interactive-base rounded inline-flex items-center justify-center bg-brand-dark text-white px-8 py-4 text-preset-button-main interactive-hover ${additionalClasses}">
-            ${icon}
-            ${text}
-        </a>
-    `;
+    return BaseButton({ tag: 'a', id, text, href, icon, baseClasses: 'bg-brand-dark text-white', sizeClass: 'btn-medium', additionalClasses });
 }
 
 /**
@@ -282,18 +296,9 @@ export function DarkButton({ id, text, href = '#', icon = '', additionalClasses 
  * @returns {string} The HTML string for the solid action button.
  */
 export function SolidButton({ id, text, icon = '', iconEnd = '', size = 'md', isFullWidth = false }) {
-    let sizeClasses = size === 'lg' ? 'px-8 py-3' : 'px-6 py-3';
-    if (size === 'xl') sizeClasses = 'py-4';
-
+    const sizeClasses = size === 'xl' || size === 'lg' ? 'btn-large' : 'btn-medium';
     const widthClass = isFullWidth ? 'w-full' : '';
-
-    return `
-        <button id="${id}" class="bg-brand-dark text-white ${sizeClasses} ${widthClass} interactive-base rounded text-preset-button-main inline-flex items-center justify-center interactive-hover">
-            ${icon}
-            ${text}
-            ${iconEnd}
-        </button>
-    `;
+    return BaseButton({ tag: 'button', id, text, icon, iconEnd, baseClasses: `bg-brand-dark text-white ${widthClass}`, sizeClass: sizeClasses });
 }
 
 /**
@@ -306,14 +311,8 @@ export function SolidButton({ id, text, icon = '', iconEnd = '', size = 'md', is
  * @returns {string} The HTML string for the outline action button.
  */
 export function OutlineButton({ id, text, icon = '', isFlexible = false }) {
-    const sizeClasses = isFlexible ? 'flex-1 py-3 text-preset-button-main' : 'px-6 py-3';
-
-    return `
-        <button id="${id}" class="bg-white border border-gray-200 text-gray-600 ${sizeClasses} interactive-base rounded text-preset-button-main inline-flex items-center justify-center interactive-hover">
-            ${icon}
-            ${text}
-        </button>
-    `;
+    const sizeClasses = isFlexible ? 'flex-1 btn-medium' : 'btn-medium';
+    return BaseButton({ tag: 'button', id, text, icon, baseClasses: 'bg-white border border-gray-200 text-gray-600', sizeClass: sizeClasses });
 }
 
 /**
@@ -344,7 +343,7 @@ export function TextIconButton({ id, text, icon = '' }) {
  */
 export function TextIconLink({ id, text, href = '#', icon = '' }) {
     return `
-        <a id="${id}" href="${href}" class="interactive-base text-preset-button-main text-gray-500 hover:text-brand-dark inline-flex items-center">
+        <a id="${id}" href="${href}" class="interactive-base text-preset-normal text-gray-500 hover:text-brand-dark hover:underline inline-flex items-center py-2.5">
             ${icon}
             ${text}
         </a>

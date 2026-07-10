@@ -18,7 +18,7 @@ const verifiedFilesCache = new Set(); // Cache verified files to avoid redundant
 export function getDownloadFilename(currentState) {
     const { scenario, perspective, timeHorizon, language } = currentState;
     const perspectiveTag = perspective === 'corp' ? 'Corporate' : 'General';
-    return `AnticipaLead_Scenario${scenario}_${perspectiveTag}_${language.toUpperCase()}.zip`;
+    return `AnticipaLead_Scenario${scenario}_${perspectiveTag}_${timeHorizon}_${language.toUpperCase()}.zip`;
 }
 
 /**
