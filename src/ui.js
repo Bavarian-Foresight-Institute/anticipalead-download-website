@@ -22,7 +22,7 @@ import { IconCheckSm } from './ui/icons.js';
 export function renderScenarioCard({ id, title, description, badgeText, badgeColorClass, isSelected = false }) {
     const ringClass = isSelected ? 'card-ring-selected' : 'card-ring';
     const dotClass = isSelected ? 'card-dot-selected' : 'card-dot';
-    const headingClass = isSelected ? 'text-black' : 'text-gray-400';
+    const headingClass = isSelected ? 'text-brand-darker' : 'text-gray-400';
 
     return `
         <div data-scenario="${id}" class="bg-white rounded interactive-base ${ringClass} p-5 cursor-pointer relative interactive-hover">
@@ -51,7 +51,7 @@ export function renderPerspectiveCard({ id, title, description, isRecommended, i
 
     const ringClass = isSelected ? 'card-ring-selected' : 'card-ring';
     const dotClass = isSelected ? 'card-dot-selected' : 'card-dot';
-    const headingClass = isSelected ? 'text-black' : 'text-gray-400';
+    const headingClass = isSelected ? 'text-brand-darker' : 'text-gray-400';
 
     return `
         <div data-perspective="${id}" class="bg-white rounded interactive-base ${ringClass} pt-4 pb-5 px-5 cursor-pointer relative interactive-hover">
@@ -77,7 +77,7 @@ export function renderPerspectiveCard({ id, title, description, isRecommended, i
 export function renderTimeHorizonCard({ id, title, description, isSelected = false }) {
     const ringClass = isSelected ? 'card-ring-selected' : 'card-ring';
     const dotClass = isSelected ? 'card-dot-selected' : 'card-dot';
-    const headingClass = isSelected ? 'text-black' : 'text-gray-400';
+    const headingClass = isSelected ? 'text-brand-darker' : 'text-gray-400';
 
     return `
         <div data-time="${id}" class="bg-white rounded interactive-base ${ringClass} pt-4 pb-5 px-5 cursor-pointer relative interactive-hover">
@@ -98,7 +98,7 @@ export function renderTimeHorizonCard({ id, title, description, isSelected = fal
 export function renderLanguageCard({ id, title, isSelected = false }) {
     const ringClass = isSelected ? 'card-ring-selected' : 'card-ring';
     const dotClass = isSelected ? 'card-dot-selected' : 'card-dot';
-    const headingClass = isSelected ? 'text-black' : 'text-gray-400';
+    const headingClass = isSelected ? 'text-brand-darker' : 'text-gray-400';
 
     return `
         <div data-lang="${id}" class="flex-1 bg-white rounded interactive-base relative py-4 pl-5 pr-12 text-left cursor-pointer ${ringClass} interactive-hover">
@@ -227,7 +227,7 @@ function BaseButton({ tag = 'a', id, text, href = '#', icon = '', iconEnd = '', 
  * @returns {string} The HTML string for the navigation button.
  */
 export function NavButton({ id, text, href = '#', additionalClasses = '' }) {
-    return BaseButton({ tag: 'a', id, text, href, baseClasses: 'bg-white text-brand-dark', sizeClass: 'btn-medium', additionalClasses });
+    return BaseButton({ tag: 'a', id, text, href, baseClasses: 'bg-white text-brand-dark hover:bg-brand-white-hover-dark', sizeClass: 'btn-medium', additionalClasses });
 }
 
 /**
@@ -253,7 +253,7 @@ export function NavLink({ id, text, href = '#', additionalClasses = '' }) {
  * @returns {string} The HTML string for the primary button.
  */
 export function PrimaryButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
-    return BaseButton({ tag: 'a', id, text, href, icon, baseClasses: 'bg-brand-red text-white', sizeClass: 'btn-large', additionalClasses });
+    return BaseButton({ tag: 'a', id, text, href, icon, baseClasses: 'bg-brand-red text-white hover:bg-brand-red-hover', sizeClass: 'btn-large', additionalClasses });
 }
 
 /**
@@ -267,7 +267,7 @@ export function PrimaryButton({ id, text, href = '#', icon = '', additionalClass
  * @returns {string} The HTML string for the secondary button.
  */
 export function SecondaryButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
-    return BaseButton({ tag: 'a', id, text, href, icon, baseClasses: 'bg-white text-brand-dark border border-gray-200', sizeClass: 'btn-large', additionalClasses });
+    return BaseButton({ tag: 'a', id, text, href, icon, baseClasses: 'bg-white text-brand-dark border border-gray-200 hover:bg-brand-white-hover-dark', sizeClass: 'btn-large', additionalClasses });
 }
 
 /**
@@ -281,7 +281,7 @@ export function SecondaryButton({ id, text, href = '#', icon = '', additionalCla
  * @returns {string} The HTML string for the dark button.
  */
 export function DarkButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
-    return BaseButton({ tag: 'a', id, text, href, icon, baseClasses: 'bg-brand-dark text-white', sizeClass: 'btn-medium', additionalClasses });
+    return BaseButton({ tag: 'a', id, text, href, icon, baseClasses: 'bg-brand-dark text-white hover:bg-brand-dark-hover', sizeClass: 'btn-medium', additionalClasses });
 }
 
 /**
@@ -298,7 +298,7 @@ export function DarkButton({ id, text, href = '#', icon = '', additionalClasses 
 export function SolidButton({ id, text, icon = '', iconEnd = '', size = 'md', isFullWidth = false }) {
     const sizeClasses = size === 'xl' || size === 'lg' ? 'btn-large' : 'btn-medium';
     const widthClass = isFullWidth ? 'w-full' : '';
-    return BaseButton({ tag: 'button', id, text, icon, iconEnd, baseClasses: `bg-brand-dark text-white ${widthClass}`, sizeClass: sizeClasses });
+    return BaseButton({ tag: 'button', id, text, icon, iconEnd, baseClasses: `bg-brand-dark text-white hover:bg-brand-dark-hover ${widthClass}`, sizeClass: sizeClasses });
 }
 
 /**
@@ -312,7 +312,7 @@ export function SolidButton({ id, text, icon = '', iconEnd = '', size = 'md', is
  */
 export function OutlineButton({ id, text, icon = '', isFlexible = false }) {
     const sizeClasses = isFlexible ? 'flex-1 btn-medium' : 'btn-medium';
-    return BaseButton({ tag: 'button', id, text, icon, baseClasses: 'bg-white border border-gray-200 text-gray-600', sizeClass: sizeClasses });
+    return BaseButton({ tag: 'button', id, text, icon, baseClasses: 'bg-white border border-gray-200 text-gray-600 hover:bg-brand-white-hover', sizeClass: sizeClasses });
 }
 
 /**

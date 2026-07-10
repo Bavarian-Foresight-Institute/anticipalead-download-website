@@ -1,21 +1,72 @@
 @import "tailwindcss";
 
 @theme {
+  /* --- Brand Core Colors --- */
+  /* Primary brand color, used for main CTA buttons and active state indicators */
   --color-brand-red: #ED1C24;
+
+  /* Main dark color, used for primary text, dark backgrounds, and dark buttons */
   --color-brand-dark: #111111;
+
+  /* Darkest shade, used for selected card headings and hero section background */
   --color-brand-darker: #0a0a0a;
+
+  /* Primary off-white application background */
   --color-brand-light: #F8F8F7;
-  --color-brand-gray-100: #F3F4F6;
-  --color-brand-gray-200: #E5E7EB;
-  --color-brand-gray-400: #9CA3AF;
-  --color-brand-gray-600: #4B5563;
-  --color-brand-gray-800: #1F2937;
+
+  /* Pure white, used for cards, primary content areas, and secondary buttons */
+  --color-white: #ffffff;
+
+  /* --- Grayscale Palette --- */
+  /* Very subtle backgrounds and inactive states */
+  --color-gray-50: #f9fafb;
+
+  /* Subtle borders, inactive backgrounds, and slight white button hover states */
+  --color-gray-100: #F3F4F6;
+
+  /* Default card borders, inactive stepper lines */
+  --color-gray-200: #E5E7EB;
+
+  /* Selected card borders and outline elements */
+  --color-gray-300: #d1d5db;
+
+  /* Inactive or unselected text, disabled icons */
+  --color-gray-400: #9CA3AF;
+
+  /* Secondary text, card descriptions, table labels */
+  --color-gray-500: #6b7280;
+
+  /* Outline button text */
+  --color-gray-600: #4B5563;
+
+  /* Darker secondary text elements */
+  --color-gray-700: #374151;
+
+  /* Deep gray backgrounds, dark overlays */
+  --color-gray-800: #1F2937;
+
+  /* --- Specific UI Colors --- */
+  /* Used for dark red warning/new badges */
+  --color-red-800: #991b1b;
+
+  /* --- Hover States --- */
+  /* Hover state for primary red buttons (darkened) */
+  --color-brand-red-hover: #D61A21;
+
+  /* Hover state for dark buttons (brightened) */
+  --color-brand-dark-hover: #2a2a2a;
+
+  /* Default hover state for white buttons (slight darken) */
+  --color-brand-white-hover: #f9fafb;
+
+  /* Intense hover state for prominent white buttons like the video guide */
+  --color-brand-white-hover-dark: #E5E7EB;
+
+  /* --- Base Typography and Utilities --- */
   --font-sans: "Clear Sans", sans-serif;
   --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.2), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --shadow-invisible: 0 1px 3px 0 rgb(0 0 0 / 0), 0 1px 2px -1px rgb(0 0 0 / 0);
   --radius: 0.5rem;
-  --brightness-101: 1.01;
-  --brightness-98: .98;
 }
 
 @layer base {
@@ -26,7 +77,7 @@
 
 /* Applies transitions and base properties to prevent visual flashes */
 @utility interactive-base {
-  transition-property: filter, color, background-color, border-color, opacity;
+  transition-property: filter, color, background-color, border-color, opacity, box-shadow;
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   @apply shadow-invisible brightness-100;
@@ -36,7 +87,7 @@
 
 /* Applies hover interaction */
 @utility interactive-hover {
-  @apply hover:shadow active:shadow hover:brightness-101;
+  @apply hover:shadow active:shadow;
 }
 
 /* Card Selection Styles */

@@ -7,22 +7,20 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-red-700: oklch(50.5% 0.213 27.518);
-    --color-red-800: oklch(44.4% 0.177 26.899);
-    --color-green-500: oklch(72.3% 0.219 149.579);
-    --color-green-600: oklch(62.7% 0.194 149.214);
+    --color-red-800: #991b1b;
     --color-blue-700: oklch(48.8% 0.243 264.376);
     --color-purple-700: oklch(49.6% 0.265 301.924);
-    --color-gray-50: oklch(98.5% 0.002 247.839);
-    --color-gray-100: oklch(96.7% 0.003 264.542);
-    --color-gray-200: oklch(92.8% 0.006 264.531);
-    --color-gray-300: oklch(87.2% 0.01 258.338);
-    --color-gray-400: oklch(70.7% 0.022 261.325);
-    --color-gray-500: oklch(55.1% 0.027 264.364);
-    --color-gray-600: oklch(44.6% 0.03 256.802);
-    --color-gray-700: oklch(37.3% 0.034 259.733);
-    --color-gray-800: oklch(27.8% 0.033 256.848);
+    --color-gray-50: #f9fafb;
+    --color-gray-100: #F3F4F6;
+    --color-gray-200: #E5E7EB;
+    --color-gray-300: #d1d5db;
+    --color-gray-400: #9CA3AF;
+    --color-gray-500: #6b7280;
+    --color-gray-600: #4B5563;
+    --color-gray-700: #374151;
+    --color-gray-800: #1F2937;
     --color-black: #000;
-    --color-white: #fff;
+    --color-white: #ffffff;
     --spacing: 0.25rem;
     --container-lg: 32rem;
     --container-2xl: 42rem;
@@ -74,7 +72,10 @@
     --color-brand-dark: #111111;
     --color-brand-darker: #0a0a0a;
     --color-brand-light: #F8F8F7;
-    --brightness-101: 1.01;
+    --color-brand-red-hover: #D61A21;
+    --color-brand-dark-hover: #2a2a2a;
+    --color-brand-white-hover: #f9fafb;
+    --color-brand-white-hover-dark: #E5E7EB;
   }
 }
 @layer base {
@@ -319,9 +320,6 @@
   .mb-24 {
     margin-bottom: calc(var(--spacing) * 24);
   }
-  .ml-1 {
-    margin-left: var(--spacing);
-  }
   .ml-2 {
     margin-left: calc(var(--spacing) * 2);
   }
@@ -412,9 +410,6 @@
   .max-w-4xl {
     max-width: var(--container-4xl);
   }
-  .max-w-lg {
-    max-width: var(--container-lg);
-  }
   .flex-1 {
     flex: 1;
   }
@@ -425,7 +420,7 @@
     flex-grow: 1;
   }
   .interactive-base {
-    transition-property: filter, color, background-color, border-color, opacity;
+    transition-property: filter, color, background-color, border-color, opacity, box-shadow;
     transition-duration: 150ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0));
@@ -746,11 +741,11 @@
     letter-spacing: var(--tracking-wider);
     text-transform: uppercase;
   }
-  .text-black {
-    color: var(--color-black);
-  }
   .text-brand-dark {
     color: var(--color-brand-dark);
+  }
+  .text-brand-darker {
+    color: var(--color-brand-darker);
   }
   .text-brand-red {
     color: var(--color-brand-red);
@@ -770,12 +765,6 @@
   .text-gray-700 {
     color: var(--color-gray-700);
   }
-  .text-green-500 {
-    color: var(--color-green-500);
-  }
-  .text-green-600 {
-    color: var(--color-green-600);
-  }
   .text-white {
     color: var(--color-white);
   }
@@ -789,9 +778,6 @@
   .opacity-25 {
     opacity: 25%;
   }
-  .opacity-70 {
-    opacity: 70%;
-  }
   .opacity-75 {
     opacity: 75%;
   }
@@ -800,12 +786,6 @@
       @media (hover: hover) {
         --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.2)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
         box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-      }
-    }
-    &:hover {
-      @media (hover: hover) {
-        --tw-brightness: brightness(var(--brightness-101));
-        filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
       }
     }
     &:active {
@@ -842,6 +822,34 @@
   }
   .ring-inset {
     --tw-ring-inset: inset;
+  }
+  .hover\:bg-brand-dark-hover {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-brand-dark-hover);
+      }
+    }
+  }
+  .hover\:bg-brand-red-hover {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-brand-red-hover);
+      }
+    }
+  }
+  .hover\:bg-brand-white-hover {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-brand-white-hover);
+      }
+    }
+  }
+  .hover\:bg-brand-white-hover-dark {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-brand-white-hover-dark);
+      }
+    }
   }
   .hover\:text-brand-dark {
     &:hover {
