@@ -617,12 +617,16 @@ function init() {
 
         function renderPrintingGuide() {
             if (DOM.printingGuideTabsContainer) {
-                DOM.printingGuideTabsContainer.innerHTML = `
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-small w-full">
-                        ${renderLanguageCard({ id: 'corp', title: 'Corporate with changes', isSelected: printingGuideVersion === 'corp' })}
-                        ${renderLanguageCard({ id: 'gen', title: 'Generic', isSelected: printingGuideVersion === 'gen' })}
-                    </div>
-                `;
+                if (DOM.printingGuideTabsContainer.children.length === 0) {
+                    DOM.printingGuideTabsContainer.innerHTML = `
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-small w-full">
+                            ${renderLanguageCard({ id: 'corp', title: 'Corporate with changes', isSelected: printingGuideVersion === 'corp' })}
+                            ${renderLanguageCard({ id: 'gen', title: 'Generic', isSelected: printingGuideVersion === 'gen' })}
+                        </div>
+                    `;
+                } else {
+                    updateGridSelection(DOM.printingGuideTabsContainer, printingGuideVersion, 'lang');
+                }
             }
 
             if (DOM.printingGuideTableContainer) {
