@@ -7,7 +7,7 @@
 
 import { getState, setScenario, setPerspective, setTimeHorizon, setLanguage, subscribe, resetState, initState } from './core/state.js';
 import { renderFooterContent, renderPackageContentCard, renderHowItWorksStep, renderScenarioCard, renderPerspectiveCard, renderTimeHorizonCard, renderLanguageCard, renderSummaryRow, renderStepper, NavButton, NavLink, PrimaryButton, SecondaryButton, DarkButton, SolidButton, OutlineButton, TextIconButton, TextIconLink } from './ui.js';
-import { IconRoleCards, IconCanvases, IconTechCards, IconAudioGuide, IconDownloadLg, IconVideoLg, IconArrowLeftSm, IconArrowRightSm, IconEditSm, IconArrowLeftMd, IconDownloadSm, IconVideoSm, IconSpinner, IconCheckmarkDark, IconPlusSm, IconPrinterSm } from './ui/icons.js';
+import { IconRoleCards, IconCanvases, IconTechCards, IconAudioGuide, IconDownloadLg, IconVideoLg, IconArrowLeftSm, IconArrowRightSm, IconEditSm, IconArrowLeftMd, IconDownloadSm, IconVideoSm, IconSpinner, IconCheckmarkDark, IconPlusSm, IconPrinterSm, IconInfoSm, IconUsersSm, IconClockSm, IconBriefcaseSm, IconTranslateSm } from './ui/icons.js';
 import { footerContent, packageContents, howItWorksSteps, scenarios, perspectives, timeHorizons, languages } from './core/content.js';
 import { generateAndDownloadZip, getEstimatedZipSize, getDownloadFilename } from './core/download.js';
 
@@ -57,6 +57,11 @@ function cacheDOM() {
 
     DOM.downloadFilename = document.getElementById('download-filename');
     DOM.downloadInfo = document.getElementById('download-info');
+    DOM.iconInfoContainer = document.getElementById('icon-info-container');
+    DOM.iconUsersContainer = document.getElementById('icon-users-container');
+    DOM.iconClockContainer = document.getElementById('icon-clock-container');
+    DOM.iconBriefcaseContainer = document.getElementById('icon-briefcase-container');
+    DOM.iconTranslateContainer = document.getElementById('icon-translate-container');
 
     // Dynamically injected buttons (re-cached after injection)
     DOM.btnContinue = document.getElementById('btn-continue');
@@ -324,6 +329,13 @@ function init() {
             titleClass: isIndexPage ? '' : 'text-brand-dark'
         });
     }
+
+    // Inject raw standalone SVG icons
+    if (DOM.iconInfoContainer) DOM.iconInfoContainer.innerHTML = IconInfoSm;
+    if (DOM.iconUsersContainer) DOM.iconUsersContainer.innerHTML = IconUsersSm;
+    if (DOM.iconClockContainer) DOM.iconClockContainer.innerHTML = IconClockSm;
+    if (DOM.iconBriefcaseContainer) DOM.iconBriefcaseContainer.innerHTML = IconBriefcaseSm;
+    if (DOM.iconTranslateContainer) DOM.iconTranslateContainer.innerHTML = IconTranslateSm;
 
     if (isIndexPage) {
         if (DOM.packageContentsContainer) {
