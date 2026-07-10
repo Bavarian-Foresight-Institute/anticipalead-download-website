@@ -48,6 +48,15 @@
         "language"
       ],
       "template": "guides/quickstart_{language}.pdf"
+    },
+    "moderatorCard": {
+      "dependencies": [
+        "language"
+      ],
+      "conditions": {
+        "perspective": "gen"
+      },
+      "template": "moderator/moderator_{language}.pdf"
     }
   }
 }

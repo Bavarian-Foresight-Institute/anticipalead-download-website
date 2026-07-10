@@ -34,6 +34,18 @@ export function resolveDownloadList(currentState) {
 
         if (!isSatisfied) continue;
 
+        // Validate Conditions (Optional strict match)
+        if (mapping.conditions) {
+            let conditionsMet = true;
+            for (const condKey in mapping.conditions) {
+                if (currentState[condKey] !== mapping.conditions[condKey]) {
+                    conditionsMet = false;
+                    break;
+                }
+            }
+            if (!conditionsMet) continue;
+        }
+
         // Interpolate Template
         templateString = templateString.replace(/{([^{}]+)}/g, (match, key) => {
             const val = currentState[key];
