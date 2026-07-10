@@ -79,21 +79,30 @@
 
 /* --- Interactive Utilities --- */
 @utility interactive-base {
-  transition-property: filter, color, background-color, border-color, opacity, box-shadow;
+  transition-property: filter, color, background-color, border-color, border-width, opacity, box-shadow, transform, translate;
   /* Base transition properties */
-  transition-duration: 150ms;
+  transition-duration: 100ms;
   /* Base transition speed */
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   /* Base transition easing */
-  @apply shadow-invisible brightness-100;
+  @apply shadow-invisible brightness-100 relative;
   /* Start with invisible shadow */
   transform: translateZ(0);
   /* Hardware acceleration */
 }
 
 @utility interactive-hover {
-  @apply hover:shadow active:shadow;
-  /* Interactive hover shadow */
+  @apply hover:shadow hover:-translate-y-px;
+  /* Interactive hover shadow and lift */
+
+  &:hover::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+  }
 }
 
 /* --- Card Selection Styles --- */
@@ -108,13 +117,21 @@
 }
 
 @utility card-dot {
-  @apply border border-gray-300;
+  @apply border border-gray-300 transition-all;
+  transition-duration: 100ms;
   /* Default selection dot */
 }
 
 @utility card-dot-selected {
-  @apply border-4 border-brand-red;
+  @apply border-4 border-brand-red transition-all;
+  transition-duration: 100ms;
   /* Selected selection dot */
+}
+
+/* --- Patterns --- */
+@utility bg-dot-matrix {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 /* --- Typography Presets --- */

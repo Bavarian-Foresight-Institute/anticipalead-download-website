@@ -13,6 +13,12 @@ dependencies: styles, src/js/app.js
     <title>AnticipaLead - Experience the future of leadership decisions</title>
     <link rel="stylesheet" href="./assets/output.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/clear-sans@latest/index.min.css">
+    <meta name="description"
+        content="AnticipaLead is a scenario-based serious game for teams of 5-7 to experience the future of leadership decisions in AI transformations.">
+    <meta property="og:title" content="AnticipaLead - Experience the future of leadership decisions">
+    <meta property="og:description"
+        content="AnticipaLead is a scenario-based serious game for teams of 5-7. No moderator needed - download the materials and start playing within the hour.">
+    <meta property="og:type" content="website">
 </head>
 
 <body id="page-index" class="bg-brand-light font-sans text-brand-dark antialiased min-h-screen flex flex-col">
@@ -31,15 +37,30 @@ dependencies: styles, src/js/app.js
                         <div class="hidden md:flex gap-8 text-preset-normal">
                             <div id="nav-links-container" class="contents"></div>
                         </div>
-                        <div>
+                        <div class="hidden md:block">
                             <div id="nav-btn-container" class="contents"></div>
                         </div>
+                        <button id="mobile-menu-btn"
+                            class="md:hidden text-white hover:text-brand-red transition-colors duration-fast">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
                     </div>
                 </nav>
             </div>
 
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobile-menu"
+                class="hidden w-full bg-brand-darker border-t border-gray-800 md:hidden flex-col items-center py-medium gap-small text-preset-normal">
+                <div id="mobile-nav-links-container" class="flex flex-col items-center gap-small"></div>
+                <div id="mobile-nav-btn-container" class="mt-small"></div>
+            </div>
+
             <!-- Hero Content -->
-            <div class="bg-brand-dark w-full">
+            <div class="bg-brand-dark bg-dot-matrix w-full">
                 <div
                     class="flex flex-col items-center justify-center text-center px-small max-w-4xl mx-auto pt-section pb-section-double">
                     <p

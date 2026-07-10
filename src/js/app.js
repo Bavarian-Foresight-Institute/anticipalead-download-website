@@ -37,6 +37,11 @@ function cacheDOM() {
 
     DOM.navLinksContainer = document.getElementById('nav-links-container');
     DOM.navBtnContainer = document.getElementById('nav-btn-container');
+    DOM.mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    DOM.mobileMenu = document.getElementById('mobile-menu');
+    DOM.mobileNavLinksContainer = document.getElementById('mobile-nav-links-container');
+    DOM.mobileNavBtnContainer = document.getElementById('mobile-nav-btn-container');
+
     DOM.heroDownloadContainer = document.getElementById('hero-download-btn-container');
     DOM.heroVideoContainer = document.getElementById('hero-video-btn-container');
     DOM.bottomDownloadContainer = document.getElementById('bottom-download-btn-container');
@@ -104,6 +109,54 @@ function switchView(viewId) {
 }
 
 /**
+ * Purpose: Update selection classes on an existing grid without rebuilding the DOM.
+ * @param {HTMLElement} gridElement - The grid container.
+ * @param {string} selectedId - The ID of the currently selected item.
+ * @param {string} dataAttr - The data attribute prefix (e.g., 'scenario', 'lang').
+ */
+function updateGridSelection(gridElement, selectedId, dataAttr) {
+    if (!gridElement) return;
+    const cards = gridElement.querySelectorAll(`[data-${dataAttr}]`);
+    cards.forEach(card => {
+        const id = card.getAttribute(`data-${dataAttr}`);
+        const isSelected = id === selectedId;
+
+        // Ring class
+        if (isSelected) {
+            card.classList.remove('card-ring');
+            card.classList.add('card-ring-selected');
+        } else {
+            card.classList.remove('card-ring-selected');
+            card.classList.add('card-ring');
+        }
+
+        // Dot class
+        const dot = card.querySelector('.rounded-full');
+        if (dot) {
+            if (isSelected) {
+                dot.classList.remove('card-dot');
+                dot.classList.add('card-dot-selected');
+            } else {
+                dot.classList.remove('card-dot-selected');
+                dot.classList.add('card-dot');
+            }
+        }
+
+        // Heading class
+        const heading = card.querySelector('h3');
+        if (heading) {
+            if (isSelected) {
+                heading.classList.remove('text-gray-400');
+                heading.classList.add('text-brand-darker');
+            } else {
+                heading.classList.remove('text-brand-darker');
+                heading.classList.add('text-gray-400');
+            }
+        }
+    });
+}
+
+/**
  * Purpose: Re-render the UI components based on the current state.
  * @param {Object} state - The current state object containing user selections.
  * @returns {void}
@@ -112,30 +165,46 @@ function switchView(viewId) {
 function renderUI(state) {
     // Render Scenarios
     if (DOM.scenarioGrid) {
-        DOM.scenarioGrid.innerHTML = scenarios.map(s =>
-            renderScenarioCard({ ...s, isSelected: state.scenario === s.id })
-        ).join('');
+        if (DOM.scenarioGrid.children.length === 0) {
+            DOM.scenarioGrid.innerHTML = scenarios.map(s =>
+                renderScenarioCard({ ...s, isSelected: state.scenario === s.id })
+            ).join('');
+        } else {
+            updateGridSelection(DOM.scenarioGrid, state.scenario, 'scenario');
+        }
     }
 
     // Render Perspectives
     if (DOM.perspectiveGrid) {
-        DOM.perspectiveGrid.innerHTML = perspectives.map(p =>
-            renderPerspectiveCard({ ...p, isSelected: state.perspective === p.id })
-        ).join('');
+        if (DOM.perspectiveGrid.children.length === 0) {
+            DOM.perspectiveGrid.innerHTML = perspectives.map(p =>
+                renderPerspectiveCard({ ...p, isSelected: state.perspective === p.id })
+            ).join('');
+        } else {
+            updateGridSelection(DOM.perspectiveGrid, state.perspective, 'perspective');
+        }
     }
 
     // Render Time Horizons
     if (DOM.timeHorizonGrid) {
-        DOM.timeHorizonGrid.innerHTML = timeHorizons.map(t =>
-            renderTimeHorizonCard({ ...t, isSelected: state.timeHorizon === t.id })
-        ).join('');
+        if (DOM.timeHorizonGrid.children.length === 0) {
+            DOM.timeHorizonGrid.innerHTML = timeHorizons.map(t =>
+                renderTimeHorizonCard({ ...t, isSelected: state.timeHorizon === t.id })
+            ).join('');
+        } else {
+            updateGridSelection(DOM.timeHorizonGrid, state.timeHorizon, 'time');
+        }
     }
 
     // Render Languages
     if (DOM.languageGrid) {
-        DOM.languageGrid.innerHTML = languages.map(l =>
-            renderLanguageCard({ ...l, isSelected: state.language === l.id })
-        ).join('');
+        if (DOM.languageGrid.children.length === 0) {
+            DOM.languageGrid.innerHTML = languages.map(l =>
+                renderLanguageCard({ ...l, isSelected: state.language === l.id })
+            ).join('');
+        } else {
+            updateGridSelection(DOM.languageGrid, state.language, 'lang');
+        }
     }
 
     // Update Printing Guide Button href
@@ -325,18 +394,28 @@ function init() {
     const isAboutPage = document.getElementById('page-about') !== null;
 
     // Inject common buttons
-    if (DOM.navLinksContainer) {
-        DOM.navLinksContainer.innerHTML = [
-            NavLink({ id: 'nav-about', text: 'About', href: './about.html' }),
-            NavLink({ id: 'nav-printing-guide', text: 'Printing guide', href: './printing-guide.html' })
-        ].join('');
-    }
+    const navLinksHtml = [
+        NavLink({ id: 'nav-about', text: 'About', href: './about.html' }),
+        NavLink({ id: 'nav-printing-guide', text: 'Printing guide', href: './printing-guide.html' })
+    ].join('');
 
-    if (DOM.navBtnContainer) {
-        DOM.navBtnContainer.innerHTML = NavButton({
-            id: 'nav-download-btn',
-            text: 'Download',
-            href: './download.html'
+    if (DOM.navLinksContainer) DOM.navLinksContainer.innerHTML = navLinksHtml;
+    if (DOM.mobileNavLinksContainer) DOM.mobileNavLinksContainer.innerHTML = navLinksHtml;
+
+    const navBtnHtml = NavButton({
+        id: 'nav-download-btn',
+        text: 'Download',
+        href: './download.html'
+    });
+
+    if (DOM.navBtnContainer) DOM.navBtnContainer.innerHTML = navBtnHtml;
+    if (DOM.mobileNavBtnContainer) DOM.mobileNavBtnContainer.innerHTML = navBtnHtml;
+
+    // Mobile Menu Toggle
+    if (DOM.mobileMenuBtn && DOM.mobileMenu) {
+        DOM.mobileMenuBtn.addEventListener('click', () => {
+            DOM.mobileMenu.classList.toggle('hidden');
+            DOM.mobileMenu.classList.toggle('flex');
         });
     }
 
