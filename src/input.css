@@ -63,6 +63,8 @@
   --color-brand-white-hover-dark: #E5E7EB;
 
   /* --- Base Typography and Utilities --- */
+  --spacing-cards: 1rem;
+  --spacing-elements: 2.5rem;
   --font-sans: "Clear Sans", sans-serif;
   --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.2), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --shadow-invisible: 0 1px 3px 0 rgb(0 0 0 / 0), 0 1px 2px -1px rgb(0 0 0 / 0);

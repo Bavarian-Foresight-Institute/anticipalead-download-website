@@ -76,6 +76,8 @@
     --color-brand-dark-hover: #2a2a2a;
     --color-brand-white-hover: #f9fafb;
     --color-brand-white-hover-dark: #E5E7EB;
+    --spacing-cards: 1rem;
+    --spacing-elements: 2.5rem;
   }
 }
 @layer base {
@@ -302,23 +304,17 @@
   .mb-3 {
     margin-bottom: calc(var(--spacing) * 3);
   }
-  .mb-4 {
-    margin-bottom: calc(var(--spacing) * 4);
-  }
   .mb-6 {
     margin-bottom: calc(var(--spacing) * 6);
   }
-  .mb-8 {
-    margin-bottom: calc(var(--spacing) * 8);
-  }
-  .mb-10 {
-    margin-bottom: calc(var(--spacing) * 10);
-  }
-  .mb-12 {
-    margin-bottom: calc(var(--spacing) * 12);
-  }
   .mb-24 {
     margin-bottom: calc(var(--spacing) * 24);
+  }
+  .mb-cards {
+    margin-bottom: var(--spacing-cards);
+  }
+  .mb-elements {
+    margin-bottom: var(--spacing-elements);
   }
   .ml-2 {
     margin-left: calc(var(--spacing) * 2);
@@ -456,14 +452,11 @@
   .justify-center {
     justify-content: center;
   }
-  .gap-4 {
-    gap: calc(var(--spacing) * 4);
-  }
-  .gap-6 {
-    gap: calc(var(--spacing) * 6);
-  }
   .gap-8 {
     gap: calc(var(--spacing) * 8);
+  }
+  .gap-cards {
+    gap: var(--spacing-cards);
   }
   .space-y-4 {
     :where(& > :not(:last-child)) {
@@ -554,9 +547,6 @@
   .bg-white {
     background-color: var(--color-white);
   }
-  .p-4 {
-    padding: calc(var(--spacing) * 4);
-  }
   .p-5 {
     padding: calc(var(--spacing) * 5);
   }
@@ -566,8 +556,11 @@
   .p-8 {
     padding: calc(var(--spacing) * 8);
   }
-  .p-10 {
-    padding: calc(var(--spacing) * 10);
+  .p-cards {
+    padding: var(--spacing-cards);
+  }
+  .p-elements {
+    padding: var(--spacing-elements);
   }
   .btn-medium {
     padding-inline: calc(var(--spacing) * 6);
@@ -590,14 +583,14 @@
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
   }
-  .px-4 {
-    padding-inline: calc(var(--spacing) * 4);
-  }
   .px-5 {
     padding-inline: calc(var(--spacing) * 5);
   }
   .px-6 {
     padding-inline: calc(var(--spacing) * 6);
+  }
+  .px-cards {
+    padding-inline: var(--spacing-cards);
   }
   .py-1 {
     padding-block: var(--spacing);
@@ -608,9 +601,6 @@
   .py-2\.5 {
     padding-block: calc(var(--spacing) * 2.5);
   }
-  .py-4 {
-    padding-block: calc(var(--spacing) * 4);
-  }
   .py-6 {
     padding-block: calc(var(--spacing) * 6);
   }
@@ -620,11 +610,14 @@
   .py-24 {
     padding-block: calc(var(--spacing) * 24);
   }
-  .pt-4 {
-    padding-top: calc(var(--spacing) * 4);
+  .py-cards {
+    padding-block: var(--spacing-cards);
   }
   .pt-12 {
     padding-top: calc(var(--spacing) * 12);
+  }
+  .pt-cards {
+    padding-top: var(--spacing-cards);
   }
   .pr-12 {
     padding-right: calc(var(--spacing) * 12);
