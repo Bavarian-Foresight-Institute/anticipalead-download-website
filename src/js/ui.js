@@ -417,13 +417,16 @@ export function renderPrintingGuideCards(data, selectedVersion = 'gen') {
     const filteredData = data.filter(item => !item.versions || item.versions.includes(selectedVersion));
 
     const cardsHtml = filteredData.map(item => {
-        // Resolve info text
-        let infoText = '';
-        if (typeof item.info === 'string') {
-            infoText = item.info;
-        } else if (typeof item.info === 'object' && item.info !== null) {
-            infoText = item.info[selectedVersion] || '';
-        }
+        // Helper to resolve string or object based on selected version
+        const resolveField = (field) => {
+            if (typeof field === 'string') return field;
+            if (typeof field === 'object' && field !== null) return field[selectedVersion] || '';
+            return '';
+        };
+
+        const infoText = resolveField(item.info);
+        const amountText = resolveField(item.amount);
+        const formatText = resolveField(item.format);
 
         return `
         <div class="card-static p-0 overflow-hidden flex flex-col">
@@ -433,10 +436,10 @@ export function renderPrintingGuideCards(data, selectedVersion = 'gen') {
             <div class="px-card-padding pt-small ${infoText ? 'pb-xs' : 'pb-card-padding'} flex flex-col gap-xs">
                 <div class="grid grid-cols-2 gap-small text-preset-card text-gray-500 w-full">
                     <span class="flex flex-col sm:flex-row sm:items-center gap-xs">
-                        <span class="font-medium text-gray-700">Amount:</span> ${item.amount}
+                        <span class="font-medium text-gray-700">Amount:</span> ${amountText}
                     </span>
                     <span class="flex flex-col sm:flex-row sm:items-center gap-xs">
-                        <span class="font-medium text-gray-700">Format:</span> ${item.format}
+                        <span class="font-medium text-gray-700">Format:</span> ${formatText}
                     </span>
                 </div>
             </div>

@@ -39,15 +39,15 @@ export const scenarios = [
  */
 export const perspectives = [
     {
-        id: 'gen',
-        title: 'General',
-        description: 'Players keep their role throughout. Ideal for first-time groups or fewer than 7 players.',
+        id: 'corp',
+        title: 'Corporate Version with Perspective Changes',
+        description: 'Players take on new roles during the game helping them to see the issues from different points of view. This version is recommended in most cases.',
         isRecommended: true
     },
     {
-        id: 'corp',
-        title: 'Corporate with changes',
-        description: 'Players switch roles between rounds. Requires exactly 7 players and double-sided printing.',
+        id: 'gen',
+        title: 'General Version without Perspective Changes',
+        description: 'Players retain their own perspective throughout the game.',
         isRecommended: false
     }
 ];
@@ -60,22 +60,17 @@ export const timeHorizons = [
     {
         id: 'all',
         title: 'All Time Horizons',
-        description: 'Play with all available cards for a complete experience.'
-    },
-    {
-        id: 's',
-        title: 'Short-term',
-        description: 'Focus on immediate technological impacts.'
+        description: 'This version contains the most comprehensive selection of technologies, offering the broadest range of strategic challenges.'
     },
     {
         id: 'm',
         title: 'Medium-term',
-        description: 'Explore emerging trends and their adoption.'
+        description: 'This version focuses on technologies that are currently emerging or expected to become prominent in the medium-term future.'
     },
     {
         id: 'l',
         title: 'Long-term',
-        description: 'Analyze distant futures and paradigm shifts.'
+        description: 'This version explores technologies that are expected to have a significant impact on the distant future.'
     }
 ];
 
@@ -105,23 +100,23 @@ export const languages = [
 export const howItWorksSteps = [
     {
         num: '01',
-        title: 'Choose your scenario',
-        description: 'Pick from 8 scenarios spanning AI in HR, healthcare, manufacturing, logistics, and more. Each challenges a different leadership dilemma.'
+        title: 'Choose your configuration',
+        description: 'Configure the game to perfectly fit your needs by selecting a scenario, game version, time horizon and language.'
     },
     {
         num: '02',
         title: 'Download and print',
-        description: 'The assistant bundles exactly the files you need. Technology cards print at A4; canvases at A3.'
+        description: 'The download assistant bundles all the necessary files for your version. Follow the printing guide to print the materials.'
     },
     {
         num: '03',
         title: 'Set up the table',
-        description: 'Arrange materials as shown in the quick start guide. The audio file replaces a human moderator entirely.'
+        description: 'Set up the table with the game materials as shown in the quick start guide.'
     },
     {
         num: '04',
-        title: 'Play and reflect',
-        description: 'Work through Canvas 1, draw technology cards, and discuss on Canvas 2. Repeat rounds, then share results across groups.'
+        title: 'Start playing',
+        description: 'Start playing and experience the future of leadership.'
     }
 ];
 
@@ -132,34 +127,34 @@ export const howItWorksSteps = [
  */
 export const packageContents = [
     {
-        id: 'IconRoleCards',
-        title: 'Role cards',
-        description: 'Ethicist, Executor, Integrator, Analyst'
+        id: 'IconCanvases',
+        title: 'Game canvas',
+        description: 'The game board containing all necessary instructions and space to write down your results'
     },
     {
-        id: 'IconCanvases',
-        title: 'Canvases 1 and 2',
-        description: 'A3 format - 1 copy per group'
+        id: 'IconRoleCards',
+        title: 'Role cards',
+        description: 'Describe the roles of the players and serve as a place to take notes during the game'
+    },
+    {
+        id: 'IconNameTags',
+        title: 'Name tags',
+        description: 'Table standups for each player containing a summary of the scenario'
     },
     {
         id: 'IconTechCards',
         title: 'Technology cards',
-        description: 'Scenario specific - A4 cut outs'
+        description: 'Provide the technological context for your game'
+    },
+    {
+        id: 'IconQuickstart',
+        title: 'Quickstart guide',
+        description: 'An overview of the setup and gameplay loop'
     },
     {
         id: 'IconAudioGuide',
-        title: 'Audio guide',
-        description: 'Replaces an external moderator'
-    },
-    {
-        id: 'IconAudioGuide',
-        title: 'Audio guide',
-        description: 'Replaces an external moderator'
-    },
-    {
-        id: 'IconAudioGuide',
-        title: 'Audio guide',
-        description: 'Replaces an external moderator'
+        title: 'Scenario audio',
+        description: 'An audio file to set the stage for the game'
     }
 ];
 
@@ -168,8 +163,8 @@ export const packageContents = [
  * Purpose: Defines the centralized footer text for all pages.
  */
 export const footerContent = {
-    institutions: 'Technische Hochschule Ingolstadt - Bayerisches Foresight-Institut - ETH Zürich',
-    description: 'AnticipaLead is a research-based serious game for leadership education. Free for educational use.'
+    institutions: 'Bavarian Foresight-Institute - armasuisse - deftech',
+    description: 'AnticipaLead is a research-based serious game for leadership education. AnticipaLead can be used freely in educational and commercial settings, but may not be resold or repackaged without permission from the authors.'
 };
 
 /**
@@ -178,43 +173,57 @@ export const footerContent = {
  */
 export const printingGuideData = [
     {
-        file: 'Role cards',
-        amount: '1 per player',
-        format: 'A4',
-        info: {
-            gen: 'Single-sided.',
-            corp: 'Double-sided printing required for role changes.'
-        }
-    },
-    {
         file: 'Canvas 1',
         amount: '1 per group',
         format: 'A3',
-        info: 'Single-sided. Place in the center of the table.'
     },
     {
         file: 'Canvas 2',
-        amount: '1 per group',
+        amount: '1 per group and round',
         format: 'A3',
-        info: 'Single-sided. Place in the center of the table.'
+        info: 'If you want to play multiple rounds, you will need one copy of Canvas Part 2 per round per group.'
+    },
+    {
+        file: 'Role cards',
+        amount: {
+            gen: '1 copy per player',
+            corp: '1 copy per group'
+        },
+        format: {
+            gen: 'A4',
+            corp: 'A4, double-sided'
+        },
+        info: {
+            corp: 'If you play with less than 7 players, make sure the roles of Ethicist, Executor, Integrator, and Analyst are filled.'
+        }
+    },
+    {
+        file: 'Name tags',
+        amount: {
+            gen: '1 copy per player',
+            corp: '1 copy per group'
+        },
+        format: 'A4',
+        // versions: ['corp'], // Only shows up when "Corporate" tab is active
+        info: 'Fold the paper in half along the long edge. This way the name tags will stand up on the table.'
     },
     {
         file: 'Technology cards',
         amount: '1 set per group',
         format: 'A4',
-        info: 'Cut out along the dashed lines after printing.'
+        info: 'The Technology Cards need to be cut out along the dashed lines before playing the game. If you wish to discuss a specific technology that is not in the cards, you do not need to print the cards.'
     },
-    {
-        file: 'Name tags',
-        amount: '1 per player',
-        format: 'A4 / Labels',
-    },
-    {
-        file: 'Corporate Specific File',
-        amount: '1 per group',
-        format: 'A4',
-        versions: ['corp'], // Only shows up when "Corporate" tab is active
-        info: 'Some text here.'
-    }
 
+    {
+        file: 'Quickstart Guide',
+        amount: '-',
+        format: '-',
+        info: 'The Quickstart Guide is not needed during the game itself, all steps are detailed on canvas 1 and 2. It can be used to get a first overview of the game and its setup.'
+    },
+    {
+        file: 'Scenario Audio',
+        amount: '-',
+        format: 'Audio Playback Device',
+        info: 'The scenario audio is used to immerse the players into the game, ensure that you have an audio playback device ready to play the audio file during the game.'
+    }
 ];

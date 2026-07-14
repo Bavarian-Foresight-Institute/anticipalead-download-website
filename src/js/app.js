@@ -7,7 +7,7 @@
 
 import { getState, setScenario, setPerspective, setTimeHorizon, setLanguage, subscribe, resetState, initState } from './core/state.js';
 import { renderFooterContent, renderPackageContentCard, renderHowItWorksStep, renderScenarioCard, renderPerspectiveCard, renderTimeHorizonCard, renderLanguageCard, renderSummaryRow, renderStepper, NavButton, NavLink, PrimaryButton, SecondaryButton, DarkButton, SolidButton, OutlineButton, TextIconButton, TextIconLink, renderPrintingGuideCards } from './ui.js';
-import { IconRoleCards, IconCanvases, IconTechCards, IconAudioGuide, IconDownloadLg, IconVideoLg, IconArrowLeftSm, IconArrowRightSm, IconEditSm, IconArrowLeftMd, IconDownloadSm, IconVideoSm, IconSpinner, IconCheckmarkDark, IconPlusSm, IconPrinterSm, IconInfoSm, IconUsersSm, IconClockSm, IconBriefcaseSm, IconTranslateSm } from './ui/icons.js';
+import { IconRoleCards, IconCanvases, IconTechCards, IconAudioGuide, IconNameTags, IconQuickstart, IconDownloadLg, IconVideoLg, IconArrowLeftSm, IconArrowRightSm, IconEditSm, IconArrowLeftMd, IconDownloadSm, IconVideoSm, IconSpinner, IconCheckmarkDark, IconPlusSm, IconPrinterSm, IconInfoSm, IconUsersSm, IconClockSm, IconBriefcaseSm, IconTranslateSm } from './ui/icons.js';
 import { footerContent, packageContents, howItWorksSteps, scenarios, perspectives, timeHorizons, languages, printingGuideData } from './core/content.js';
 import { generateAndDownloadZip, getEstimatedZipSize, getDownloadFilename } from './core/download.js';
 
@@ -440,7 +440,9 @@ function init() {
                 IconRoleCards,
                 IconCanvases,
                 IconTechCards,
-                IconAudioGuide
+                IconAudioGuide,
+                IconNameTags,
+                IconQuickstart
             };
             DOM.packageContentsContainer.innerHTML = packageContents.map(card =>
                 renderPackageContentCard({
@@ -620,8 +622,8 @@ function init() {
                 if (DOM.printingGuideTabsContainer.children.length === 0) {
                     DOM.printingGuideTabsContainer.innerHTML = `
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-small w-full">
-                            ${renderLanguageCard({ id: 'corp', title: 'Corporate with changes', isSelected: printingGuideVersion === 'corp' })}
-                            ${renderLanguageCard({ id: 'gen', title: 'Generic', isSelected: printingGuideVersion === 'gen' })}
+                            ${renderLanguageCard({ id: 'corp', title: 'Corporate with perspective changes', isSelected: printingGuideVersion === 'corp' })}
+                            ${renderLanguageCard({ id: 'gen', title: 'Generic without perspective changes', isSelected: printingGuideVersion === 'gen' })}
                         </div>
                     `;
                 } else {
