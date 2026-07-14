@@ -305,7 +305,7 @@ function bindEvents() {
                             DOM.downloadInfo.innerHTML = `<span class="text-brand-red text-preset-card">Warning: ${missingFiles.length} of ${filesCount} files are missing on the server!</span>`;
                         } else {
                             const mb = (totalBytes / (1024 * 1024)).toFixed(1);
-                            DOM.downloadInfo.innerHTML = `${filesCount} files - ${mb} MB - Scenario ${selectedScenario.id} - ${selectedPerspective.title} - ${selectedTimeHorizon.title} - ${selectedLanguage.title}`;
+                            DOM.downloadInfo.innerHTML = `${filesCount} files - ${mb} MB <br> ${selectedLanguage.title} - ${selectedPerspective.title} - Scenario ${selectedScenario.id} - ${selectedTimeHorizon.title}`;
                         }
                     }
                 });
@@ -613,7 +613,7 @@ function init() {
         const faqContainer = document.getElementById('faq-cards-container');
         if (faqContainer) {
             faqContainer.innerHTML = renderFAQCards(faqData);
-            
+
             // FAQ toggling delegation
             document.addEventListener('click', (e) => {
                 const toggleBtn = e.target.closest('.faq-toggle-btn');
@@ -621,7 +621,7 @@ function init() {
                     const index = toggleBtn.getAttribute('data-index');
                     const answerDiv = document.getElementById(`faq-answer-${index}`);
                     const iconDiv = toggleBtn.querySelector('.faq-icon');
-                    
+
                     if (answerDiv && iconDiv) {
                         if (answerDiv.classList.contains('faq-answer-expanded')) {
                             answerDiv.classList.remove('faq-answer-expanded');
