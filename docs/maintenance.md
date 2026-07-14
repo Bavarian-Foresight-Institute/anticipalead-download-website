@@ -11,11 +11,11 @@ This guide provides instructions for maintaining and updating the AnticipaLead d
 
 ## Updating Content
 
-The static UI content (scenarios, perspectives, time horizons) is centralized in `src/core/content.js`. To add or modify the available options, update the respective objects in this file.
+The static UI content (scenarios, perspectives, time horizons) is centralized in `src/js/core/content.js`. To add or modify the available options, update the respective objects in this file.
 
 ## Updating File Mappings
 
-The mapping between user choices and download files is defined in `src/core/config.json`. If new file combinations are introduced or file naming conventions change, update the string interpolation templates in this file.
+The mapping between user choices and download files is defined in `src/js/core/config.json`. If new file combinations are introduced or file naming conventions change, update the string interpolation templates in this file.
 
 ## CSS Changes
 

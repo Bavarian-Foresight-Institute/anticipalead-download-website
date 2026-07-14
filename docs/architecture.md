@@ -23,8 +23,10 @@ anticipalead-download-website/
 │   ├── maintenance.md
 │   ├── milestones.md
 │   └── setup.md
+├── about.html
 ├── index.html
 ├── download.html
+├── printing-guide.html
 ├── package.json
 ├── README.md
 └── src/
@@ -38,6 +40,7 @@ anticipalead-download-website/
         └── core/
             ├── config.json
             ├── content.js
+            ├── download.js
             ├── engine.js
             └── state.js
 ```
@@ -69,7 +72,6 @@ The application maintains a centralized state object representing the user's int
     *   `gen` (General perspective, without specific corporate changes)
 *   **Scenario:** The specific game scenario. Supported codes are `s1` through `s8`. This design is fully scalable to allow future scenario additions without changing the underlying architecture.
 *   **Time Horizon:** The selected future timeline for the technology cards. Supported codes are:
-    *   `s` (Short-term)
     *   `m` (Medium-term)
     *   `l` (Long-term)
     *   `all` (All time horizons)
