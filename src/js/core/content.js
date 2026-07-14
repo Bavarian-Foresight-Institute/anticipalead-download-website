@@ -239,14 +239,38 @@ export const faqData = [
     },
     {
         question: 'How long does a game take?',
-        answer: 'A standard session takes between 60 to 120 minutes, depending on the depth of the discussion.'
+        answer: 'A standard session with 1 or two rounds takes between 60 to 120 minutes, depending on the depth of the discussion. Each additional round adds about 30-45 minutes to the session.'
     },
     {
         question: 'Do we need a moderator?',
         answer: 'No, AnticipaLead is designed to be played without a moderator. The game materials, quickstart guide, and audio scenarios guide you through the process.'
     },
     {
+        question: 'How many players can play AnticipaLead?',
+        answer: 'AnticipaLead is designed for teams of 4-7 players. If you are 8 or more, we recommend splitting your group into multiple groups and playing the game in parallel.'
+    },
+    {
+        question: 'Is AnticipaLead free to use?',
+        answer: 'Yes, AnticipaLead can be used freely in educational and commercial settings, but may not be resold or repackaged without permission from the authors.'
+    },
+    {
+        question: 'Who is AnticipaLead for?',
+        answer: 'AnticipaLead is designed for managers or leadership personnel from all backgrounds interested in exploring the future of leadership.'
+    },
+    {
+        question: 'Why should I play AnticipaLead?',
+        answer: 'AnticipaLead is a serious game that allows you to experience the future of leadership decisions. It is a fun and interactive way to learn about the potential impacts of uncertainty and new technologies on leadership and to develop your decision-making skills.'
+    },
+    {
+        question: 'Why should I play AnticipaLead as a manager? Can\'t I just let my team play and get the insight from them?',
+        answer: 'While you can gain valuable insights from your team\'s experience, experiencing the impacts of uncertainty and new technologies during the game yourself is the most effective way to develop the necessary skills to deal with similar situations in your everyday leadership.'
+    },
+    {
+        question: 'Can I use AnticipaLead to explore my own scenarios or technologies?',
+        answer: 'Yes, AnticipaLead is designed to be adaptable to your own needs. Feel free to adjust the game materials, scenarios and technologies to your specific context.'
+    },
+    {
         question: 'I have a different question',
-        answer: 'Feel free to reach out to us directly! You can contact us via email at <a href="mailto:hello@anticipalead.com" class="text-brand-red font-medium hover:underline">hello@anticipalead.com</a> and we will be happy to assist you.'
+        answer: 'Feel free to reach out to us directly! You can contact us via email at <a href="mailto:foresight@thi.de" class="text-brand-red font-medium hover:underline">foresight@thi.de</a> and we will be happy to assist you.'
     }
 ];
