@@ -9,12 +9,10 @@ Detailed documentation can be found in the `docs/` directory:
 - [Architecture](docs/architecture.md): System design, core modules, and file mapping logic.
 - [Setup](docs/setup.md): Local development and build instructions.
 - [Maintenance](docs/maintenance.md): Guide for updating content and file configurations.
-- [Coding Standards](docs/coding-standards.md): Project conventions and best practices.
-- [Milestones](docs/milestones.md): Project phases and progress tracking.
 
 ## Tech Stack
 
-- HTML5 / Vanilla JavaScript (No heavy frameworks)
+- HTML5 / Vanilla JavaScript
 - Tailwind CSS (v4+)
 - JSZip (for client-side file bundling)
 

@@ -48,5 +48,5 @@ Open your browser to the URL provided by `serve` (usually `http://localhost:3000
 To build the CSS for production:
 
 ```bash
-npm run build:css
+npx @tailwindcss/cli -i ./src/css/input.css -o ./assets/output.css --minify
 ```
