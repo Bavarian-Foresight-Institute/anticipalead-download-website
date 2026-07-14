@@ -5,7 +5,7 @@
  * dependencies: None
  */
 
-import { IconCheckSm } from './ui/icons.js';
+import { IconCheckSm, IconPlusSm, IconMinusSm } from './ui/icons.js';
 
 /**
  * Purpose: Render the HTML template for a scenario selection card.
@@ -459,3 +459,38 @@ export function renderPrintingGuideCards(data, selectedVersion = 'gen') {
     `;
 }
 
+/**
+ * Purpose: Render the FAQ cards component.
+ * @param {Array<{question: string, answer: string}>} data - FAQ data.
+ * @returns {string} HTML string for the FAQ cards.
+ */
+export function renderFAQCards(data) {
+    const cardsHtml = data.map((item, index) => {
+        return `
+        <div class="card-static p-0 overflow-hidden flex flex-col text-left group">
+            <button type="button" class="faq-toggle-btn px-card-padding pt-card-padding pb-small w-full flex items-start justify-between cursor-pointer focus:outline-none hover:bg-gray-50 transition-colors" data-index="${index}">
+                <div class="flex-1 pr-4 text-left">
+                    <h3 class="text-preset-sub-heading text-brand-dark">${item.question}</h3>
+                </div>
+                <div class="faq-icon text-gray-400 mt-1" data-index="${index}">
+                    ${IconPlusSm}
+                </div>
+            </button>
+            
+            <div id="faq-answer-${index}" class="faq-answer">
+                <div class="faq-answer-inner">
+                    <div class="px-card-padding pt-small pb-card-padding border-t border-gray-200">
+                        <p class="text-preset-card text-gray-500">${item.answer}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+    }).join('');
+
+    return `
+        <div class="flex flex-col gap-small w-full" id="faq-accordion">
+            ${cardsHtml}
+        </div>
+    `;
+}

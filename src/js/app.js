@@ -6,9 +6,9 @@
  */
 
 import { getState, setScenario, setPerspective, setTimeHorizon, setLanguage, subscribe, resetState, initState } from './core/state.js';
-import { renderFooterContent, renderPackageContentCard, renderHowItWorksStep, renderScenarioCard, renderPerspectiveCard, renderTimeHorizonCard, renderLanguageCard, renderSummaryRow, renderStepper, NavButton, NavLink, PrimaryButton, SecondaryButton, DarkButton, SolidButton, OutlineButton, TextIconButton, TextIconLink, renderPrintingGuideCards } from './ui.js';
-import { IconRoleCards, IconCanvases, IconTechCards, IconAudioGuide, IconNameTags, IconQuickstart, IconDownloadLg, IconVideoLg, IconArrowLeftSm, IconArrowRightSm, IconEditSm, IconArrowLeftMd, IconDownloadSm, IconVideoSm, IconSpinner, IconCheckmarkDark, IconPlusSm, IconPrinterSm, IconInfoSm, IconUsersSm, IconClockSm, IconBriefcaseSm, IconTranslateSm } from './ui/icons.js';
-import { footerContent, packageContents, howItWorksSteps, scenarios, perspectives, timeHorizons, languages, printingGuideData } from './core/content.js';
+import { renderFooterContent, renderPackageContentCard, renderHowItWorksStep, renderScenarioCard, renderPerspectiveCard, renderTimeHorizonCard, renderLanguageCard, renderSummaryRow, renderStepper, NavButton, NavLink, PrimaryButton, SecondaryButton, DarkButton, SolidButton, OutlineButton, TextIconButton, TextIconLink, renderPrintingGuideCards, renderFAQCards } from './ui.js';
+import { IconRoleCards, IconCanvases, IconTechCards, IconAudioGuide, IconNameTags, IconQuickstart, IconDownloadLg, IconVideoLg, IconArrowLeftSm, IconArrowRightSm, IconEditSm, IconArrowLeftMd, IconDownloadSm, IconVideoSm, IconSpinner, IconCheckmarkDark, IconPlusSm, IconMinusSm, IconPrinterSm, IconInfoSm, IconUsersSm, IconClockSm, IconBriefcaseSm, IconTranslateSm } from './ui/icons.js';
+import { footerContent, packageContents, howItWorksSteps, scenarios, perspectives, timeHorizons, languages, printingGuideData, faqData } from './core/content.js';
 import { generateAndDownloadZip, getEstimatedZipSize, getDownloadFilename } from './core/download.js';
 
 // DOM Elements Cache
@@ -392,11 +392,13 @@ function init() {
     const isIndexPage = document.getElementById('page-index') !== null;
     const isPrintingGuidePage = document.getElementById('page-printing-guide') !== null;
     const isAboutPage = document.getElementById('page-about') !== null;
+    const isFAQPage = document.getElementById('page-faq') !== null;
 
     // Inject common buttons
     const navLinksHtml = [
         NavLink({ id: 'nav-about', text: 'About', href: './about.html' }),
-        NavLink({ id: 'nav-printing-guide', text: 'Printing guide', href: './printing-guide.html' })
+        NavLink({ id: 'nav-printing-guide', text: 'Printing guide', href: './printing-guide.html' }),
+        NavLink({ id: 'nav-faq', text: 'FAQ', href: './faq.html' })
     ].join('');
 
     if (DOM.navLinksContainer) DOM.navLinksContainer.innerHTML = navLinksHtml;
@@ -596,13 +598,40 @@ function init() {
         renderUI(getState());
     }
 
-    if (isPrintingGuidePage || isAboutPage) {
+    if (isPrintingGuidePage || isAboutPage || isFAQPage) {
         if (DOM.navBackContainer) {
             DOM.navBackContainer.innerHTML = TextIconLink({
                 id: 'nav-back-btn',
                 text: 'Back to overview',
                 href: './index.html',
                 icon: IconArrowLeftMd
+            });
+        }
+    }
+
+    if (isFAQPage) {
+        const faqContainer = document.getElementById('faq-cards-container');
+        if (faqContainer) {
+            faqContainer.innerHTML = renderFAQCards(faqData);
+            
+            // FAQ toggling delegation
+            document.addEventListener('click', (e) => {
+                const toggleBtn = e.target.closest('.faq-toggle-btn');
+                if (toggleBtn) {
+                    const index = toggleBtn.getAttribute('data-index');
+                    const answerDiv = document.getElementById(`faq-answer-${index}`);
+                    const iconDiv = toggleBtn.querySelector('.faq-icon');
+                    
+                    if (answerDiv && iconDiv) {
+                        if (answerDiv.classList.contains('faq-answer-expanded')) {
+                            answerDiv.classList.remove('faq-answer-expanded');
+                            iconDiv.innerHTML = IconPlusSm;
+                        } else {
+                            answerDiv.classList.add('faq-answer-expanded');
+                            iconDiv.innerHTML = IconMinusSm;
+                        }
+                    }
+                }
             });
         }
     }

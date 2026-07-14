@@ -227,3 +227,26 @@ export const printingGuideData = [
         info: 'The scenario audio is used to immerse the players into the game, ensure that you have an audio playback device ready to play the audio file during the game.'
     }
 ];
+
+/**
+ * @type {Array<{question: string, answer: string}>}
+ * Purpose: Defines the FAQ data.
+ */
+export const faqData = [
+    {
+        question: 'What is AnticipaLead?',
+        answer: 'AnticipaLead is a scenario-based foresight serious game developed for leadership training. It helps teams of 4-7 players experience the future of leadership decisions in AI transformations.'
+    },
+    {
+        question: 'How long does a game take?',
+        answer: 'A standard session takes between 60 to 120 minutes, depending on the depth of the discussion.'
+    },
+    {
+        question: 'Do we need a moderator?',
+        answer: 'No, AnticipaLead is designed to be played without a moderator. The game materials, quickstart guide, and audio scenarios guide you through the process.'
+    },
+    {
+        question: 'I have a different question',
+        answer: 'Feel free to reach out to us directly! You can contact us via email at <a href="mailto:hello@anticipalead.com" class="text-brand-red font-medium hover:underline">hello@anticipalead.com</a> and we will be happy to assist you.'
+    }
+];
