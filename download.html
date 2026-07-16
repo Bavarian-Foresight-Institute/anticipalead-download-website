@@ -57,34 +57,56 @@ dependencies: styles, src/js/app.js
                     <span>Step 1 of 3</span>
                 </p>
                 <h1 class="text-preset-main-heading mb-small">Configure your package</h1>
-                <p class="text-gray-600 text-preset-normal mb-medium">Choose a language, game version, scenario, and
-                    time horizon.<br>
-                    The download assistant bundles and downloads exactly the files you need.</p>
+                <p class="text-gray-600 text-preset-normal mb-medium">Choose a language and game version you want to
+                    play.
+                    <br>The download assistant will bundle and download exactly the files you need.
+                </p>
 
                 <!-- Language Selection -->
                 <div class="mb-medium">
-                    <h2 class="text-gray-400 text-preset-highlight-category mb-small">Language</h2>
+                    <h2 class="text-gray-400 text-preset-highlight-category mb-small">Select the language for your game
+                        files.</h2>
                     <div id="language-grid" class="flex flex-col sm:flex-row gap-small"></div>
                 </div>
 
-                <!-- Perspective Selection -->
+                <!-- Version / Mode Selection -->
                 <div class="mb-medium">
-                    <h2 class="text-gray-400 text-preset-highlight-category mb-small">Perspective</h2>
-                    <div id="perspective-grid" class="space-y-4">
-                    </div>
+                    <h2 class="text-gray-400 text-preset-highlight-category mb-small">Select between two preconfigured
+                        versions or adapt the game exactly to your needs.</h2>
+                    <div id="mode-grid" class="grid grid-cols-1 lg:grid-cols-3 gap-small"></div>
                 </div>
 
-                <!-- Scenario Selection -->
-                <div class="mb-medium">
-                    <h2 class="text-gray-400 text-preset-highlight-category mb-small">Scenario</h2>
-                    <div id="scenario-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-small">
-                    </div>
-                </div>
+                <!-- Granular Custom Options (Perspective, Scenario, Time Horizon) -->
+                <div id="custom-options-container" class="custom-options-wrapper">
+                    <div class="custom-options-inner">
+                        <div class="space-y-medium pt-small mb-medium">
+                            <!-- Perspective Selection -->
+                            <div>
+                                <h2 class="text-gray-400 text-preset-highlight-category mb-small">Select if you want to
+                                    play the version with or without perspective changes.</h2>
+                                <div id="perspective-grid" class="space-y-4">
+                                </div>
+                            </div>
 
-                <!-- Time Horizon Selection -->
-                <div class="mb-medium">
-                    <h2 class="text-gray-400 text-preset-highlight-category mb-small">Time Horizon</h2>
-                    <div id="time-horizon-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-small">
+                            <!-- Scenario Selection -->
+                            <div>
+                                <h2 class="text-gray-400 text-preset-highlight-category mb-small">Select a future
+                                    scenario, that sets the overall stage and societal context for your discussion.</h2>
+                                <div id="scenario-grid"
+                                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-small">
+                                </div>
+                            </div>
+
+                            <!-- Time Horizon Selection -->
+                            <div>
+                                <h2 class="text-gray-400 text-preset-highlight-category mb-small">Select the timescale
+                                    for the technology cards you want to use or decide to use your own cards instead.
+                                </h2>
+                                <div id="time-horizon-grid"
+                                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-small">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

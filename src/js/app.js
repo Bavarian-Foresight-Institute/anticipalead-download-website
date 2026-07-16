@@ -5,10 +5,10 @@
  * dependencies: src/js/core/state.js, src/js/core/engine.js, src/js/ui.js
  */
 
-import { getState, setScenario, setPerspective, setTimeHorizon, setLanguage, subscribe, resetState, initState } from './core/state.js';
-import { renderFooterContent, renderPackageContentCard, renderHowItWorksStep, renderScenarioCard, renderPerspectiveCard, renderTimeHorizonCard, renderLanguageCard, renderSummaryRow, renderStepper, NavButton, NavLink, PrimaryButton, SecondaryButton, DarkButton, SolidButton, OutlineButton, TextIconButton, TextIconLink, renderPrintingGuideCards, renderFAQCards } from './ui.js';
+import { getState, setScenario, setPerspective, setTimeHorizon, setLanguage, setMode, subscribe, resetState, initState } from './core/state.js';
+import { renderFooterContent, renderPackageContentCard, renderHowItWorksStep, renderScenarioCard, renderPerspectiveCard, renderTimeHorizonCard, renderLanguageCard, renderModeCard, renderSummaryRow, renderStepper, NavButton, NavLink, PrimaryButton, SecondaryButton, DarkButton, SolidButton, OutlineButton, TextIconButton, TextIconLink, renderPrintingGuideCards, renderFAQCards } from './ui.js';
 import { IconRoleCards, IconCanvases, IconTechCards, IconAudioGuide, IconNameTags, IconQuickstart, IconDownloadLg, IconVideoLg, IconArrowLeftSm, IconArrowRightSm, IconEditSm, IconArrowLeftMd, IconDownloadSm, IconVideoSm, IconSpinner, IconCheckmarkDark, IconPlusSm, IconMinusSm, IconPrinterSm, IconInfoSm, IconUsersSm, IconClockSm, IconBriefcaseSm, IconTranslateSm } from './ui/icons.js';
-import { footerContent, packageContents, howItWorksSteps, scenarios, perspectives, timeHorizons, languages, printingGuideData, faqData } from './core/content.js';
+import { footerContent, packageContents, howItWorksSteps, scenarios, perspectives, timeHorizons, languages, presetModes, printingGuideData, faqData } from './core/content.js';
 import { generateAndDownloadZip, getEstimatedZipSize, getDownloadFilename } from './core/download.js';
 
 // DOM Elements Cache
@@ -32,6 +32,8 @@ function cacheDOM() {
     DOM.perspectiveGrid = document.getElementById('perspective-grid');
     DOM.timeHorizonGrid = document.getElementById('time-horizon-grid');
     DOM.languageGrid = document.getElementById('language-grid');
+    DOM.modeGrid = document.getElementById('mode-grid');
+    DOM.customOptionsContainer = document.getElementById('custom-options-container');
     DOM.summaryTableBody = document.getElementById('summary-table-body');
     DOM.stepperContainer = document.getElementById('stepper-container');
 
@@ -207,6 +209,28 @@ function renderUI(state) {
         }
     }
 
+    // Render Modes
+    if (DOM.modeGrid) {
+        if (DOM.modeGrid.children.length === 0) {
+            DOM.modeGrid.innerHTML = presetModes.map(m =>
+                renderModeCard({ ...m, isSelected: state.mode === m.id })
+            ).join('');
+        } else {
+            updateGridSelection(DOM.modeGrid, state.mode, 'mode');
+        }
+    }
+
+    // Toggle Custom Options Container Visibility
+    if (DOM.customOptionsContainer) {
+        const selectedMode = presetModes.find(m => m.id === state.mode);
+        const isCustom = selectedMode?.isCustom || state.mode === 'custom';
+        if (isCustom) {
+            DOM.customOptionsContainer.classList.add('custom-options-expanded');
+        } else {
+            DOM.customOptionsContainer.classList.remove('custom-options-expanded');
+        }
+    }
+
     // Update Printing Guide Button href
     const btnPrintingGuide = document.getElementById('btn-printing-guide');
     if (btnPrintingGuide) {
@@ -272,6 +296,17 @@ function bindEvents() {
         });
     }
 
+    // Mode selection delegation
+    if (DOM.modeGrid) {
+        DOM.modeGrid.addEventListener('mousedown', (e) => {
+            const card = e.target.closest('[data-mode]');
+            if (card) {
+                const modeId = card.getAttribute('data-mode');
+                setMode(modeId);
+            }
+        });
+    }
+
     // Continue to Review button
     if (DOM.btnContinue) {
         DOM.btnContinue.addEventListener('mousedown', () => {
@@ -282,15 +317,24 @@ function bindEvents() {
             const selectedPerspective = perspectives.find(p => p.id === state.perspective);
             const selectedTimeHorizon = timeHorizons.find(t => t.id === state.timeHorizon);
             const selectedLanguage = languages.find(l => l.id === state.language) || { title: state.language };
+            const selectedMode = presetModes.find(m => m.id === state.mode);
+            const isCustomMode = selectedMode?.isCustom || state.mode === 'custom';
 
             // Populate Summary Table
             if (DOM.summaryTableBody) {
-                DOM.summaryTableBody.innerHTML = [
-                    renderSummaryRow('Language', selectedLanguage.title),
-                    renderSummaryRow('Perspective', selectedPerspective.title),
-                    renderSummaryRow('Scenario', `${selectedScenario.id} - ${selectedScenario.title}`),
-                    renderSummaryRow('Time Horizon', selectedTimeHorizon.title)
-                ].join('');
+                if (!isCustomMode && selectedMode) {
+                    DOM.summaryTableBody.innerHTML = [
+                        renderSummaryRow('Language', selectedLanguage.title),
+                        renderSummaryRow('Version', selectedMode.title)
+                    ].join('');
+                } else {
+                    DOM.summaryTableBody.innerHTML = [
+                        renderSummaryRow('Language', selectedLanguage.title),
+                        renderSummaryRow('Perspective', selectedPerspective?.title || state.perspective),
+                        renderSummaryRow('Scenario', selectedScenario ? `${selectedScenario.id} - ${selectedScenario.title}` : state.scenario),
+                        renderSummaryRow('Time Horizon', selectedTimeHorizon?.title || state.timeHorizon)
+                    ].join('');
+                }
             }
 
             if (DOM.downloadFilename && DOM.downloadInfo) {
@@ -305,7 +349,11 @@ function bindEvents() {
                             DOM.downloadInfo.innerHTML = `<span class="text-brand-red text-preset-card">Warning: ${missingFiles.length} of ${filesCount} files are missing on the server!</span>`;
                         } else {
                             const mb = (totalBytes / (1024 * 1024)).toFixed(1);
-                            DOM.downloadInfo.innerHTML = `${filesCount} files - ${mb} MB <br> ${selectedLanguage.title} - ${selectedPerspective.title} - Scenario ${selectedScenario.id} - ${selectedTimeHorizon.title}`;
+                            if (!isCustomMode && selectedMode) {
+                                DOM.downloadInfo.innerHTML = `${filesCount} files - ${mb} MB <br> ${selectedLanguage.title} - ${selectedMode.title}`;
+                            } else {
+                                DOM.downloadInfo.innerHTML = `${filesCount} files - ${mb} MB <br> ${selectedLanguage.title} - ${selectedPerspective?.title || state.perspective} - Scenario ${selectedScenario?.id || state.scenario} - ${selectedTimeHorizon?.title || state.timeHorizon}`;
+                            }
                         }
                     }
                 });
@@ -491,13 +539,14 @@ function init() {
     }
 
     if (isDownloadPage) {
-        // Derive initial defaults from content.js
-        const defaultPerspective = perspectives.find(p => p.isRecommended)?.id || perspectives[0].id;
-        const defaultTimeHorizon = timeHorizons[0].id;
+        const defaultMode = presetModes[0];
+        const defaultPerspective = defaultMode.perspective || perspectives.find(p => p.isRecommended)?.id || perspectives[0].id;
+        const defaultTimeHorizon = defaultMode.timeHorizon || timeHorizons[0].id;
         const defaultLanguage = languages[0].id;
-        const defaultScenario = scenarios[0].id;
+        const defaultScenario = defaultMode.scenario || scenarios[0].id;
 
         initState({
+            mode: defaultMode.id,
             scenario: defaultScenario,
             perspective: defaultPerspective,
             timeHorizon: defaultTimeHorizon,

@@ -5,7 +5,7 @@
  * dependencies: src/js/core/content.js
  */
 
-import { scenarios, perspectives, timeHorizons, languages } from './content.js';
+import { scenarios, perspectives, timeHorizons, languages, presetModes } from './content.js';
 
 /**
  * @type {Object}
@@ -13,6 +13,7 @@ import { scenarios, perspectives, timeHorizons, languages } from './content.js';
  * Logic reason: Ensures that there is always a valid state to revert to or initialize from.
  */
 let defaultState = {
+    mode: null,
     scenario: null,
     perspective: null,
     timeHorizon: null,
@@ -54,6 +55,7 @@ export function getState() {
 export function setScenario(id) {
     if (scenarios.some(s => s.id === id)) {
         state.scenario = id;
+        if (state.mode !== 'custom') state.mode = 'custom';
         notifyListeners();
     } else {
         console.warn(`Invalid scenario ID: ${id}`);
@@ -69,6 +71,7 @@ export function setScenario(id) {
 export function setPerspective(perspective) {
     if (perspectives.some(p => p.id === perspective)) {
         state.perspective = perspective;
+        if (state.mode !== 'custom') state.mode = 'custom';
         notifyListeners();
     } else {
         console.warn(`Invalid perspective ID: ${perspective}`);
@@ -84,6 +87,7 @@ export function setPerspective(perspective) {
 export function setTimeHorizon(th) {
     if (timeHorizons.some(t => t.id === th)) {
         state.timeHorizon = th;
+        if (state.mode !== 'custom') state.mode = 'custom';
         notifyListeners();
     } else {
         console.warn(`Invalid time horizon ID: ${th}`);
@@ -102,6 +106,26 @@ export function setLanguage(lang) {
         notifyListeners();
     } else {
         console.warn(`Invalid language ID: ${lang}`);
+    }
+}
+
+/**
+ * Purpose: Update the selected package configuration mode in the state.
+ * @param {string} id - The ID of the chosen mode.
+ * @returns {void}
+ */
+export function setMode(id) {
+    const mode = presetModes.find(m => m.id === id);
+    if (mode) {
+        state.mode = id;
+        if (!mode.isCustom) {
+            if (mode.scenario) state.scenario = mode.scenario;
+            if (mode.perspective) state.perspective = mode.perspective;
+            if (mode.timeHorizon) state.timeHorizon = mode.timeHorizon;
+        }
+        notifyListeners();
+    } else {
+        console.warn(`Invalid mode ID: ${id}`);
     }
 }
 

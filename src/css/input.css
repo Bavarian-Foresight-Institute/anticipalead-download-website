@@ -181,7 +181,7 @@
 }
 
 @utility text-preset-highlight-category {
-  @apply text-xs font-bold tracking-wider uppercase;
+  @apply text-xs font-bold tracking-wider;
   /* Grid category titles */
 }
 
@@ -243,6 +243,26 @@
 }
 
 @utility faq-answer-inner {
+  overflow: hidden;
+  /* Required for grid-based height animation */
+}
+
+/* --- Custom Options Smooth Accordion --- */
+@utility custom-options-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 250ms cubic-bezier(0.4, 0, 0.2, 1), opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  /* Base closed state */
+}
+
+@utility custom-options-expanded {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  /* Expanded state */
+}
+
+@utility custom-options-inner {
   overflow: hidden;
   /* Required for grid-based height animation */
 }

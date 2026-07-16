@@ -71,6 +71,11 @@ export const timeHorizons = [
         id: 'l',
         title: 'Long-term',
         description: 'This version explores technologies that are expected to have a significant impact on the distant future.'
+    },
+    {
+        id: 'own',
+        title: 'Own Technologies',
+        description: 'Create and use your own technology cards in the game.'
     }
 ];
 
@@ -90,6 +95,36 @@ export const languages = [
     {
         id: 'fr',
         title: '🇫🇷 Français'
+    }
+];
+
+/**
+ * @type {Array<{id: string, title: string, description?: string, isCustom?: boolean, perspective?: string, timeHorizon?: string, scenario?: string}>}
+ * Purpose: Defines the package configuration options (presets vs custom mode).
+ * Note: You can easily add new preconfigured versions right here by adding a new object with an id, title, description, and exact parameter combination (perspective, timeHorizon, scenario). The UI and logic will dynamically render and apply any preset defined below!
+ */
+export const presetModes = [
+    {
+        id: 'preset1',
+        title: 'Standard',
+        description: 'Recommended for companies to start the game as quickly as possible.',
+        perspective: 'corp',
+        timeHorizon: 'all',
+        scenario: '1'
+    },
+    {
+        id: 'preset2',
+        title: 'Military',
+        description: 'Recommended for military and government organizations.',
+        perspective: 'gen',
+        timeHorizon: 'all',
+        scenario: '1'
+    },
+    {
+        id: 'custom',
+        title: 'Configure yourself',
+        description: 'Configure the game yourself to optimally fit your needs.',
+        isCustom: true
     }
 ];
 

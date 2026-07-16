@@ -109,6 +109,28 @@ export function renderLanguageCard({ id, title, isSelected = false }) {
 }
 
 /**
+ * Purpose: Render the HTML template for a version/configuration mode card.
+ * @param {string} id - The mode ID (e.g. 'preset-standard').
+ * @param {string} title - The display title.
+ * @param {string} [description] - Optional description text for the preset version.
+ * @param {boolean} [isSelected=false] - Whether this card is currently selected.
+ * @returns {string} The HTML string for the mode card.
+ */
+export function renderModeCard({ id, title, description, isSelected = false }) {
+    const ringClass = isSelected ? 'card-ring-selected' : 'card-ring';
+    const dotClass = isSelected ? 'card-dot-selected' : 'card-dot';
+    const headingClass = isSelected ? 'text-brand-darker' : 'text-gray-400';
+
+    return `
+        <div data-mode="${id}" class="card-selectable ${ringClass} pt-small pb-5 px-5">
+            <h3 class="${headingClass} text-preset-sub-heading mb-xs pointer-events-none">${title}</h3>
+            ${description ? `<p class="text-gray-500 text-preset-card mb-small pointer-events-none">${description}</p>` : ''}
+            <div class="absolute bottom-5 right-5 w-[16px] h-[16px] rounded-full ${dotClass} pointer-events-none"></div>
+        </div>
+    `;
+}
+
+/**
  * Purpose: Render an HTML table row for the configuration summary.
  * @param {string} label - The label for the summary row.
  * @param {string} value - The value to display.
