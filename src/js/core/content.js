@@ -1,7 +1,7 @@
 /**
  * file: src/js/core/content.js
  * purpose: Centralized static UI content definitions.
- * responsibilities: Export constants for scenarios, perspectives, time horizons, and languages.
+ * responsibilities: Export constants for presets, scenarios, perspectives, time horizons, languages, FAQs, and printing guides.
  * dependencies: None
  */
 
@@ -286,7 +286,7 @@ export const printingGuideData = [
         file: 'Technology cards',
         amount: '1 set per group',
         format: 'A4',
-        info: 'The Technology Cards need to be cut out along the dashed lines before playing the game. If you wish to discuss a specific technology that is not in the cards, you do not need to print the cards.'
+        info: 'The Technology Cards need to be cut out along the dashed lines before playing the game. To play with your own technologies, please refer to the own material guide bundled in your download.'
     },
 
     {
@@ -299,7 +299,7 @@ export const printingGuideData = [
         file: 'Scenario Audio',
         amount: '-',
         format: 'Audio Playback Device',
-        info: 'The scenario audio is used to immerse the players into the game, ensure that you have an audio playback device ready to play the audio file during the game.'
+        info: 'The scenario audio is used to immerse the players into the game, ensure that you have an audio playback device ready to play the audio file during the game. If you play with your own scenario, please refer to the own material guide bundled in your download to create your own immersive audio.'
     }
 ];
 
