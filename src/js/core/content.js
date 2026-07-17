@@ -6,30 +6,60 @@
  */
 
 /**
- * @type {Array<{id: string, title: string, description: string, badgeText: string, badgeColorClass: string}>}
- * Purpose: Defines the available game scenarios.
+ * @type {Array<{id: string, title: string, description?: string, isCustom?: boolean, perspective?: string, timeHorizon?: string, scenario?: string}>}
+ * Purpose: Defines the package configuration options (presets vs custom mode).
+ * Note: You can easily add new preconfigured versions right here by adding a new object with an id, title, description, and exact parameter combination (perspective, timeHorizon, scenario). The UI and logic will dynamically render and apply any preset defined below!
  */
-export const scenarios = [
+
+export const presetModes = [
     {
-        id: '1',
-        title: 'AI in talent management',
-        description: 'AI-driven hiring and performance evaluation. Ethics, accountability, and bias.',
-        badgeText: 'HR & PEOPLE',
-        badgeColorClass: 'bg-red-800'
+        id: 'preset1',
+        title: 'Standard',
+        description: 'Quick start for companies.',
+        perspective: 'corp',
+        timeHorizon: 'all',
+        scenario: '1'
     },
     {
-        id: '2',
-        title: 'Predictive maintenance & workforce',
-        description: 'AI in a factory setting. Job displacement, retraining, and leadership legitimacy.',
-        badgeText: 'MANUFACTURING',
-        badgeColorClass: 'bg-purple-700'
+        id: 'preset2',
+        title: 'Military',
+        description: 'Quick start for military and government organizations.',
+        perspective: 'gen',
+        timeHorizon: 'all',
+        scenario: '1'
     },
     {
-        id: '3',
-        title: 'Autonomous diagnostics',
-        description: 'AI-assisted clinical decisions. Patient trust, data governance, accountability.',
-        badgeText: 'HEALTHCARE',
-        badgeColorClass: 'bg-blue-700'
+        id: 'preset3',
+        title: 'Own Context',
+        description: 'Play the game with your own technologies and scenarios.',
+        perspective: 'corp',
+        timeHorizon: 'own',
+        scenario: '1'
+    },
+    {
+        id: 'custom',
+        title: 'Configure yourself',
+        description: 'Configure the game yourself to optimally fit your needs.',
+        isCustom: true
+    }
+];
+
+/**
+ * @type {Array<{id: string, title: string}>}
+ * Purpose: Defines the supported languages for the game materials.
+ */
+export const languages = [
+    {
+        id: 'de',
+        title: '🇩🇪 Deutsch'
+    },
+    {
+        id: 'en',
+        title: '🇬🇧 English'
+    },
+    {
+        id: 'fr',
+        title: '🇫🇷 Français'
     }
 ];
 
@@ -50,6 +80,63 @@ export const perspectives = [
         description: 'Players retain their own perspective throughout the game.',
         isRecommended: false
     }
+];
+
+/**
+ * @type {Array<{id: string, title: string, description: string, badgeText: string, badgeColorClass: string}>}
+ * Purpose: Defines the available game scenarios.
+ */
+export const scenarios = [
+    {
+        id: '1',
+        title: 'Sustainable Transformation',
+        description: 'A highly ordered society prioritizing stability, resource preservation, and long term ecological balance over rapid growth.',
+        badgeText: 'Generic',
+        badgeColorClass: 'bg-badge-generic'
+    },
+    {
+        id: '2',
+        title: 'The Glass Organization',
+        description: 'A culture of absolute transparency where every corporate decision is public, forcing extreme accountability and rapid adaptability.',
+        badgeText: 'Generic',
+        badgeColorClass: 'bg-badge-generic'
+    },
+    {
+        id: '3',
+        title: 'The Age of Scarce Resources',
+        description: 'A world defined by scarcity, where severe ecological and geopolitical strain enforces strict rationing.',
+        badgeText: 'Generic',
+        badgeColorClass: 'bg-badge-generic'
+    },
+    {
+        id: '4',
+        title: 'Servants of the Machines',
+        description: 'A highly automated reality where relentless machine logic dictates the pace and humans serve merely as flexible gap fillers for algorithms.',
+        badgeText: 'Corporate',
+        badgeColorClass: 'bg-badge-corporate'
+    },
+    {
+        id: '5',
+        title: 'Pressure from Two Fronts',
+        description: 'A volatile environment where leaders are caught between hybrid geopolitical threats abroad and extreme social polarization at home.',
+        badgeText: 'Military',
+        badgeColorClass: 'bg-badge-military'
+    },
+    {
+        id: '6',
+        title: 'Sovereignty on Demand',
+        description: 'A fragmented landscape where strategic national autonomy is highly conditional and entirely dependent on private tech corporations and fragile global alliances.',
+        badgeText: 'Military',
+        badgeColorClass: 'bg-badge-military'
+    },
+    {
+        id: '7',
+        title: 'Use your own Scenario',
+        description: 'Create and use your own scenario in the game.',
+        badgeText: 'Custom',
+        badgeColorClass: 'bg-badge-custom'
+    }
+
 ];
 
 /**
@@ -76,55 +163,6 @@ export const timeHorizons = [
         id: 'own',
         title: 'Own Technologies',
         description: 'Create and use your own technology cards in the game.'
-    }
-];
-
-/**
- * @type {Array<{id: string, title: string}>}
- * Purpose: Defines the supported languages for the game materials.
- */
-export const languages = [
-    {
-        id: 'de',
-        title: '🇩🇪 Deutsch'
-    },
-    {
-        id: 'en',
-        title: '🇬🇧 English'
-    },
-    {
-        id: 'fr',
-        title: '🇫🇷 Français'
-    }
-];
-
-/**
- * @type {Array<{id: string, title: string, description?: string, isCustom?: boolean, perspective?: string, timeHorizon?: string, scenario?: string}>}
- * Purpose: Defines the package configuration options (presets vs custom mode).
- * Note: You can easily add new preconfigured versions right here by adding a new object with an id, title, description, and exact parameter combination (perspective, timeHorizon, scenario). The UI and logic will dynamically render and apply any preset defined below!
- */
-export const presetModes = [
-    {
-        id: 'preset1',
-        title: 'Standard',
-        description: 'Recommended for companies to start the game as quickly as possible.',
-        perspective: 'corp',
-        timeHorizon: 'all',
-        scenario: '1'
-    },
-    {
-        id: 'preset2',
-        title: 'Military',
-        description: 'Recommended for military and government organizations.',
-        perspective: 'gen',
-        timeHorizon: 'all',
-        scenario: '1'
-    },
-    {
-        id: 'custom',
-        title: 'Configure yourself',
-        description: 'Configure the game yourself to optimally fit your needs.',
-        isCustom: true
     }
 ];
 

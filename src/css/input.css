@@ -36,6 +36,14 @@
   /* --- Specific UI Colors --- */
   --color-red-800: #991b1b;
   /* Used for dark red warning/new badges */
+  --color-badge-corporate: #991b1b;
+  /* Darker red for Corporate scenario badge */
+  --color-badge-generic: #6b21a8;
+  /* Darker purple for Generic scenario badge */
+  --color-badge-military: #1e40af;
+  /* Darker blue for Military scenario badge */
+  --color-badge-custom: #166534;
+  /* Darker green for Custom scenario badge */
 
   /* --- Hover States --- */
   --color-brand-red-hover: #D61A21;
@@ -225,6 +233,23 @@
 @utility card-static {
   @apply bg-white p-card-padding rounded border border-gray-100 shadow;
   /* Non-interactive feature cards */
+}
+
+/* --- Scenario Badge Utilities --- */
+@utility bg-badge-corporate {
+  background-color: var(--color-badge-corporate);
+}
+
+@utility bg-badge-generic {
+  background-color: var(--color-badge-generic);
+}
+
+@utility bg-badge-military {
+  background-color: var(--color-badge-military);
+}
+
+@utility bg-badge-custom {
+  background-color: var(--color-badge-custom);
 }
 
 /* --- FAQ Accordion --- */
