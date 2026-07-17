@@ -34,7 +34,7 @@ export const presetModes = [
         description: 'Play the game with your own technologies and scenarios.',
         perspective: 'corp',
         timeHorizon: 'own',
-        scenario: '1'
+        scenario: '7'
     },
     {
         id: 'custom',
@@ -83,7 +83,7 @@ export const perspectives = [
 ];
 
 /**
- * @type {Array<{id: string, title: string, description: string, badgeText: string, badgeColorClass: string}>}
+ * @type {Array<{id: string, title: string, description: string, badgeText: string, badgeColorClass: string, isCustom?: boolean}>}
  * Purpose: Defines the available game scenarios.
  */
 export const scenarios = [
@@ -134,13 +134,14 @@ export const scenarios = [
         title: 'Use your own Scenario',
         description: 'Create and use your own scenario in the game.',
         badgeText: 'Custom',
-        badgeColorClass: 'bg-badge-custom'
+        badgeColorClass: 'bg-badge-custom',
+        isCustom: true
     }
 
 ];
 
 /**
- * @type {Array<{id: string, title: string, description: string}>}
+ * @type {Array<{id: string, title: string, description: string, isCustom?: boolean}>}
  * Purpose: Defines the available time horizons for technology cards.
  */
 export const timeHorizons = [
@@ -162,7 +163,8 @@ export const timeHorizons = [
     {
         id: 'own',
         title: 'Own Technologies',
-        description: 'Create and use your own technology cards in the game.'
+        description: 'Create and use your own technology cards in the game.',
+        isCustom: true
     }
 ];
 

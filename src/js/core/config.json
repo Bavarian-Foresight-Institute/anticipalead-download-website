@@ -34,7 +34,12 @@
         "language",
         "scenario"
       ],
-      "template": "audio/audio_{language}_{scenario}.mp3"
+      "template": "audio/audio_{language}_{scenario}.mp3",
+      "excludeConditions": [
+        {
+          "scenario.isCustom": true
+        }
+      ]
     },
     "techCards": {
       "dependencies": [
@@ -48,6 +53,20 @@
         "language"
       ],
       "template": "guides/quickstart_{language}.pdf"
+    },
+    "customGuide": {
+      "dependencies": [
+        "language"
+      ],
+      "template": "guides/own_material_guide_{language}.pdf",
+      "conditionsAny": [
+        {
+          "scenario.isCustom": true
+        },
+        {
+          "timeHorizon.isCustom": true
+        }
+      ]
     }
   }
 }
