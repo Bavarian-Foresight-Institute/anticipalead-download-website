@@ -96,14 +96,14 @@ export const scenarios = [
     },
     {
         id: '2',
-        title: 'The Glass Organization',
+        title: 'The Transparent Organization',
         description: 'A culture of absolute transparency where every corporate decision is public, forcing extreme accountability and rapid adaptability.',
         badgeText: 'Generic',
         badgeColorClass: 'bg-badge-generic'
     },
     {
         id: '3',
-        title: 'The Age of Scarce Resources',
+        title: 'The Era of Scarce Resources',
         description: 'A world defined by scarcity, where severe ecological and geopolitical strain enforces strict rationing.',
         badgeText: 'Generic',
         badgeColorClass: 'bg-badge-generic'
@@ -146,23 +146,13 @@ export const scenarios = [
  */
 export const timeHorizons = [
     {
-        id: 'all',
-        title: 'All Time Horizons',
-        description: 'This version contains the most comprehensive selection of technologies, offering the broadest range of strategic challenges.'
-    },
-    {
-        id: 'm',
-        title: 'Medium-term',
-        description: 'This version focuses on technologies that are currently emerging or expected to become prominent in the medium-term future.'
-    },
-    {
-        id: 'l',
-        title: 'Long-term',
-        description: 'This version explores technologies that are expected to have a significant impact on the distant future.'
+        id: 'curated',
+        title: 'Curated technologies',
+        description: 'Use our curated set of relevant technologies to get started quickly.'
     },
     {
         id: 'own',
-        title: 'Own Technologies',
+        title: 'Own technologies',
         description: 'Create and use your own technology cards in the game.',
         isCustom: true
     }
@@ -176,7 +166,7 @@ export const howItWorksSteps = [
     {
         num: '01',
         title: 'Choose your configuration',
-        description: 'Configure the game to perfectly fit your needs by selecting a scenario, game version, time horizon and language.'
+        description: 'Configure the game to perfectly fit your needs by selecting a game version, scenario and language.'
     },
     {
         num: '02',
