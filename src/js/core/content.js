@@ -147,12 +147,12 @@ export const scenarios = [
 export const timeHorizons = [
     {
         id: 'curated',
-        title: 'Curated technologies',
+        title: 'Curated Technologies',
         description: 'Use our curated set of relevant technologies to get started quickly.'
     },
     {
         id: 'own',
-        title: 'Own technologies',
+        title: 'Own Technologies',
         description: 'Create and use your own technology cards in the game.',
         isCustom: true
     }
