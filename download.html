@@ -1,0 +1,208 @@
+<!--
+file: download.html
+purpose: Download generation interface.
+responsibilities: Guide the user through the 4-step selection process and trigger the file download.
+dependencies: styles, src/js/app.js
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnticipaLead Download - Configure your package</title>
+    <link rel="stylesheet" href="./assets/output.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/clear-sans@latest/index.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <meta name="description"
+        content="AnticipaLead is a scenario-based foresight serious game developed for leadership training. It is designed for teams of 4-7 and requires no moderator. Download the materials and start playing within the hour.">
+    <meta property="og:title" content="AnticipaLead Download - Configure your package">
+    <meta property="og:description"
+        content="AnticipaLead is a scenario-based foresight serious game developed for leadership training. It is designed for teams of 4-7 and requires no moderator. Download the materials and start playing within the hour.">
+    <meta property="og:image" content="./assets/logos/anticipalead_logo_black.svg">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="./assets/logos/anticipalead_logo_black.svg">
+</head>
+
+<body id="page-download" class="bg-brand-light font-sans text-brand-dark antialiased min-h-screen flex flex-col">
+    <noscript>
+        <div
+            style="background-color: #ED1C24; color: white; text-align: center; padding: 1rem; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; font-family: sans-serif;">
+            Please enable JavaScript to use the AnticipaLead website.
+        </div>
+    </noscript>
+    <!-- Top Navigation -->
+    <nav class="bg-white border-b border-gray-200 py-small w-full">
+        <div class="max-w-3xl mx-auto w-full px-medium flex items-center justify-between">
+            <div class="flex items-center">
+                <span class="text-preset-logo">Anticipa<span class="text-brand-red">Lead</span></span>
+            </div>
+            <div>
+                <div id="nav-back-container" class="contents"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Stepper -->
+    <div id="stepper-container" class="bg-white border-b border-gray-200 py-small w-full"></div>
+
+    <!-- Main Content -->
+    <main class="w-full flex-1">
+        <div class="max-w-3xl mx-auto w-full px-medium">
+
+            <!-- STEP 1: CONFIGURE -->
+            <div id="view-configure" class="py-section">
+                <p class="text-brand-red text-preset-highlight-big mb-small flex items-center gap-small">
+                    <span class="w-4 h-px bg-brand-red"></span>
+                    <span>Step 1 of 3</span>
+                </p>
+                <h1 class="text-preset-main-heading mb-small">Configure your package</h1>
+                <p class="text-gray-600 text-preset-normal mb-medium">
+                    Our game configurator lets you assemble your individual AnticipaLead package.
+                    <br>
+                    Choose from several predefined and scientifically grounded options for the core components of the
+                    game:
+                    <i>Technology cards</i> that serve as a foundation for the discussions,
+                    <i>scenarios</i> that provide the game's context,
+                    and <i>predefined roles</i> designed to offer alternative perspectives on key issues and discussion
+                    points.
+                </p>
+
+                <!-- Language Selection -->
+                <div class="mb-medium">
+                    <h2 class="text-gray-400 text-preset-highlight-category mb-small">Select the language for your game
+                        files.</h2>
+                    <div id="language-grid" class="flex flex-col sm:flex-row gap-small"></div>
+                </div>
+
+                <!-- Version / Mode Selection -->
+                <div class="mb-medium">
+                    <h2 class="text-gray-400 text-preset-highlight-category mb-small">
+                        To get started quickly, choose one of our preconfigured versions or click "configure" to create
+                        your own package.</h2>
+                    <div id="mode-grid" class="grid grid-cols-1 lg:grid-cols-4 gap-small"></div>
+                </div>
+
+                <!-- Granular Custom Options (Perspective, Scenario, Time Horizon) -->
+                <div id="custom-options-container" class="custom-options-wrapper">
+                    <div class="custom-options-inner">
+                        <div class="space-y-medium pt-small mb-medium">
+                            <!-- Perspective Selection -->
+                            <div>
+                                <h2 class="text-gray-400 text-preset-highlight-category mb-small">Select if you want to
+                                    play the version with or without perspective changes.</h2>
+                                <div id="perspective-grid" class="space-y-4">
+                                </div>
+                            </div>
+
+                            <!-- Scenario Selection -->
+                            <div>
+                                <h2 class="text-gray-400 text-preset-highlight-category mb-small">Select a future
+                                    scenario, that sets the overall stage and societal context for your discussion.</h2>
+                                <div id="scenario-grid"
+                                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-small">
+                                </div>
+                            </div>
+
+                            <!-- Time Horizon Selection -->
+                            <div>
+                                <h2 class="text-gray-400 text-preset-highlight-category mb-small">Chose it you want to
+                                    use our curated set or technology cards or it you want to create your own.
+                                </h2>
+                                <div id="tech-cards-grid" class="grid grid-cols-1 md:grid-cols-2 gap-small">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-medium flex justify-end">
+                    <div id="btn-continue-container" class="contents"></div>
+                </div>
+            </div>
+
+            <!-- STEP 2: REVIEW (Temporarily visible) -->
+            <div id="view-review" class="py-section">
+                <p class="text-brand-red text-preset-highlight-big mb-small flex items-center gap-small">
+                    <span class="w-4 h-px bg-brand-red"></span>
+                    <span>Step 2 of 3</span>
+                </p>
+                <h1 class="text-preset-main-heading mb-small">Review your selection</h1>
+                <p class="text-gray-600 text-preset-normal mb-medium">Check the configuration below before we assemble
+                    your package.</p>
+
+                <!-- Configuration Summary -->
+                <div class="card-static overflow-hidden mb-medium p-0">
+                    <div
+                        class="bg-white px-6 py-card-padding border-b border-gray-200 flex justify-between items-center">
+                        <h2 class="text-brand-dark text-preset-sub-heading">Package configuration</h2>
+                        <div id="btn-edit-container" class="contents"></div>
+                    </div>
+                    <div class="p-card-padding">
+                        <table class="w-full">
+                            <tbody id="summary-table-body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="flex justify-between items-center">
+                    <div id="btn-back-container" class="contents"></div>
+                    <div id="btn-confirm-container" class="contents"></div>
+                </div>
+            </div>
+
+            <!-- STEP 3: DOWNLOAD (Temporarily visible) -->
+            <div id="view-download" class="py-section">
+                <p class="text-brand-red text-preset-highlight-big mb-small flex items-center gap-small">
+                    <span class="w-4 h-px bg-brand-red"></span>
+                    <span>Step 3 of 3</span>
+                </p>
+                <h1 class="text-preset-main-heading mb-small">Your download will start automatically.</h1>
+                <p class="text-gray-600 text-preset-normal mb-medium"> To play with a different configuration,
+                    please assemble a new package to prevent mismatches. For exact instructions on the printing process,
+                    please refer to the printing guide.</p>
+
+                <div class="card-static w-full mb-medium text-center">
+                    <h2 id="download-filename" class="text-preset-sub-heading mb-xs break-all">
+                        AnticipaLead_ScenarioA_Standard_DE.zip</h2>
+                    <p id="download-info" class="text-gray-500 text-preset-card mb-card-padding">...</p>
+                    <div id="download-progress-container" class="contents">
+                        <!-- Progress text/spinner injected here -->
+                    </div>
+                    <div class="mt-card-padding">
+                        <div id="btn-download-again-container" class="contents"></div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-small w-full mb-medium">
+                    <div id="btn-download-another-container" class="contents"></div>
+                    <div id="btn-quickstart-container" class="contents"></div>
+                    <div id="btn-printing-guide-container" class="contents"></div>
+                </div>
+
+                <div class="card-info">
+                    <div id="icon-info-container" class="contents"></div>
+                    <p>Different scenarios and versions use different role cards, name tags, and canvases. If you decide
+                        to play with a different configuration, please assemble a new package to prevent mismatches.
+                        Mixing different packages is not advised</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white text-gray-500 text-preset-small-note py-small text-center border-t border-gray-200 w-full">
+        <div class="max-w-3xl mx-auto w-full px-medium">
+            <div id="footer-content-container" class="max-w-4xl mx-auto px-medium">
+                <!-- Footer content dynamically injected here -->
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="./src/js/app.js"></script>
+</body>
+
+</html>

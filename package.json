@@ -1,0 +1,32 @@
+{
+  "name": "anticipalead-download-website",
+  "version": "1.0.0",
+  "description": "Interactive download page for the AnticipaLead serious game",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build:css": "npx @tailwindcss/cli -i ./src/css/input.css -o ./assets/output.css --minify",
+    "watch:css": "npx @tailwindcss/cli -i ./src/css/input.css -o ./assets/output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bavarian-Foresight-Institute/anticipalead-download-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Bavarian-Foresight-Institute/anticipalead-download-website/issues"
+  },
+  "homepage": "https://github.com/Bavarian-Foresight-Institute/anticipalead-download-website#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.2",
+    "tailwindcss": "^4.3.2"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1"
+  }
+}

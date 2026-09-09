@@ -1,0 +1,72 @@
+{
+  "fileMappings": {
+    "canvas1": {
+      "dependencies": [
+        "language",
+        "perspective"
+      ],
+      "template": "canvases/canvas1_{language}_{perspective}.pdf"
+    },
+    "canvas2": {
+      "dependencies": [
+        "language",
+        "perspective"
+      ],
+      "template": "canvases/canvas2_{language}_{perspective}.pdf"
+    },
+    "nameTags": {
+      "dependencies": [
+        "language",
+        "perspective",
+        "scenario"
+      ],
+      "template": "nametags/nametags_{language}_{perspective}_{scenario}.pdf"
+    },
+    "playerCards": {
+      "dependencies": [
+        "language",
+        "perspective"
+      ],
+      "template": "playercards/playercards_{language}_{perspective}.pdf"
+    },
+    "audio": {
+      "dependencies": [
+        "language",
+        "scenario"
+      ],
+      "template": "audio/audio_{language}_{scenario}.mp3",
+      "excludeConditions": [
+        {
+          "scenario.isCustom": true
+        }
+      ]
+    },
+    "techCards": {
+      "dependencies": [
+        "language",
+        "techCards"
+      ],
+      "template": "techcards/techcards_{language}_{techCards}.pdf"
+    },
+    "quickstartGuide": {
+      "dependencies": [
+        "language"
+      ],
+      "template": "guides/quickstart_{language}.pdf"
+    },
+    "customGuide": {
+      "dependencies": [
+        "language"
+      ],
+      "template": "guides/own_material_guide_{language}.pdf",
+      "conditionsAny": [
+        {
+          "scenario.isCustom": true
+        },
+        {
+          "techCards.isCustom": true
+        }
+      ]
+    }
+  }
+}

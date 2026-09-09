@@ -1,0 +1,74 @@
+<!--
+file: download.html
+purpose: Download generation interface.
+responsibilities: Guide the user through the 4-step selection process and trigger the file download.
+dependencies: styles, src/js/app.js
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnticipaLead - FAQ</title>
+    <link rel="stylesheet" href="./assets/output.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/clear-sans@latest/index.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <meta name="description"
+        content="AnticipaLead is a scenario-based foresight serious game developed for leadership training. It is designed for teams of 4-7 and requires no moderator. Download the materials and start playing within the hour.">
+    <meta property="og:title" content="AnticipaLead - FAQ">
+    <meta property="og:description"
+        content="AnticipaLead is a scenario-based foresight serious game developed for leadership training. It is designed for teams of 4-7 and requires no moderator. Download the materials and start playing within the hour.">
+    <meta property="og:image" content="./assets/logos/anticipalead_logo_black.svg">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="./assets/logos/anticipalead_logo_black.svg">
+</head>
+
+<body id="page-faq" class="bg-brand-light font-sans text-brand-dark antialiased min-h-screen flex flex-col">
+    <noscript>
+        <div
+            style="background-color: #ED1C24; color: white; text-align: center; padding: 1rem; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; font-family: sans-serif;">
+            Please enable JavaScript to use the AnticipaLead website.
+        </div>
+    </noscript>
+    <!-- Top Navigation -->
+    <nav class="bg-white border-b border-gray-200 py-small w-full">
+        <div class="max-w-3xl mx-auto w-full px-medium flex items-center justify-between">
+            <div class="flex items-center">
+                <img src="./assets/logos/anticipalead_logo_black.svg" alt="AnticipaLead" class="h-12 w-auto">
+            </div>
+            <div>
+                <div id="nav-back-container" class="contents"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="w-full flex-1">
+        <div class="max-w-3xl mx-auto w-full px-medium py-section">
+
+            <p class="text-brand-red text-preset-highlight-big mb-small flex items-center gap-small">
+                <span class="w-4 h-px bg-brand-red"></span>
+                <span>Questions and answers</span>
+            </p>
+            <h1 class="text-preset-main-heading mb-small">FAQ</h1>
+            <p class="text-gray-600 text-preset-normal mb-small">Find answers to the most common questions about the AnticipaLead serious game.</p>
+
+            <div id="faq-cards-container" class="contents"></div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white text-gray-500 text-preset-small-note py-small text-center border-t border-gray-200 w-full">
+        <div class="max-w-3xl mx-auto w-full px-medium">
+            <div id="footer-content-container" class="max-w-4xl mx-auto px-medium">
+                <!-- Footer content dynamically injected here -->
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="./src/js/app.js"></script>
+</body>
+
+</html>

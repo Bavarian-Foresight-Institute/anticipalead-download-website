@@ -1,0 +1,540 @@
+/**
+ * file: src/js/ui.js
+ * purpose: DOM manipulation and template rendering layer.
+ * responsibilities: Provide reusable rendering functions for UI components.
+ * dependencies: None
+ */
+
+import { IconCheckSm, IconPlusSm, IconMinusSm } from './ui/icons.js';
+
+/**
+ * Purpose: Render the HTML template for a scenario selection card.
+ * @param {string} id - The ID of the scenario.
+ * @param {string} title - The display title of the scenario.
+ * @param {string} description - The description text.
+ * @param {string} badgeText - The text for the top badge.
+ * @param {string} badgeColor - The color variable for the badge.
+ * @param {boolean} [isSelected=false] - Whether this card is currently selected.
+ * @returns {string} The HTML string for the scenario card.
+ * Logic reason: Uses template literals to construct HTML dynamically with proper styling based on selection state.
+ */
+
+export function renderScenarioCard({ id, title, description, badgeText, badgeColor, isSelected = false }) {
+    const cleanColor = badgeColor ? badgeColor.replace(/^(bg-|text-|border-|ring-)/, '') : '';
+    const ringClass = isSelected ? 'card-ring-selected' : 'card-ring';
+    const dotClass = isSelected ? 'card-dot-selected' : 'card-dot';
+    const headingClass = isSelected ? 'text-brand-darker' : 'text-gray-400';
+
+    return `
+        <div data-scenario="${id}" class="card-selectable ${ringClass} p-card-padding">
+            <span class="bg-white border text-preset-highlight-tag px-2 py-1 inline-block rounded mb-xs pointer-events-none" style="color: var(--color-${cleanColor}); border-color: color-mix(in srgb, var(--color-${cleanColor}) 25%, transparent);">${badgeText}</span>
+            <h3 class="${headingClass} text-preset-sub-heading mb-xs pointer-events-none"> ${id} ${title}</h3>
+            <p class="text-gray-500 text-preset-card mb-small pointer-events-none">${description}</p>
+            <div class="absolute bottom-5 right-5 w-[16px] h-[16px] rounded-full ${dotClass} pointer-events-none"></div>
+        </div>
+    `;
+}
+
+/**
+ * Purpose: Render the HTML template for a perspective selection card.
+ * @param {string} id - The ID of the perspective ('with_roles' or 'no_roles').
+ * @param {string} title - The display title.
+ * @param {string} description - The description text.
+ * @param {boolean} isRecommended - Whether to display the "Recommended" badge.
+ * @param {boolean} [isSelected=false] - Whether this card is currently selected.
+ * @returns {string} The HTML string for the perspective card.
+ * Logic reason: Conditionally renders a recommendation badge and toggles selection styles.
+ */
+export function renderPerspectiveCard({ id, title, description, isRecommended, isSelected = false }) {
+    const badgeHTML = isRecommended
+        ? `<span class="bg-white ring-1 ring-inset ring-gray-200 text-gray-500 text-preset-highlight-tag px-2 py-1 rounded pointer-events-none">Recommended</span>`
+        : '';
+
+    const ringClass = isSelected ? 'card-ring-selected' : 'card-ring';
+    const dotClass = isSelected ? 'card-dot-selected' : 'card-dot';
+    const headingClass = isSelected ? 'text-brand-darker' : 'text-gray-400';
+
+    return `
+        <div data-perspective="${id}" class="card-selectable ${ringClass} pt-small pb-5 px-5">
+            <div class="flex justify-between items-start mb-xs pointer-events-none">
+                <h3 class="${headingClass} text-preset-sub-heading pointer-events-none">${title}</h3>
+                ${badgeHTML}
+            </div>
+            <p class="text-gray-500 text-preset-card mb-small pointer-events-none">${description}</p>
+            <div class="absolute bottom-5 right-5 w-[16px] h-[16px] rounded-full ${dotClass} pointer-events-none"></div>
+        </div>
+    `;
+}
+
+/**
+ * Purpose: Render the HTML template for a tech cards selection card.
+ * @param {string} id - The ID of the tech cards option.
+ * @param {string} title - The display title.
+ * @param {string} description - The description text.
+ * @param {boolean} [isSelected=false] - Whether this card is currently selected.
+ * @returns {string} The HTML string for the tech cards card.
+ * Logic reason: Uses dynamic Tailwind classes to reflect the selected state.
+ */
+export function renderTechCardsCard({ id, title, description, isSelected = false }) {
+    const ringClass = isSelected ? 'card-ring-selected' : 'card-ring';
+    const dotClass = isSelected ? 'card-dot-selected' : 'card-dot';
+    const headingClass = isSelected ? 'text-brand-darker' : 'text-gray-400';
+
+    return `
+        <div data-tech="${id}" class="card-selectable ${ringClass} pt-small pb-5 px-5">
+            <h3 class="${headingClass} text-preset-sub-heading mb-xs pointer-events-none">${title}</h3>
+            <p class="text-gray-500 text-preset-card mb-small pointer-events-none">${description}</p>
+            <div class="absolute bottom-5 right-5 w-[16px] h-[16px] rounded-full ${dotClass} pointer-events-none"></div>
+        </div>
+    `;
+}
+
+/**
+ * Purpose: Render the HTML template for a language selection card.
+ * @param {string} id - The language code (e.g. 'de').
+ * @param {string} title - The display title (e.g. '🇩🇪 Deutsch').
+ * @param {boolean} [isSelected=false] - Whether this card is currently selected.
+ * @returns {string} The HTML string for the language card.
+ */
+export function renderLanguageCard({ id, title, isSelected = false }) {
+    const ringClass = isSelected ? 'card-ring-selected' : 'card-ring';
+    const dotClass = isSelected ? 'card-dot-selected' : 'card-dot';
+    const headingClass = isSelected ? 'text-brand-darker' : 'text-gray-400';
+
+    return `
+        <div data-lang="${id}" class="card-selectable ${ringClass} flex-1 py-small pl-5 pr-12 text-left">
+            <h3 class="${headingClass} text-preset-sub-heading pointer-events-none">${title}</h3>
+            <div class="absolute bottom-5 right-5 w-[16px] h-[16px] rounded-full ${dotClass} pointer-events-none"></div>
+        </div>
+    `;
+}
+
+/**
+ * Purpose: Render the HTML template for a version/configuration mode card.
+ * @param {Object} props - Configuration properties.
+ * @param {string} props.id - The mode ID (e.g. 'preset-standard').
+ * @param {string} props.title - The display title.
+ * @param {string} [props.description] - Optional description text for the preset version.
+ * @param {boolean} [props.isQuickStart] - Whether to display the "Quick Start" badge.
+ * @param {boolean} [props.isSelected=false] - Whether this card is currently selected.
+ * @returns {string} The HTML string for the mode card.
+ */
+export function renderModeCard({ id, title, description, badgeText, badgeColor, isSelected = false }) {
+    const cleanColor = badgeColor ? badgeColor.replace(/^(bg-|text-|border-|ring-)/, '') : '';
+    const badgeHTML = (badgeText && cleanColor)
+        ? `<span class="bg-white border text-preset-highlight-tag px-2 py-1 rounded pointer-events-none whitespace-nowrap order-2 lg:order-1 lg:mb-xs" style="color: var(--color-${cleanColor}); border-color: color-mix(in srgb, var(--color-${cleanColor}) 25%, transparent);">${badgeText}</span>`
+        : '';
+
+    const ringClass = isSelected ? 'card-ring-selected' : 'card-ring';
+    const dotClass = isSelected ? 'card-dot-selected' : 'card-dot';
+    const headingClass = isSelected ? 'text-brand-darker' : 'text-gray-400';
+
+    return `
+        <div data-mode="${id}" class="card-selectable ${ringClass} pt-small pb-5 px-5 lg:p-card-padding">
+            <div class="flex justify-between items-start mb-xs pointer-events-none gap-2 lg:flex-col lg:items-start lg:gap-0">
+                <h3 class="${headingClass} text-preset-sub-heading pointer-events-none order-1 lg:order-2">${title}</h3>
+                ${badgeHTML}
+            </div>
+            ${description ? `<p class="text-gray-500 text-preset-card mb-small pointer-events-none">${description}</p>` : ''}
+            <div class="absolute bottom-5 right-5 w-[16px] h-[16px] rounded-full ${dotClass} pointer-events-none"></div>
+        </div>
+    `;
+}
+
+/**
+ * Purpose: Render an HTML table row for the configuration summary.
+ * @param {string} label - The label for the summary row.
+ * @param {string} value - The value to display.
+ * @returns {string} The HTML string for the table row.
+ * Logic reason: Standardizes the rendering of key-value pairs in the review table.
+ */
+export function renderSummaryRow(label, value) {
+    return `
+        <tr>
+            <td class="w-1/3 text-gray-500 text-preset-card py-2 align-top">${label}</td>
+            <td class="w-2/3 text-preset-card py-2 align-top">${value}</td>
+        </tr>
+    `;
+}
+
+/**
+ * Purpose: Render the dynamic stepper progress bar.
+ * @param {number} currentStep - The current active step (1, 2, or 3).
+ * @returns {string} The HTML string for the stepper.
+ */
+export function renderStepper(currentStep) {
+    const steps = [
+        { num: 1, label: 'Configure' },
+        { num: 2, label: 'Review' },
+        { num: 3, label: 'Download' }
+    ];
+
+    const getStepHtml = (stepNum, label) => {
+        if (stepNum < currentStep) {
+            // Completed: black background, checkmark, black text
+            return `
+            <div class="flex items-center">
+                <div class="w-6 h-6 rounded-full bg-brand-dark text-white flex items-center justify-center text-preset-normal">
+                    ${IconCheckSm}
+                </div>
+                <span class="ml-2 text-preset-normal text-brand-dark">${label}</span>
+            </div>
+            `;
+        } else if (stepNum === currentStep) {
+            // Active: red background, number, red text
+            return `
+            <div class="flex items-center">
+                <div class="w-6 h-6 rounded-full bg-brand-red text-white flex items-center justify-center text-preset-normal">${stepNum}</div>
+                <span class="ml-2 text-preset-normal text-brand-red">${label}</span>
+            </div>
+            `;
+        } else {
+            // Next: gray background, number, gray text
+            return `
+            <div class="flex items-center">
+                <div class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-preset-normal">${stepNum}</div>
+                <span class="ml-2 text-preset-normal text-gray-400">${label}</span>
+            </div>
+            `;
+        }
+    };
+
+    return `
+        <div class="w-full">
+            <div class="max-w-3xl mx-auto w-full px-6 flex items-center justify-center">
+                ${getStepHtml(1, steps[0].label)}
+                <div class="w-12 h-px ${currentStep > 1 ? 'bg-brand-dark' : 'bg-gray-300'} mx-4"></div>
+                ${getStepHtml(2, steps[1].label)}
+                <div class="w-12 h-px ${currentStep > 2 ? 'bg-brand-dark' : 'bg-gray-300'} mx-4"></div>
+                ${getStepHtml(3, steps[2].label)}
+            </div>
+        </div>
+    `;
+}
+
+/**
+ * Purpose: Render the navigation button.
+ * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID of the button.
+ * @param {string} props.text - Button label.
+ * @param {string} [props.href='#'] - Link URL.
+ * @param {string} [props.additionalClasses=''] - Extra classes to append.
+ * @returns {string} The HTML string for the navigation button.
+ */
+/**
+ * Internal helper to generate consistent button markup.
+ */
+function BaseButton({ tag = 'a', id, text, href = '#', target = '', rel = '', icon = '', iconEnd = '', baseClasses = '', sizeClass = 'btn-medium', additionalClasses = '' }) {
+    // Filter out extra spaces
+    const commonClasses = `interactive-base rounded inline-flex items-center justify-center interactive-hover ${baseClasses} ${sizeClass} ${additionalClasses}`.replace(/\s+/g, ' ').trim();
+
+    // Some buttons only have icon or iconEnd, wrap them to prevent empty spaces if possible, but JS templates easily handle empty strings.
+    const innerContent = `
+            ${icon}
+            ${text}
+            ${iconEnd}
+    `.trim();
+
+    if (tag === 'button') {
+        return `
+        <button id="${id}" class="${commonClasses}">
+            ${innerContent}
+        </button>
+        `;
+    }
+
+    const isExternal = href && (href.startsWith('http://') || href.startsWith('https://'));
+    const resolvedTarget = target || (isExternal ? '_blank' : '');
+    const resolvedRel = rel || (resolvedTarget === '_blank' ? 'noopener noreferrer' : '');
+    const targetAttr = resolvedTarget ? ` target="${resolvedTarget}"` : '';
+    const relAttr = resolvedRel ? ` rel="${resolvedRel}"` : '';
+
+    return `
+        <a id="${id}" href="${href}"${targetAttr}${relAttr} class="${commonClasses}">
+            ${innerContent}
+        </a>
+    `;
+}
+
+/**
+ * Purpose: Render a button for the navigation bar.
+ * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID of the button.
+ * @param {string} props.text - Button label.
+ * @param {string} [props.href='#'] - Link URL.
+ * @param {string} [props.additionalClasses=''] - Extra classes to append.
+ * @returns {string} The HTML string for the navigation button.
+ */
+export function NavButton({ id, text, href = '#', additionalClasses = '' }) {
+    return BaseButton({ tag: 'a', id, text, href, baseClasses: 'bg-white text-brand-dark hover:bg-brand-white-hover-dark', sizeClass: 'btn-medium', additionalClasses });
+}
+
+/**
+ * Purpose: Render a text link for the navigation bar.
+ * ...
+ */
+export function NavLink({ id, text, href = '#', additionalClasses = '' }) {
+    return `
+        <a id="${id}" href="${href}" class="interactive-base hover:text-gray-300 hover:underline py-2.5 ${additionalClasses}">
+            ${text}
+        </a>
+    `;
+}
+
+/**
+ * Purpose: Render the primary CTA button (Red).
+ * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID.
+ * @param {string} props.text - Label.
+ * @param {string} [props.href='#'] - Link.
+ * @param {string} [props.icon=''] - SVG icon string.
+ * @param {string} [props.additionalClasses=''] - Extra classes.
+ * @returns {string} The HTML string for the primary button.
+ */
+export function PrimaryButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
+    return BaseButton({ tag: 'a', id, text, href, icon, baseClasses: 'bg-brand-red text-white hover:bg-brand-red-hover', sizeClass: 'btn-large', additionalClasses });
+}
+
+/**
+ * Purpose: Render the secondary CTA button (White).
+ * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID.
+ * @param {string} props.text - Label.
+ * @param {string} [props.href='#'] - Link.
+ * @param {string} [props.target=''] - Link target.
+ * @param {string} [props.rel=''] - Link rel.
+ * @param {string} [props.icon=''] - SVG icon string.
+ * @param {string} [props.additionalClasses=''] - Extra classes.
+ * @returns {string} The HTML string for the secondary button.
+ */
+export function SecondaryButton({ id, text, href = '#', target = '', rel = '', icon = '', additionalClasses = '' }) {
+    return BaseButton({ tag: 'a', id, text, href, target, rel, icon, baseClasses: 'bg-white text-brand-dark border border-gray-200 hover:bg-brand-white-hover-dark', sizeClass: 'btn-large', additionalClasses });
+}
+
+/**
+ * Purpose: Render the dark CTA button.
+ * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID.
+ * @param {string} props.text - Label.
+ * @param {string} [props.href='#'] - Link.
+ * @param {string} [props.icon=''] - SVG icon string.
+ * @param {string} [props.additionalClasses=''] - Extra classes.
+ * @returns {string} The HTML string for the dark button.
+ */
+export function DarkButton({ id, text, href = '#', icon = '', additionalClasses = '' }) {
+    return BaseButton({ tag: 'a', id, text, href, icon, baseClasses: 'bg-brand-dark text-white hover:bg-brand-dark-hover', sizeClass: 'btn-medium', additionalClasses });
+}
+
+/**
+ * Purpose: Render a Solid Action Button (e.g. Continue, Confirm).
+ * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID.
+ * @param {string} props.text - Label.
+ * @param {string} [props.icon=''] - Start icon SVG string.
+ * @param {string} [props.iconEnd=''] - End icon SVG string.
+ * @param {string} [props.size='md'] - 'md', 'lg', or 'xl'.
+ * @param {boolean} [props.isFullWidth=false] - Whether button takes full width.
+ * @returns {string} The HTML string for the solid action button.
+ */
+export function SolidButton({ id, text, icon = '', iconEnd = '', size = 'md', isFullWidth = false }) {
+    const sizeClasses = size === 'xl' || size === 'lg' ? 'btn-large' : 'btn-medium';
+    const widthClass = isFullWidth ? 'w-full' : '';
+    return BaseButton({ tag: 'button', id, text, icon, iconEnd, baseClasses: `bg-brand-dark text-white hover:bg-brand-dark-hover ${widthClass}`, sizeClass: sizeClasses });
+}
+
+/**
+ * Purpose: Render an Outline Action Button (e.g. Back).
+ * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID.
+ * @param {string} props.text - Label.
+ * @param {string} [props.icon=''] - SVG icon string.
+ * @param {boolean} [props.isFlexible=false] - Whether button flexes to fill space.
+ * @param {string} [props.href=null] - Optional URL if button acts as link.
+ * @param {string} [props.target=''] - Link target.
+ * @param {string} [props.rel=''] - Link rel.
+ * @returns {string} The HTML string for the outline action button.
+ */
+export function OutlineButton({ id, text, icon = '', isFlexible = false, href = null, target = '', rel = '' }) {
+    const sizeClasses = isFlexible ? 'flex-1 btn-medium' : 'btn-medium';
+    const tag = href ? 'a' : 'button';
+    return BaseButton({ tag, href, target, rel, id, text, icon, baseClasses: 'bg-white border border-gray-200 text-gray-600 hover:bg-brand-white-hover', sizeClass: sizeClasses });
+}
+
+/**
+ * Purpose: Render a plain Text Icon Button (e.g. Edit).
+ * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID.
+ * @param {string} props.text - Label.
+ * @param {string} [props.icon=''] - SVG icon string.
+ * @returns {string} The HTML string for the text icon button.
+ */
+export function TextIconButton({ id, text, icon = '' }) {
+    return `
+        <button id="${id}" class="interactive-base text-brand-red text-preset-normal inline-flex items-center hover:underline">
+            ${icon}
+            ${text}
+        </button>
+    `;
+}
+
+/**
+ * Purpose: Render a plain Text Icon Link (e.g. Back to overview).
+ * @param {Object} props - Configuration object.
+ * @param {string} props.id - HTML ID.
+ * @param {string} props.text - Label.
+ * @param {string} [props.href='#'] - Link URL.
+ * @param {string} [props.icon=''] - SVG icon string.
+ * @returns {string} The HTML string for the text icon link.
+ */
+export function TextIconLink({ id, text, href = '#', icon = '' }) {
+    return `
+        <a id="${id}" href="${href}" class="interactive-base text-preset-normal text-gray-500 hover:text-brand-dark hover:underline inline-flex items-center py-2.5">
+            ${icon}
+            ${text}
+        </a>
+    `;
+}
+
+/**
+ * Purpose: Render a single step row for the 'How it works' section.
+ * @param {Object} props
+ * @param {string} props.num - Step number string (e.g. '01')
+ * @param {string} props.title - Step title
+ * @param {string} props.description - Step description
+ * @param {boolean} [props.isLast=false] - Whether this is the last step (removes bottom border)
+ * @returns {string} HTML string for the step row
+ */
+export function renderHowItWorksStep({ num, title, description, isLast = false }) {
+    const borderClass = isLast ? '' : 'border-b border-gray-100';
+    return `
+        <div class="p-card-padding ${borderClass} flex items-start">
+            <div class="text-brand-red text-preset-sub-heading w-medium shrink-0">${num}</div>
+            <div>
+                <h3 class="text-preset-sub-heading mb-xs">${title}</h3>
+                <p class="text-gray-600 text-preset-normal">${description}</p>
+            </div>
+        </div>
+    `;
+}
+
+
+/**
+ * Purpose: Render a package content card for the index page.
+ * @param {Object} props
+ * @param {string} props.title - Card title
+ * @param {string} props.description - Card description
+ * @param {string} props.icon - SVG string for the icon
+ * @returns {string} HTML string for the package content card
+ */
+export function renderPackageContentCard({ title, description, icon }) {
+    return `
+        <div class="card-static">
+            ${icon}
+            <h3 class="text-preset-sub-heading mb-xs">${title}</h3>
+            <p class="text-gray-500 text-preset-card">${description}</p>
+        </div>
+    `;
+}
+
+/**
+ * Purpose: Render the centralized footer content.
+ * @param {Object} props
+ * @param {string} props.institutions - Institution names
+ * @param {string} props.description - Game description
+ * @param {string} [props.titleClass=''] - Extra classes for the title
+ * @returns {string} HTML string for the footer inner content
+ */
+export function renderFooterContent({ institutions, description, titleClass = '' }) {
+    return `
+        <p class="mb-xs ${titleClass}">${institutions}</p>
+        <p>${description}</p>
+    `;
+}
+
+/**
+ * Purpose: Render the printing guide cards component.
+ * @param {Array<{file: string, amount: string, format: string, info: string}>} data - Printing guide data.
+ * @returns {string} HTML string for the printing guide cards.
+ */
+export function renderPrintingGuideCards(data, selectedVersion = 'with_roles') {
+    // Filter data if a 'versions' array is specified and the selectedVersion is not in it
+    const filteredData = data.filter(item => !item.versions || item.versions.includes(selectedVersion));
+
+    const cardsHtml = filteredData.map(item => {
+        // Helper to resolve string or object based on selected version
+        const resolveField = (field) => {
+            if (typeof field === 'string') return field;
+            if (typeof field === 'object' && field !== null) return field[selectedVersion] || '';
+            return '';
+        };
+
+        const infoText = resolveField(item.info);
+        const amountText = resolveField(item.amount);
+        const formatText = resolveField(item.format);
+
+        return `
+        <div class="card-static p-0 overflow-hidden flex flex-col">
+            <div class="px-card-padding pt-card-padding pb-small border-b border-gray-200 w-full">
+                <h2 class="text-preset-sub-heading text-brand-dark">${item.file}</h2>
+            </div>
+            <div class="px-card-padding pt-small ${infoText ? 'pb-xs' : 'pb-card-padding'} flex flex-col gap-xs">
+                <div class="grid grid-cols-2 gap-small text-preset-card text-gray-500 w-full">
+                    <span class="flex flex-col sm:flex-row sm:items-center gap-xs">
+                        <span class="font-medium text-gray-700">Amount:</span> ${amountText}
+                    </span>
+                    <span class="flex flex-col sm:flex-row sm:items-center gap-xs">
+                        <span class="font-medium text-gray-700">Format:</span> ${formatText}
+                    </span>
+                </div>
+            </div>
+            ${infoText ? `
+            <div class="px-card-padding pb-card-padding">
+                <p class="text-preset-card text-gray-600">${infoText}</p>
+            </div>
+            ` : ''}
+        </div>
+        `;
+    }).join('');
+
+    return `
+        <div class="flex flex-col gap-small w-full">
+            ${cardsHtml}
+        </div>
+    `;
+}
+
+/**
+ * Purpose: Render the FAQ cards component.
+ * @param {Array<{question: string, answer: string}>} data - FAQ data.
+ * @returns {string} HTML string for the FAQ cards.
+ */
+export function renderFAQCards(data) {
+    const cardsHtml = data.map((item, index) => {
+        return `
+        <div class="card-static p-0 overflow-hidden flex flex-col text-left group">
+            <button type="button" class="faq-toggle-btn px-card-padding pt-card-padding pb-small w-full flex items-start justify-between cursor-pointer focus:outline-none hover:bg-gray-50 transition-colors" data-index="${index}">
+                <div class="flex-1 pr-4 text-left">
+                    <h3 class="text-preset-sub-heading text-brand-dark">${item.question}</h3>
+                </div>
+                <div class="faq-icon text-gray-400 mt-1" data-index="${index}">
+                    ${IconPlusSm}
+                </div>
+            </button>
+            
+            <div id="faq-answer-${index}" class="faq-answer">
+                <div class="faq-answer-inner">
+                    <div class="px-card-padding pt-small pb-card-padding border-t border-gray-200">
+                        <p class="text-preset-card text-gray-500">${item.answer}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+    }).join('');
+
+    return `
+        <div class="flex flex-col gap-small w-full" id="faq-accordion">
+            ${cardsHtml}
+        </div>
+    `;
+}

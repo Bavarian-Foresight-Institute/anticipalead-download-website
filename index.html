@@ -1,0 +1,178 @@
+<!--
+file: index.html
+purpose: Landing page for the AnticipaLead website.
+responsibilities: Display project overview and provide an entry point to the download selection flow.
+dependencies: styles, src/js/app.js
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnticipaLead - Experience the future of leadership decisions</title>
+    <link rel="stylesheet" href="./assets/output.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/clear-sans@latest/index.min.css">
+    <meta name="description"
+        content="AnticipaLead is a scenario-based foresight serious game developed for leadership training. It is designed for teams of 4-7 and requires no moderator. Download the materials and start playing within the hour.">
+    <meta property="og:title" content="AnticipaLead - Experience the future of leadership decisions">
+    <meta property="og:description"
+        content="AnticipaLead is a scenario-based foresight serious game developed for leadership training. It is designed for teams of 4-7 and requires no moderator. Download the materials and start playing within the hour.">
+    <meta property="og:image" content="./assets/logos/anticipalead_logo_black.svg">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="./assets/logos/anticipalead_logo_black.svg">
+</head>
+
+<body id="page-index" class="bg-brand-light font-sans text-brand-dark antialiased min-h-screen flex flex-col">
+    <noscript>
+        <div
+            style="background-color: #ED1C24; color: white; text-align: center; padding: 1rem; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; font-family: sans-serif;">
+            Please enable JavaScript to use the AnticipaLead website.
+        </div>
+    </noscript>
+
+    <!-- Main wrapper for flex layout -->
+    <main class="flex-1">
+        <!-- Hero Section -->
+        <header class="text-white flex flex-col w-full">
+            <!-- Top Navigation -->
+            <div class="bg-brand-darker w-full">
+                <nav class="max-w-3xl mx-auto px-medium flex items-center justify-between py-small w-full">
+                    <div class="flex items-center">
+                        <img src="./assets/logos/anticipalead_logo_white.svg" alt="AnticipaLead" class="h-12 w-auto">
+                    </div>
+                    <div class="flex items-center gap-8">
+                        <div class="hidden md:flex gap-8 text-preset-normal">
+                            <div id="nav-links-container" class="contents"></div>
+                        </div>
+                        <div class="hidden md:block">
+                            <div id="nav-btn-container" class="contents"></div>
+                        </div>
+                        <button id="mobile-menu-btn"
+                            class="md:hidden text-white hover:text-brand-red transition-colors duration-fast">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobile-menu"
+                class="hidden w-full bg-brand-darker border-t border-gray-800 md:hidden flex-col items-center py-medium gap-small text-preset-normal">
+                <div id="mobile-nav-links-container" class="flex flex-col items-center gap-small"></div>
+                <div id="mobile-nav-btn-container" class="mt-small"></div>
+            </div>
+
+            <!-- Hero Content -->
+            <div class="bg-brand-dark bg-dot-matrix w-full">
+                <div
+                    class="flex flex-col items-center justify-center text-center px-small max-w-4xl mx-auto pt-section pb-section-double">
+                    <p
+                        class="text-brand-red text-preset-highlight-big mb-small flex items-center justify-center gap-small">
+                        <span class="w-8 h-px bg-brand-red"></span>
+                        <span>Foresight - Leadership - Emerging Technologies</span>
+                        <span class="w-8 h-px bg-brand-red"></span>
+                    </p>
+                    <h1 class="text-preset-hero-title mb-medium">
+                        Experience the future of <br /> <span class="text-brand-red">leadership</span> decisions.
+                    </h1>
+                    <p class="text-gray-300 text-preset-hero-subtitle mb-small max-w-2xl">
+                        AnticipaLead is a scenario-based foresight serious game that lets teams explore how
+                        emerging technologies could transform organizations and leadership.
+                        Players enter possible futures, take on different perspectives,
+                        and practice making decisions under uncertainty before change becomes urgent.
+                    </p>
+                    <p class="text-gray-400 text-preset-hero-subtitle mb-medium max-w-2xl">
+                        Open Access and highly customizable.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-medium">
+                        <div id="hero-download-btn-container" class="contents"></div>
+                        <div id="hero-video-btn-container" class="contents"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Bar -->
+            <div class="bg-brand-darker py-small w-full">
+                <div
+                    class="max-w-3xl mx-auto px-medium flex flex-wrap justify-center gap-x-12 gap-y-4 text-preset-small-note text-gray-400">
+                    <div class="flex items-center">
+                        <div id="icon-users-container" class="contents"></div> 4-7 players per group
+                    </div>
+                    <div class="flex items-center">
+                        <div id="icon-clock-container" class="contents"></div> 60-120 min per game
+                    </div>
+                    <div class="flex items-center">
+                        <div id="icon-moderator-container" class="contents"></div> No moderator needed
+                    </div>
+                    <div class="flex items-center">
+                        <div id="icon-translate-container" class="contents"></div> DE - EN - FR
+                    </div>
+                </div>
+                <div
+                    class="max-w-3xl mx-auto px-medium mt-6 flex justify-center items-center gap-small text-gray-500 text-preset-small-note">
+                    <span>Developed in collaboration between the Bavarian Foresight-Institute and armasuisse.</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- How it works section -->
+        <section class="pt-section w-full">
+            <div class="max-w-3xl mx-auto w-full px-medium">
+                <div class="max-w-3xl mx-auto">
+                    <p class="text-brand-red text-preset-highlight-big mb-small flex items-center gap-small">
+                        <span class="w-6 h-px bg-brand-red"></span>
+                        <span>How it works</span>
+                    </p>
+                    <h2 class="text-preset-main-heading mb-small">Ready in four steps</h2>
+                    <p class="text-gray-600 text-preset-normal mb-medium">Follow the steps below to prepare and play your first session.</p>
+                    <div id="how-it-works-container" class="card-static overflow-hidden p-0">
+                        <!-- Steps dynamically injected here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Package Contents -->
+        <section class="py-section w-full">
+            <div class="max-w-3xl mx-auto w-full px-medium">
+                <div class="max-w-4xl mx-auto">
+                    <p class="text-brand-red text-preset-highlight-big mb-small flex items-center gap-small">
+                        <span class="w-6 h-px bg-brand-red"></span>
+                        <span>Package contents</span>
+                    </p>
+                    <h2 class="text-preset-main-heading mb-small">Everything in one download</h2>
+                    <p class="text-gray-600 text-preset-normal mb-medium">Each package is assembled for your exact
+                        configuration and contains all the files you need.</p>
+
+                    <div id="package-contents-container"
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-small mb-medium">
+                        <!-- Package content cards dynamically injected here -->
+                    </div>
+
+                    <div class="text-center">
+                        <div id="bottom-download-btn-container" class="contents"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+        class="bg-brand-darker text-gray-500 text-preset-small-note py-small text-center border-t border-gray-800 w-full">
+        <div class="max-w-3xl mx-auto w-full px-medium">
+            <div id="footer-content-container" class="max-w-4xl mx-auto px-medium">
+                <!-- Footer content dynamically injected here -->
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="./src/js/app.js"></script>
+</body>
+
+</html>
