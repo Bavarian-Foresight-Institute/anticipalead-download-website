@@ -703,8 +703,8 @@ function init() {
                 if (DOM.printingGuideTabsContainer.children.length === 0) {
                     DOM.printingGuideTabsContainer.innerHTML = `
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-small w-full">
-                            ${renderLanguageCard({ id: 'with_roles', title: 'With perspective changes', isSelected: printingGuideVersion === 'with_roles' })}
-                            ${renderLanguageCard({ id: 'no_roles', title: 'Without perspective changes', isSelected: printingGuideVersion === 'no_roles' })}
+                            ${renderLanguageCard({ id: 'with_roles', title: 'With pre-defined roles', isSelected: printingGuideVersion === 'with_roles' })}
+                            ${renderLanguageCard({ id: 'no_roles', title: 'With own roles', isSelected: printingGuideVersion === 'no_roles' })}
                         </div>
                     `;
                 } else {

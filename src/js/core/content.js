@@ -85,13 +85,13 @@ export const languages = [
 export const perspectives = [
     {
         id: 'with_roles',
-        title: 'Version with Perspective Changes',
+        title: 'Version with Pre-Defined Roles',
         description: 'This option is recommended to enjoy the full benefits of the game',
         isRecommended: false
     },
     {
         id: 'no_roles',
-        title: 'Version without Perspective Changes',
+        title: 'Version with Own Roles',
         description: 'Players keep their organizational roles and perspective throughout the game.',
         isRecommended: false
     }
