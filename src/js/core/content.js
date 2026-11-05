@@ -75,6 +75,10 @@ export const languages = [
     {
         id: 'fr',
         title: '🇫🇷 Français'
+    },
+    {
+        id: 'it',
+        title: '🇮🇹 Italiano'
     }
 ];
 

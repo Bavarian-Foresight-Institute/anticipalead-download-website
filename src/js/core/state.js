@@ -96,7 +96,7 @@ export function setTechCards(tc) {
 
 /**
  * Purpose: Update the selected language in the state.
- * @param {string} lang - The chosen language ('de', 'en', 'fr').
+ * @param {string} lang - The chosen language ('de', 'en', 'fr', 'it').
  * @returns {void}
  * Logic reason: Validates the language against supported codes.
  */

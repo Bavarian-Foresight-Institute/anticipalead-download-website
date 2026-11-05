@@ -67,6 +67,8 @@ The application maintains a centralized state object (`state`) representing the 
 *   **Language:** The selected language for the game materials. Supported codes are:
     *   `de` (German)
     *   `en` (English)
+    *   `fr` (French)
+    *   `it` (Italian)
 *   **Perspective:** The scenario viewpoint of the player. Supported codes are:
     *   `corp` (Corporate perspective)
     *   `gen` (General perspective)
