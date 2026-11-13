@@ -10,7 +10,7 @@
  * Purpose: Centralized link to the video guide (e.g. YouTube URL).
  * Update this variable in one place to change the video guide URL across the entire website.
  */
-export const videoGuideUrl = '#';
+export const videoGuideUrl = 'https://youtu.be/NnhaRcQ4nCM';
 
 /**
  * @type {Array<{id: string, title: string, description?: string, isCustom?: boolean, badgeText?: string, badgeColor?: string, perspective?: string, techCards?: string, scenario?: string}>}
